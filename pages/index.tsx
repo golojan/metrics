@@ -57,7 +57,7 @@ const Home: NextPage = () => {
             <br />
             Metrics Admin
           </h1>
-          <h4>Artificail Intelligence Ranking Engine</h4>
+          <h4>Artifical Intelligence Education Ranking Engine</h4>
         </div>
         <div className="section mb-5 p-2">
           <form autoComplete="off" onSubmit={adminLogon} method="POST">

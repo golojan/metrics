@@ -1,9 +1,9 @@
-import { AccountTypes, AccountRoles, States } from "./../interfaces/enums";
+import { AccountTypes, AccountRoles, StateTypes } from "./../interfaces/enums";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { AccountInfo, UserInfo } from "../interfaces";
 
-export const domainAtom = atom<string>("metrics.ng");
+export const domainAtom = atomWithStorage<string>("domain", "metrics.ng");
 export const loadedAtom = atom(false);
 
 export const accidAtom = atom("");
@@ -21,7 +21,7 @@ export const newUserAtom = atom<UserInfo>({
   membership: AccountTypes.STUDENT,
   role: AccountRoles.USER,
   regfee: 0,
-  state: States.ENUGU,
+  state: StateTypes.ENUGU,
 });
 
 export const intakesAtom = atom<AccountInfo[]>([]);

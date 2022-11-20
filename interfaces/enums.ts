@@ -1,4 +1,4 @@
-export enum States {
+export enum StateTypes {
   ABIA = "Abia State",
   ANAMBRA = "Anambra State",
   ENUGU = "Enugu State",
@@ -6,9 +6,15 @@ export enum States {
   IMO = "Imo State",
 }
 
+export enum OwnerTypes {
+  STATE = "State Government",
+  FEDERAL = "Federal Government",
+  PRIVATE = "Private Owned",
+}
+
 export enum AccountTypes {
   ADMIN = "ADMIN",
-  ECTURER = "ECTURER",
+  LECTURER = "LECTURER",
   STUDENT = "STUDENT",
 }
 

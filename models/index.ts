@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Accounts from "./accounts";
+import Schools from "./schools";
 
 const { MONGOOSE_URI } = process.env;
 
@@ -9,5 +10,5 @@ export const dbCon = async () => {
     .then(() => {})
     .catch((err) => console.log(err));
   console.log("Mongoose Connection Established");
-  return { conn, Accounts };
+  return { conn, Accounts, Schools };
 };

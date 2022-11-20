@@ -2,7 +2,7 @@ import React from "react";
 import type { AppProps } from "next/app";
 import { Provider, useAtom } from "jotai";
 import { useEffect } from "react";
-import { domainAtom } from "../store";
+import { withDomain } from "../utils/withInitialProps";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
@@ -11,11 +11,7 @@ import "../public/DataTables/datatables.min.css";
 import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [domain, setDomain] = useAtom(domainAtom);
-
   useEffect(() => {
-    const hostname = window.location.hostname;
-    alert(hostname);
     require("jquery/dist/jquery");
     require("popper.js/dist/popper");
     require("bootstrap/dist/js/bootstrap.bundle");
@@ -32,4 +28,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default withDomain(MyApp);
