@@ -13,8 +13,9 @@ export default async function middleware(req: NextRequest, res: any) {
     return NextResponse.rewrite(`${newUrl}`);
   }
 
-  // const response = await fetch(process.env.DOMAIN + `/api/domains/${hostname}`);
-  // const result = await response.json();
+  const response = await fetch(process.env.DOMAIN + `/api/domains/${hostname}`);
+  const result = await response.json();
+
   // if (result.status) {
   //   newUrl = `${url}universities/${result.domain}`;
   // }
