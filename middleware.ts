@@ -8,7 +8,7 @@ export default async function middleware(req: NextRequest, res: any) {
   const { url, nextUrl } = req;
   const { hostname } = nextUrl;
   let newUrl = url;
-
+  console.log(hostname);
   if (hostname == "metrics.ng") {
     return NextResponse.rewrite(`${newUrl}`);
   }
