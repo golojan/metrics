@@ -11,7 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { AccountInfo } from "../interfaces";
-import { userAtom } from "../store";
+import { userAtom, schoolAtom } from "../store";
 // import SiteBusy from "../components/SiteBusy";
 
 interface AppHeaderProps {
@@ -20,6 +20,8 @@ interface AppHeaderProps {
 }
 
 function AppHeader({ token, isroot }: AppHeaderProps) {
+  const [school, setSchool] = useAtom(schoolAtom);
+
   const [user] = useAtom<AccountInfo>(userAtom);
   return (
     <>
@@ -38,7 +40,7 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
               </a>
             </div>
             <div className="pageTitle">
-              <h2 className="text-white mt-2">{`${user.university}`}</h2>
+              <h2 className="text-white mt-2">{`${school.name} (${school.shortname})`}</h2>
             </div>
             <div className="right">
               <a href="#" className="headerButton">
