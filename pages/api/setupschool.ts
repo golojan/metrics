@@ -13,7 +13,7 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools } = await dbCon();
       const created = await Schools.create({
-        domain: "localhost",
+        domain: "esut.metrics.ng",
         name: "Enugu State University of Science and Technology",
         shortname: "ESUT",
       }).catch(catcher);
