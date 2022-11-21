@@ -72,7 +72,7 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
             </div>
 
             <div className="pageTitle">
-              <h1 className="text-black mt-2">Prime Admin</h1>
+              <h1 className="text-black mt-2">School Admin</h1>
             </div>
             <div className="right">
               <a href="#" className="headerButton">
