@@ -4,13 +4,16 @@ import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { Logon } from "../interfaces";
 import { useAtom } from "jotai";
-import { busyAtom } from "../store";
+import { busyAtom, domainAtom, schoolAtom } from "../store";
 import { authLogin } from "../utils/withAuthSync";
 import { NextPage } from "next";
 import DashboardLayout from "../components/DashboardLayout";
 import SiteBusy from "../components/SiteBusy";
 
 const Home: NextPage = () => {
+  const [domain, setDomain] = useAtom(domainAtom);
+  const [school, setSchool] = useAtom(schoolAtom);
+
   const router = useRouter();
   const [, setBusy] = useAtom(busyAtom);
   const [errorMsg, setErrorMsg] = useState("");
