@@ -2,7 +2,8 @@ import React from "react";
 import type { AppProps } from "next/app";
 import { Provider, useAtom } from "jotai";
 import { useEffect } from "react";
-import { withDomain } from "../utils/withInitialProps";
+import { withDomain, withUniversity } from "../utils/withInitialProps";
+import { compose } from "redux";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
@@ -28,4 +29,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default withDomain(MyApp);
+export default compose(withDomain, withUniversity)(MyApp);

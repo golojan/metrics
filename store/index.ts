@@ -4,6 +4,8 @@ import { atomWithStorage } from "jotai/utils";
 import { AccountInfo, UserInfo } from "../interfaces";
 
 export const domainAtom = atomWithStorage<string>("domain", "metrics.ng");
+export const schoolAtom = atomWithStorage("school", {});
+
 export const loadedAtom = atom(false);
 
 export const accidAtom = atom("");
