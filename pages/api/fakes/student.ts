@@ -13,10 +13,11 @@ export default async function handler(
   const catcher = (error: Error) => res.status(400).json({ error });
   const handleCase: ResponseFunctions = {
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
-      const { sex } = req.query;
+      const { sex, type } = req.query;
 
       const { Students } = await dbCon();
       const gender = sex == Gender.MALE ? "male" : "female";
+
       const created = await Students.create({
         avatar: faker.image.avatar(),
         regNumber: faker.random.numeric(10),
@@ -25,6 +26,7 @@ export default async function handler(
         mobile: faker.phone.number(),
         email: faker.internet.email(),
         gender: sex,
+        studentType: type,
         enabled: true,
       }).catch(catcher);
       if (created?._id) {

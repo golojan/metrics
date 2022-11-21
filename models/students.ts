@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 mongoose.Promise = global.Promise;
 
-import { Gender } from "../interfaces/enums";
+import { Gender, StudentType } from "../interfaces/enums";
 
 const studentsScheme = new mongoose.Schema(
   {
@@ -20,6 +20,11 @@ const studentsScheme = new mongoose.Schema(
     gender: {
       type: String,
       enum: Object.values(Gender),
+    },
+    studentType: {
+      type: String,
+      enum: Object.values(StudentType),
+      default: StudentType.LOCAL,
     },
     addresses: {
       contact: {

@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Gender } from "../interfaces/enums";
+import { Gender, StudentType } from "../interfaces/enums";
 
 const DashboardMenu = () => {
-  const addStudent = async (sex: any) => {
-    const response = await fetch(`/api/fakes/student?sex=${sex}`);
+  const addStudent = async (sex: any, type: any) => {
+    const response = await fetch(`/api/fakes/student?sex=${sex}&type=${type}`);
     const { status, accid } = await response.json();
   };
   return (
@@ -17,14 +17,37 @@ const DashboardMenu = () => {
             <strong className="text-black">STUDENTS</strong> (Male & Female)
           </div>
           <hr />
-          <Link href="#" onClick={() => addStudent(Gender.MALE)}>
+          <Link
+            href="#"
+            onClick={() => addStudent(Gender.MALE, StudentType.LOCAL)}
+          >
             <div className="text-blue-700 w-full">
               <FontAwesomeIcon icon={faPlus} /> New Student (Male)
             </div>
           </Link>
-          <Link href="#" onClick={() => addStudent(Gender.FEMALE)}>
+          <Link
+            href="#"
+            onClick={() => addStudent(Gender.FEMALE, StudentType.LOCAL)}
+          >
             <div className="text-blue-700 w-full">
               <FontAwesomeIcon icon={faPlus} /> New Student (Female)
+            </div>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => addStudent(Gender.FEMALE, StudentType.INTERNATIONAL)}
+          >
+            <div className="text-blue-700 w-full">
+              <FontAwesomeIcon icon={faPlus} /> New International Student (Male)
+            </div>
+          </Link>
+          <Link
+            href="#"
+            onClick={() => addStudent(Gender.FEMALE, StudentType.INTERNATIONAL)}
+          >
+            <div className="text-blue-700 w-full">
+              <FontAwesomeIcon icon={faPlus} /> New International Student
+              (Female)
             </div>
           </Link>
         </div>
