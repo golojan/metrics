@@ -4,6 +4,17 @@ export type IndustryProps = {
   indystryType: string;
 };
 
+export type SchoolTypes = {
+  logo?: string;
+  domain?: string;
+  name?: string;
+  shortname?: { type: String };
+  state?: string;
+  location?: String;
+  ownedBy?: string;
+  founded?: Number;
+};
+
 export interface Props {
   children?: ReactNode;
 }

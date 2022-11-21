@@ -56,7 +56,7 @@ const University: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src={school.logo}
+              src={`${school.logo}`}
               alt="Metrics AI Ranking Engine"
               style={{ margin: "0 auto" }}
             />
