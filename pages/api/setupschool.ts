@@ -13,9 +13,9 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools } = await dbCon();
       const created = await Schools.create({
-        domain: "esut.metrics.ng",
-        name: "Enugu State University of Science and Technology",
-        shortname: "ESUT",
+        domain: "metrics.ng",
+        name: "Metrics Admin",
+        shortname: "METRICS",
       }).catch(catcher);
       if (created?._id) {
         res.status(200).json({ status: true, schoolid: created?._id });
