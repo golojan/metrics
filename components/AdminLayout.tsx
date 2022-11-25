@@ -1,15 +1,14 @@
-import React, { Component, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import Head from "next/head";
 import { useIdleTimer } from "react-idle-timer";
+import Script from "next/script";
 
 interface MyProps {
   children: ReactNode;
 }
-const DashboardLayout = ({ children }: MyProps) => {
+const AdminLayout = ({ children }: MyProps) => {
   const onIdle = () => {};
-
   const idleTimer = useIdleTimer({ onIdle });
-
   return (
     <>
       <Head>
@@ -21,7 +20,8 @@ const DashboardLayout = ({ children }: MyProps) => {
         <title>Admin | Metics AI Ranking Engine</title>
       </Head>
       {children}
+      <Script src="/assets/js/base.js" strategy="lazyOnload" />
     </>
   );
 };
-export default DashboardLayout;
+export default AdminLayout;

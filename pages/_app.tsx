@@ -1,10 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { AppProps } from "next/app";
-import { Provider, useAtom } from "jotai";
-import { useEffect } from "react";
-import { withDomain, withUniversity } from "../utils/withInitialProps";
-import { compose } from "redux";
-
+import { Provider } from "jotai";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -15,11 +11,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     require("jquery/dist/jquery");
     require("popper.js/dist/popper");
-    require("bootstrap/dist/js/bootstrap.bundle");
-    require("../public/DataTables/datatables.min.js");
-    require("../public/assets/js/base.js");
+    require("bootstrap/dist/js/bootstrap.min.js");
   }, []);
-
   return (
     <Provider>
       <React.StrictMode>
@@ -29,4 +22,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default compose(withDomain, withUniversity)(MyApp);
+export default MyApp;

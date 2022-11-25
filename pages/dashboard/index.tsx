@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
-import Layout from "../../components/Layout";
+import dynamic from "next/dynamic";
 import AppDrawer from "../../serverlets/AppDrawer";
+import AdminLayout from "../../components/AdminLayout";
 
 import {
   faBriefcase,
@@ -19,10 +20,14 @@ import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
 import AppAnalytics from "../../serverlets/AppAnalytics";
 import AppSummary from "../../serverlets/AppSummary";
-const Dashboard: NextPage = ({ token, userinfo }: any) => {
+
+import { withDomain, withUniversity } from "../../utils/withInitialProps";
+import { compose } from "redux";
+
+const Dashboard: NextPage = ({ token }: any) => {
   return (
     <>
-      <Layout>
+      <AdminLayout>
         <AppHeader isroot={true} token={token} />
         <div id="appCapsule">
           <div className="section wallet-card-section pt-1">
@@ -35,7 +40,7 @@ const Dashboard: NextPage = ({ token, userinfo }: any) => {
                       className="text-danger"
                       icon={faBriefcase}
                     />{" "}
-                    4,509
+                    0.0.0.0
                   </h1>
                 </div>
                 <div className="right flex">
@@ -99,9 +104,9 @@ const Dashboard: NextPage = ({ token, userinfo }: any) => {
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="dashboard" />
-      </Layout>
+      </AdminLayout>
     </>
   );
 };
 
-export default withAuthSync(Dashboard);
+export default compose(withAuthSync, withDomain, withUniversity)(Dashboard);

@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import { busyAtom, domainAtom, schoolAtom } from "../store";
 import { authLogin } from "../utils/withAuthSync";
 import { NextPage } from "next";
-import DashboardLayout from "../components/DashboardLayout";
+import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
 const Home: NextPage = () => {
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <DashboardLayout>
+    <Layout>
       <SiteBusy />
       <div className="p-10">
         <div className="section mt-[50px] text-center">
@@ -129,7 +129,7 @@ const Home: NextPage = () => {
           </form>
         </div>
       </div>
-    </DashboardLayout>
+    </Layout>
   );
 };
 

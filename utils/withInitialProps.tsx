@@ -30,7 +30,7 @@ export const withUniversity = (WrappedComponent: any) => {
 
 export const withDomain = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const [domain, setDomain] = useAtom(domainAtom);
+    const [, setDomain] = useAtom(domainAtom);
     useEffect(() => {
       const hostname = window.location.hostname;
       return () => {
@@ -53,9 +53,6 @@ export const withFaculties = (WrappedComponent: any) => {
     return <WrappedComponent {...props} />;
   };
   Wrapper.getInitialProps = async (ctx: any) => {
-    // const domain = process.env.DOMAIN;
-    // const response = await fetch(`${domain}/api/accounts/list_intakes`);
-    // const intakes = await response.json();
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));
@@ -69,9 +66,6 @@ export const withDepartments = (WrappedComponent: any) => {
     return <WrappedComponent {...props} />;
   };
   Wrapper.getInitialProps = async (ctx: any) => {
-    // const domain = process.env.DOMAIN;
-    // const response = await fetch(`${domain}/api/accounts/list_intakes`);
-    // const intakes = await response.json();
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));
@@ -85,9 +79,6 @@ export const withLecturers = (WrappedComponent: any) => {
     return <WrappedComponent {...props} />;
   };
   Wrapper.getInitialProps = async (ctx: any) => {
-    // const domain = process.env.DOMAIN;
-    // const response = await fetch(`${domain}/api/accounts/list_intakes`);
-    // const intakes = await response.json();
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));
@@ -101,9 +92,6 @@ export const withStudents = (WrappedComponent: any) => {
     return <WrappedComponent {...props} />;
   };
   Wrapper.getInitialProps = async (ctx: any) => {
-    // const domain = process.env.DOMAIN;
-    // const response = await fetch(`${domain}/api/accounts/list_intakes`);
-    // const intakes = await response.json();
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));

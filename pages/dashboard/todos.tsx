@@ -1,6 +1,5 @@
 import { NextPage } from "next";
-import React, { useEffect } from "react";
-import Layout from "../../components/Layout";
+import React from "react";
 import AppDrawer from "../../serverlets/AppDrawer";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -10,19 +9,14 @@ import Link from "next/link";
 import AppHeader from "../../serverlets/AppHeader";
 import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
-import { useAtom } from "jotai";
-import { dynamicPagesAtom } from "../../store";
 
+import AdminLayout from "../../components/AdminLayout";
 import DashboardMenu from "../../components/DashboardMenu";
 
-const ToDos: NextPage = ({ token, userinfo }: any) => {
-  const [dynamicpage, setDynamicPage] = useAtom(dynamicPagesAtom);
-  const loadPage = (page: any) => {
-    setDynamicPage(page);
-  };
+const ToDos: NextPage = ({ token }: any) => {
   return (
     <>
-      <Layout>
+      <AdminLayout>
         <AppHeader isroot={true} token={token} />
         <div id="appCapsule">
           <div className="section wallet-card-section pt-1">
@@ -50,7 +44,7 @@ const ToDos: NextPage = ({ token, userinfo }: any) => {
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="dashboard" />
-      </Layout>
+      </AdminLayout>
     </>
   );
 };

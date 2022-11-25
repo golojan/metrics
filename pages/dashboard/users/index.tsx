@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import Layout from "../../../components/Layout";
+import AdminLayout from "../../../components/AdminLayout";
 import AppDrawer from "../../../serverlets/AppDrawer";
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -27,7 +27,7 @@ const Users: NextPage = ({ token, userinfo }: any) => {
 
   return (
     <>
-      <Layout>
+      <AdminLayout>
         <AppHeader isroot={true} token={token} />
         <div id="appCapsule" className="mb-5">
           <div className="section wallet-card-section pt-1">
@@ -71,7 +71,7 @@ const Users: NextPage = ({ token, userinfo }: any) => {
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="intakes" />
-      </Layout>
+      </AdminLayout>
     </>
   );
 };

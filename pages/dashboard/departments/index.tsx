@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import React from "react";
-import DashboardLayout from "../../../components/DashboardLayout";
+import AdminLayout from "../../../components/AdminLayout";
 import AppDrawer from "../../../serverlets/AppDrawer";
 
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSchoolCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
@@ -13,34 +13,23 @@ import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
 import { withDepartments } from "../../../utils/withInitialProps";
 
-const $ = require("jquery");
-
 const Departments: NextPage = ({ token }: any) => {
   return (
     <>
-      <DashboardLayout>
+      <AdminLayout>
         <AppHeader isroot={true} token={token} />
         <div id="appCapsule" className="mb-5">
           <div className="section wallet-card-section pt-1">
             <div className="wallet-card">
               <div className="balance row">
                 <div className="left">
-                  <div className="action-sheet-content w-full">
-                    <div className="form-group basic row">
-                      <div className="input-wrapper col-12 ">
-                        <input
-                          type="text"
-                          className="form-control form-control-lg"
-                          id="text"
-                          autoComplete="off"
-                          placeholder="Search Departments"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <span className="title">Manage Departments</span>
+                  <h1 className="total">
+                    <FontAwesomeIcon icon={faSchoolCircleCheck} /> Departments
+                  </h1>
                 </div>
                 <div className="right flex">
-                  <Link href="/dashboard/intakes/add" legacyBehavior>
+                  <Link href="#" legacyBehavior>
                     <a className="button">
                       <FontAwesomeIcon icon={faPlus} />
                     </a>
@@ -117,7 +106,7 @@ const Departments: NextPage = ({ token }: any) => {
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="departments" />
-      </DashboardLayout>
+      </AdminLayout>
     </>
   );
 };
