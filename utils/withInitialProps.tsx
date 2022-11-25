@@ -1,12 +1,11 @@
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 import { domainAtom, schoolAtom } from "../store";
-import { NextPageContext } from "next";
 
 export const withUniversity = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const [domain, setDomain] = useAtom(domainAtom);
-    const [school, setSchool] = useAtom(schoolAtom);
+    const [domain] = useAtom(domainAtom);
+    const [, setSchool] = useAtom(schoolAtom);
     useEffect(() => {
       const getSchoolInfo = async () => {
         const response = await fetch(`/api/schools/${domain}/info`);
@@ -19,13 +18,7 @@ export const withUniversity = (WrappedComponent: any) => {
     }, [setSchool, domain]);
     return <WrappedComponent {...props} />;
   };
-  Wrapper.getInitialProps = async (ctx: NextPageContext) => {
-    const componentProps =
-      WrappedComponent.getInitialProps &&
-      (await WrappedComponent.getInitialProps(ctx));
-    return { ...componentProps };
-  };
-  return Wrapper;
+  return withDomain(Wrapper);
 };
 
 export const withDomain = (WrappedComponent: any) => {
@@ -38,12 +31,6 @@ export const withDomain = (WrappedComponent: any) => {
       };
     }, [setDomain]);
     return <WrappedComponent {...props} />;
-  };
-  Wrapper.getInitialProps = async (ctx: NextPageContext) => {
-    const componentProps =
-      WrappedComponent.getInitialProps &&
-      (await WrappedComponent.getInitialProps(ctx));
-    return { ...componentProps };
   };
   return Wrapper;
 };

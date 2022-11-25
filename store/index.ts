@@ -8,6 +8,8 @@ export const schoolAtom = atomWithStorage<SchoolTypes>("school", {});
 
 export const loadedAtom = atom(false);
 
+export const idelTimeAtom = atom(0);
+
 export const accidAtom = atom("");
 export const pageAtom = atom("home");
 export const busyAtom = atom(false);

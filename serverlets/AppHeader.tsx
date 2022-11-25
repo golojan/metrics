@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   faArrowLeft,
-  faBell,
   faHome,
   faListUl,
+  faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppSidebar from "./AppSidebar";
@@ -11,7 +11,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { AccountInfo } from "../interfaces";
-import { userAtom, schoolAtom } from "../store";
+import { userAtom, schoolAtom, idelTimeAtom } from "../store";
+import { authlogout } from "../utils/withAuthSync";
 // import SiteBusy from "../components/SiteBusy";
 
 interface AppHeaderProps {
@@ -20,9 +21,9 @@ interface AppHeaderProps {
 }
 
 function AppHeader({ token, isroot }: AppHeaderProps) {
-  const [school, setSchool] = useAtom(schoolAtom);
-
+  const [school] = useAtom(schoolAtom);
   const [user] = useAtom<AccountInfo>(userAtom);
+  const [rem] = useAtom<number>(idelTimeAtom);
   return (
     <>
       {isroot ? (
@@ -55,7 +56,14 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
                   className="imaged w32"
                   alt=""
                 />
-                <span className="badge badge-danger">0</span>
+              </a>
+              <a
+                href="#"
+                className="headerButton text-white"
+                onClick={authlogout}
+              >
+                <FontAwesomeIcon icon={faUserLock} />
+                <span className="badge badge-success">{rem}</span>
               </a>
             </div>
           </div>

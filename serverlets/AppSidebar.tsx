@@ -136,11 +136,11 @@ function AppSidebar() {
 
                 <li>
                   <Link href="#" legacyBehavior>
-                    <a className="item" onClick={authlogout}>
-                      <div className="icon-box bg-danger">
+                    <a className="item">
+                      <div className="icon-box bg-primary">
                         <FontAwesomeIcon icon={faHome} />
                       </div>
-                      <div className="in">Log out</div>
+                      <div className="in">Reports</div>
                     </a>
                   </Link>
                 </li>
