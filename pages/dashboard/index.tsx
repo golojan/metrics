@@ -23,6 +23,7 @@ import AppSummary from "../../serverlets/AppSummary";
 
 import { withDomain, withUniversity } from "../../utils/withInitialProps";
 import { compose } from "redux";
+import SchoolRanking from "../../serverlets/SchoolRanking";
 
 const Dashboard: NextPage = ({ token }: any) => {
   return (
@@ -97,7 +98,7 @@ const Dashboard: NextPage = ({ token }: any) => {
               </div>
             </div>
           </div>
-
+          <SchoolRanking />
           <AppAnalytics />
           <AppSummary />
 

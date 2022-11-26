@@ -46,7 +46,6 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
             <div className="right">
               <a href="#" className="headerButton">
                 <FontAwesomeIcon icon={faHome} />
-                <span className="badge badge-danger">0</span>
               </a>
               <a href="#" className="headerButton">
                 <Image

@@ -12,6 +12,7 @@ import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
 import { withDepartments } from "../../../utils/withInitialProps";
+import DepartmentsRanking from "../../../serverlets/DepartmentsRanking";
 
 const Departments: NextPage = ({ token }: any) => {
   return (
@@ -38,6 +39,7 @@ const Departments: NextPage = ({ token }: any) => {
               </div>
             </div>
           </div>
+          <DepartmentsRanking />
           <div className="section">
             <div className="row mt-2">
               <div className="col-12">

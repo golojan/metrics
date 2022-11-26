@@ -12,6 +12,7 @@ import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
 import { withFaculties } from "../../../utils/withInitialProps";
+import FacultiesRanking from "../../../serverlets/FacultiesRanking";
 
 const Faculties: NextPage = ({ token }: any) => {
   return (
@@ -38,71 +39,7 @@ const Faculties: NextPage = ({ token }: any) => {
               </div>
             </div>
           </div>
-          <div className="section">
-            <div className="row mt-2">
-              <div className="col-12">
-                <div className="stat-box">
-                  <table className="table table-striped display table-bordered w-full">
-                    <thead>
-                      <tr>
-                        <th>-</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>-</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {/* {intakes.data.map((intake: AccountInfo, i: number) => (
-                        <tr key={i}>
-                          <td>
-                            <img
-                              src={`${intake.avatar}`}
-                              width={33}
-                              alt="rrdd"
-                            />
-                          </td>
-                          <td>
-                            <strong className="text-green-600">
-                              {intake.lastname}
-                            </strong>
-                            {", "}
-                            {intake.firstname} {intake.middlename}
-                          </td>
-                          <td>{intake.email}</td>
-                          <td>{intake.mobile}</td>
-                          <td className="justify-items-end">
-                            <Link
-                              href={`/dashboard/intakes/${intake._id}/profile`}
-                              className="mx-1"
-                            >
-                              View
-                            </Link>
-                            <Link href="#" className="text-green-700 mx-1">
-                              Edit
-                            </Link>
-                            <Link href="#" className="text-danger mx-1">
-                              Delete
-                            </Link>
-                          </td>
-                        </tr>
-                      ))} */}
-                    </tbody>
-
-                    <tfoot>
-                      <tr>
-                        <th>-</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>-</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FacultiesRanking />
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="faculties" />
