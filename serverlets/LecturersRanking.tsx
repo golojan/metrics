@@ -59,9 +59,7 @@ const LecturersRanking = () => {
             <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">
-                  Percentage of International Students
-                </strong>
+                <strong className="text-black">% International Students</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
