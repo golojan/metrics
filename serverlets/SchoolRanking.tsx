@@ -103,7 +103,7 @@ const SchoolRanking = () => {
                 {98}%
               </h1>
               <ChartComponent
-                labels={["Int.St", "Loc.St"]}
+                labels={["full.accr", "others"]}
                 data={[98, 2]}
                 color={["red", "black"]}
               />
