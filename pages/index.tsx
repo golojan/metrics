@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
@@ -13,11 +13,9 @@ import SiteBusy from "../components/SiteBusy";
 const Home: NextPage = () => {
   const [domain, setDomain] = useAtom(domainAtom);
   const [school, setSchool] = useAtom(schoolAtom);
-
   const router = useRouter();
   const [, setBusy] = useAtom(busyAtom);
   const [errorMsg, setErrorMsg] = useState("");
-
   const [logon, setLogon] = useState<Logon>({
     username: "",
     password: "",

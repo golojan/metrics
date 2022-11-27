@@ -1,6 +1,7 @@
 import { faAreaChart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import ChartComponent from "../components/ChartComponent";
 import ShowChartButton from "../components/ShowChartButton";
 
 const SchoolRanking = () => {
@@ -18,14 +19,14 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {0}
+                  {0.8}
                 </h1>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box">
-              <ShowChartButton />
+              <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Percentage Female</strong>
                 <h1 className="total mt-2">
@@ -33,14 +34,19 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {0}
+                  {15.7}%
                 </h1>
+                <ChartComponent
+                  labels={["M", "F"]}
+                  data={[500, 140]}
+                  color={["black", "green"]}
+                />
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box">
-              <ShowChartButton />
+              <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">
                   Percentage Full Professors
@@ -50,26 +56,34 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {0}
+                  {30}%
                 </h1>
+                <ChartComponent
+                  labels={["P.full", "P.normal"]}
+                  data={[5, 10]}
+                  color={["blue", "black"]}
+                />
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box">
-              <ShowChartButton />
+              <ShowChartButton show={false} />
               <div className="title">
-                <strong className="text-black">
-                  Percentage of International Students
-                </strong>
+                <strong className="text-black">International Students</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {17.8}%
               </h1>
+              <ChartComponent
+                labels={["Int.St", "Loc.St"]}
+                data={[5, 10]}
+                color={["red", "black"]}
+              />
             </div>
           </div>
         </div>
@@ -77,19 +91,22 @@ const SchoolRanking = () => {
         <div className="row mt-2">
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box">
-              <ShowChartButton />
+              <ShowChartButton show={false} />
               <div className="title">
-                <strong className="text-black">
-                  Percentage Full Accreditation
-                </strong>
+                <strong className="text-black">% Full Accreditation</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {98}%
               </h1>
+              <ChartComponent
+                labels={["Int.St", "Loc.St"]}
+                data={[98, 2]}
+                color={["red", "black"]}
+              />
             </div>
           </div>
 
@@ -104,7 +121,7 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {99.9}
               </h1>
             </div>
           </div>
@@ -113,14 +130,14 @@ const SchoolRanking = () => {
             <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">All Citations Per Capita</strong>
+                <strong className="text-black">Citations Per Capita</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {7.89}
               </h1>
             </div>
           </div>
@@ -129,14 +146,14 @@ const SchoolRanking = () => {
             <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">All h-index Per Capita</strong>
+                <strong className="text-black">H-index Per Capita</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {346}
               </h1>
             </div>
           </div>
@@ -148,16 +165,14 @@ const SchoolRanking = () => {
             <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">
-                  All i-10-index Per Capita
-                </strong>
+                <strong className="text-black">i-10-index Per Capita</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {345}
               </h1>
             </div>
           </div>
@@ -166,7 +181,7 @@ const SchoolRanking = () => {
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box">
-              <ShowChartButton />
+              <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Google Scholar Presence</strong>
               </div>
@@ -175,8 +190,13 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {20}%
               </h1>
+              <ChartComponent
+                labels={["GSP", "non.GSP"]}
+                data={[20, 80]}
+                color={["green", "black"]}
+              />
             </div>
           </div>
           {/*  */}
@@ -186,16 +206,14 @@ const SchoolRanking = () => {
             <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">
-                  Contribution to Knowledge Economy
-                </strong>
+                <strong className="text-black">Knowledge Economy</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {45}
               </h1>
             </div>
           </div>
@@ -213,7 +231,7 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {0}
+                {345}
               </h1>
             </div>
           </div>

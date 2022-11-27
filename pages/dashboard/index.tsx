@@ -35,13 +35,13 @@ const Dashboard: NextPage = ({ token }: any) => {
             <div className="wallet-card">
               <div className="balance">
                 <div className="left">
-                  <span className="title">Incident Ranking</span>
+                  <span className="title">University Ranking</span>
                   <h1 className="total">
                     <FontAwesomeIcon
                       className="text-danger"
                       icon={faBriefcase}
                     />{" "}
-                    0.0.0.0
+                    568.90
                   </h1>
                 </div>
                 <div className="right flex">

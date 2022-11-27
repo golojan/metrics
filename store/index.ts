@@ -1,6 +1,6 @@
 import { AccountTypes, AccountRoles, StateTypes } from "./../interfaces/enums";
 import { atom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
+import { atomWithStorage, atomWithReducer } from "jotai/utils";
 import { AccountInfo, UserInfo, SchoolTypes } from "../interfaces";
 
 export const domainAtom = atomWithStorage<string>("domain", "metrics.ng");
