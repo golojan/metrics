@@ -12,7 +12,7 @@ import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { loadUsers } from "../../../utils/queries";
 
-const Users: NextPage = ({ token, userinfo }: any) => {
+const Users: NextPage = ({ token }: any) => {
   const [done, setDone] = useState(false);
   const [users, setUsers] = useState([]);
 

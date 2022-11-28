@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { Logon } from "../interfaces";
-import { useAtom } from "jotai";
-import { busyAtom, domainAtom, schoolAtom } from "../store";
 import { authLogin } from "../utils/withAuthSync";
 import { NextPage } from "next";
 import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
+import { RootState, Dispatch } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+
 const Home: NextPage = () => {
-  const [domain, setDomain] = useAtom(domainAtom);
-  const [school, setSchool] = useAtom(schoolAtom);
+  const { domain, school } = useSelector((state: RootState) => state.settings);
+  const dispatch = useDispatch<Dispatch>();
+
   const router = useRouter();
-  const [, setBusy] = useAtom(busyAtom);
+
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
     username: "",
@@ -23,7 +25,7 @@ const Home: NextPage = () => {
 
   const adminLogon = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setBusy(true);
+    dispatch.settings.setBusy(true);
     setErrorMsg("");
     const response = await fetch("/api/login", {
       method: "POST",
@@ -38,7 +40,7 @@ const Home: NextPage = () => {
     } else {
       setErrorMsg("Invalid Username and Password.");
     }
-    setBusy(false);
+    dispatch.settings.setBusy(false);
   };
 
   return (

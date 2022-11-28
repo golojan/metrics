@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import App from "next/app";
 import type { AppProps } from "next/app";
-import { Provider } from "jotai";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../public/DataTables/datatables.min.css";
 import "../styles/globals.scss";
 import { withUniversity } from "../utils/withInitialProps";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -17,17 +18,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <Provider>
-      <React.StrictMode>
-        <Component {...pageProps} />
-      </React.StrictMode>
+    <Provider store={store}>
+      <Component {...pageProps} />
     </Provider>
   );
 }
 
-MyApp.getInitialProps = async (appContext: any) => {
-  const appProps = await App.getInitialProps(appContext);
-  return { ...appProps };
-};
-
-export default withUniversity(MyApp);
+export default MyApp;

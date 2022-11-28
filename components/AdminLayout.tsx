@@ -1,63 +1,18 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import Head from "next/head";
 import Script from "next/script";
-import { schoolAtom, idelTimeAtom } from "../store";
-import { useAtom } from "jotai";
-import { useIdleTimer } from "react-idle-timer";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+
+import { withUniversity } from "../utils/withInitialProps";
 
 interface MyProps {
   children: ReactNode;
 }
-const AdminLayout = ({ children }: MyProps) => {
-  const [school] = useAtom(schoolAtom);
-  // const [time, setTime] = useAtom(idelTimeAtom);
-  // const onPrompt = () => {
-  //   // Fire a Modal Prompt
-  // };
-  // const updateTicker = (time: number) => {
-  //   setTime(Math.floor(time / 1000 / 60));
-  // };
-  // const onIdle = () => {
-  //   // Close Modal Prompt
-  //   // Do some idle action like log out your user
-  // };
-  // const onActive = (event: any) => {
-  //   // Close Modal Prompt
-  //   // Do some active action
-  // };
-  // const onAction = (event: any) => {
-  //   const _remT = getRemainingTime();
-  //   updateTicker(_remT);
-  //   // Do something when a user triggers a watched event
-  // };
-  // const {
-  //   // start,
-  //   // reset,
-  //   // activate,
-  //   // pause,
-  //   // resume,
-  //   // isIdle,
-  //   // isPrompted,
-  //   // isLeader,
-  //   // getTabId,
-  //   getRemainingTime,
-  //   // getElapsedTime,
-  //   // getLastIdleTime,
-  //   // getLastActiveTime,
-  //   // getTotalIdleTime,
-  //   // getTotalActiveTime,
-  // } = useIdleTimer({
-  //   onPrompt,
-  //   onIdle,
-  //   onActive,
-  //   onAction,
-  //   timeout: 1000 * 60 * 10,
-  //   promptTimeout: 0,
-  //   events: ["keydown", "mousedown", "mouseenter", "touchstart", "touchmove"],
-  //   name: "idle-timer",
-  //   syncTimers: 0,
-  // });
 
+const AdminLayout = ({ children }: MyProps) => {
+  const { school } = useSelector((state: RootState) => state.settings);
   return (
     <>
       <Head>
@@ -73,4 +28,4 @@ const AdminLayout = ({ children }: MyProps) => {
     </>
   );
 };
-export default AdminLayout;
+export default withUniversity(AdminLayout);

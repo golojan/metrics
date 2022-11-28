@@ -12,13 +12,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { authlogout } from "../utils/withAuthSync";
-import { AccountInfo } from "../interfaces";
-import { userAtom } from "../store";
-import { useAtom } from "jotai";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 function AppSidebar() {
-  const [user] = useAtom<AccountInfo>(userAtom);
+  const { user } = useSelector((state: RootState) => state.settings);
   return (
     <>
       <div

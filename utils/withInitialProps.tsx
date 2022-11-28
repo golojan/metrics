@@ -1,21 +1,22 @@
-import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-import { domainAtom, schoolAtom } from "../store";
+
+import { RootState, Dispatch } from "../store";
+import { useDispatch, useSelector } from "react-redux";
 
 export const withUniversity = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const [domain] = useAtom(domainAtom);
-    const [, setSchool] = useAtom(schoolAtom);
+    const dispatch = useDispatch<Dispatch>();
+    const domain = useSelector((state: RootState) => state.settings.domain);
     useEffect(() => {
       const getSchoolInfo = async () => {
         const response = await fetch(`/api/schools/${domain}/info`);
         const { status, data } = await response.json();
         if (status) {
-          setSchool(data);
+          dispatch.settings.setSchool(data);
         }
       };
       getSchoolInfo();
-    }, [setSchool, domain]);
+    }, [dispatch.settings, domain]);
     return <WrappedComponent {...props} />;
   };
   return withDomain(Wrapper);
@@ -23,13 +24,13 @@ export const withUniversity = (WrappedComponent: any) => {
 
 export const withDomain = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const [, setDomain] = useAtom(domainAtom);
+    const dispatch = useDispatch<Dispatch>();
     useEffect(() => {
       const hostname = window.location.hostname;
       return () => {
-        setDomain(hostname);
+        dispatch.settings.setDomain(hostname);
       };
-    }, [setDomain]);
+    }, [dispatch.settings]);
     return <WrappedComponent {...props} />;
   };
   return Wrapper;

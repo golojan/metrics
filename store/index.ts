@@ -1,31 +1,12 @@
-import { AccountTypes, AccountRoles, StateTypes } from "./../interfaces/enums";
-import { atom } from "jotai";
-import { atomWithStorage, atomWithReducer } from "jotai/utils";
-import { AccountInfo, UserInfo, SchoolTypes } from "../interfaces";
+// export const intakesAtom = atom<AccountInfo[]>([]);
 
-export const domainAtom = atomWithStorage<string>("domain", "metrics.ng");
-export const schoolAtom = atomWithStorage<SchoolTypes>("school", {});
+import { init, RematchDispatch, RematchRootState } from "@rematch/core";
+import { models, RootModel } from "./models";
 
-export const loadedAtom = atom(false);
-
-export const idelTimeAtom = atom(0);
-
-export const accidAtom = atom("");
-export const pageAtom = atom("home");
-export const busyAtom = atom(false);
-export const userAtom = atom<AccountInfo>({});
-export const blogImageAtom = atom<string>("/avatars/uploadholder.png");
-export const uploadedAtom = atom<boolean>(false);
-
-export const isLoggedInAtom = atom(false);
-export const imageUrlAtom = atom<string>("/avatars/uploadholder.png");
-export const dynamicPagesAtom = atomWithStorage("dynamicpage", "");
-
-export const newUserAtom = atom<UserInfo>({
-  membership: AccountTypes.STUDENT,
-  role: AccountRoles.USER,
-  regfee: 0,
-  state: StateTypes.ENUGU,
+export const store = init({
+  models,
 });
 
-export const intakesAtom = atom<AccountInfo[]>([]);
+export type Store = typeof store;
+export type Dispatch = RematchDispatch<RootModel>;
+export type RootState = RematchRootState<RootModel>;

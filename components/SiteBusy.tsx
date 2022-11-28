@@ -1,10 +1,10 @@
 import React from "react";
-import { useAtom } from "jotai";
-import { busyAtom } from "../store";
 import BarLoader from "react-spinners/BarLoader";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 function SiteBusy() {
-  const [busy] = useAtom(busyAtom);
+  const busy = useSelector((state: RootState) => state.settings.busy);
   return (
     <>
       {busy && (

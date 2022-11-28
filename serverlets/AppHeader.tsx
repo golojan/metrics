@@ -9,11 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AppSidebar from "./AppSidebar";
 import Link from "next/link";
 import Image from "next/image";
-import { useAtom } from "jotai";
-import { AccountInfo } from "../interfaces";
-import { userAtom, schoolAtom, idelTimeAtom } from "../store";
 import { authlogout } from "../utils/withAuthSync";
-// import SiteBusy from "../components/SiteBusy";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 interface AppHeaderProps {
   token?: string;
@@ -21,9 +20,10 @@ interface AppHeaderProps {
 }
 
 function AppHeader({ token, isroot }: AppHeaderProps) {
-  const [school] = useAtom(schoolAtom);
-  const [user] = useAtom<AccountInfo>(userAtom);
-  const [rem] = useAtom<number>(idelTimeAtom);
+  const { school, user, idelTime } = useSelector(
+    (state: RootState) => state.settings
+  );
+
   return (
     <>
       {isroot ? (
@@ -62,7 +62,7 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
                 onClick={authlogout}
               >
                 <FontAwesomeIcon icon={faUserLock} />
-                <span className="badge badge-success">{rem}</span>
+                <span className="badge badge-success">{idelTime}</span>
               </a>
             </div>
           </div>

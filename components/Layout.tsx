@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import Script from "next/script";
+import { withUniversity } from "../utils/withInitialProps";
 
 interface MyProps {
   children: ReactNode;
@@ -21,4 +22,4 @@ const DashboardLayout = ({ children }: MyProps) => {
     </>
   );
 };
-export default DashboardLayout;
+export default withUniversity(DashboardLayout);

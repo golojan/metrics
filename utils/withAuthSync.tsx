@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { useAtom } from "jotai";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 import { Token } from "../interfaces";
-import { accidAtom, isLoggedInAtom, userAtom } from "../store";
+
+import { Dispatch } from "../store";
+import { useDispatch } from "react-redux";
 
 // Login & Create session for a given minutes time
 export const authLogin = ({ token }: Token) => {
@@ -56,9 +57,7 @@ const updateUser = async (_token: any) => {
 
 export const withAuthSync = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
-    const [, setAccid] = useAtom(accidAtom);
-    const [, setLoggedIn] = useAtom(isLoggedInAtom);
-    const [, setUserInfo] = useAtom(userAtom);
+    const dispatch = useDispatch<Dispatch>();
 
     const syncLogout = (event: any) => {
       if (event.key === "logout") {
@@ -72,17 +71,17 @@ export const withAuthSync = (WrappedComponent: any) => {
       if (token) {
         updateUser(token)
           .then((info) => {
-            setUserInfo(info);
+            dispatch.settings.setUserInfo(info);
           })
           .catch();
-        setLoggedIn(true);
-        setAccid(token);
+        dispatch.settings.setIsLogged(true);
+        dispatch.settings.setAccid(token);
       }
       return () => {
         window.removeEventListener("storage", syncLogout);
         window.localStorage.removeItem("logout");
       };
-    }, [setLoggedIn, setAccid, setUserInfo]);
+    }, [dispatch.settings]);
 
     return <WrappedComponent {...props} />;
   };
