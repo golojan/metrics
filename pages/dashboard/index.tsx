@@ -34,7 +34,7 @@ const Dashboard: NextPage = ({ token }: any) => {
             <div className="wallet-card">
               <div className="balance">
                 <div className="left">
-                  <span className="title">University Ranking</span>
+                  <span className="title">Total University Ranking</span>
                   <h1 className="total">
                     <FontAwesomeIcon
                       className="text-danger"
