@@ -20,11 +20,11 @@ import { withAuthSync } from "../../utils/withAuthSync";
 import AppAnalytics from "../../serverlets/AppAnalytics";
 import AppSummary from "../../serverlets/AppSummary";
 
-import { withDomain, withUniversity } from "../../utils/withInitialProps";
 import { compose } from "redux";
 import SchoolRanking from "../../serverlets/SchoolRanking";
+import { withDomain } from "../../utils/withDomain";
 
-const Dashboard: NextPage = ({ token }: any) => {
+const Dashboard: NextPage = ({ token, domain }: any) => {
   return (
     <>
       <AdminLayout>
@@ -34,7 +34,9 @@ const Dashboard: NextPage = ({ token }: any) => {
             <div className="wallet-card">
               <div className="balance">
                 <div className="left">
-                  <span className="title">Total University Ranking</span>
+                  <span className="title">
+                    Total University Ranking {domain}
+                  </span>
                   <h1 className="total">
                     <FontAwesomeIcon
                       className="text-danger"
@@ -109,4 +111,4 @@ const Dashboard: NextPage = ({ token }: any) => {
   );
 };
 
-export default compose(withAuthSync, withDomain, withUniversity)(Dashboard);
+export default compose(withDomain, withAuthSync)(Dashboard);

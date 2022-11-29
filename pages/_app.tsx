@@ -6,7 +6,6 @@ import "bootstrap-select/dist/css/bootstrap-select.min.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../public/DataTables/datatables.min.css";
 import "../styles/globals.scss";
-import { withUniversity } from "../utils/withInitialProps";
 import { Provider } from "react-redux";
 import { store } from "../store";
 

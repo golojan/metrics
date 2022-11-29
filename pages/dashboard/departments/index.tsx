@@ -11,7 +11,6 @@ import AppHeader from "../../../serverlets/AppHeader";
 import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
-import { withDepartments } from "../../../utils/withInitialProps";
 import DepartmentsRanking from "../../../serverlets/DepartmentsRanking";
 
 const Departments: NextPage = ({ token }: any) => {
@@ -113,4 +112,4 @@ const Departments: NextPage = ({ token }: any) => {
   );
 };
 
-export default compose(withAuthSync, withDepartments)(Departments);
+export default compose(withAuthSync)(Departments);

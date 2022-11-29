@@ -12,8 +12,13 @@ export default async function handler(
   const catcher = (error: Error) => res.status(400).json({ error });
   const handleCase: ResponseFunctions = {
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
-      const { domain, username, password } = req.body;
+      const { username, password } = req.body;
       const { Schools } = await dbCon();
+
+      // =================== Get hostnmame // ===================
+      const { host }: any = req.headers;
+      const domain = host.split(":", 1).pop();
+      // =================== Get hostnmame // ===================
 
       await Schools.findOne({
         domain: domain,

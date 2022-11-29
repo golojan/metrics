@@ -11,19 +11,15 @@ import SiteBusy from "../components/SiteBusy";
 import { RootState, Dispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 
-const Home: NextPage = () => {
-  const { domain } = useSelector((state: RootState) => state.settings);
+const Home: NextPage = ({ status, domain, school }: any) => {
   const dispatch = useDispatch<Dispatch>();
-
   const router = useRouter();
-
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
     domain: domain,
     username: "",
     password: "",
   });
-
   const adminLogon = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch.settings.setBusy(true);
@@ -43,7 +39,6 @@ const Home: NextPage = () => {
     }
     dispatch.settings.setBusy(false);
   };
-
   return (
     <Layout>
       <SiteBusy />
@@ -111,7 +106,9 @@ const Home: NextPage = () => {
             </Card>
             <div className="form-links mt-2">
               <div className="text-muted">
-                <span className="mb-2 text-success">Connected</span>
+                <span className="text-black">
+                  Status: <span className="mb-2 text-success">Connected</span>
+                </span>
               </div>
               <div>
                 <a href="#" className="text-muted">
@@ -132,6 +129,18 @@ const Home: NextPage = () => {
       </div>
     </Layout>
   );
+};
+
+Home.getInitialProps = async (ctx: any) => {
+  const { req } = ctx;
+  // =================== Get hostnmame // ===================
+  const { host } = req.headers;
+  const domain = host.split(":", 1).pop();
+  // =================== Get hostnmame // ===================
+  const { DOMAIN } = process.env;
+  const response = await fetch(`${DOMAIN}/api/schools/${domain}/info`);
+  const { status, data } = await response.json();
+  return { status: status, domain: domain, school: data };
 };
 
 export default Home;

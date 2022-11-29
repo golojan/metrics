@@ -5,8 +5,6 @@ import Script from "next/script";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
-import { withUniversity } from "../utils/withInitialProps";
-
 interface MyProps {
   children: ReactNode;
 }
@@ -28,4 +26,4 @@ const AdminLayout = ({ children }: MyProps) => {
     </>
   );
 };
-export default withUniversity(AdminLayout);
+export default AdminLayout;

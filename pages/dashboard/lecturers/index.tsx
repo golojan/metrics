@@ -11,7 +11,6 @@ import AppHeader from "../../../serverlets/AppHeader";
 import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
-import { withLecturers } from "../../../utils/withInitialProps";
 import LecturersRanking from "../../../serverlets/LecturersRanking";
 
 const Lecturers: NextPage = ({ token }: any) => {
@@ -48,4 +47,4 @@ const Lecturers: NextPage = ({ token }: any) => {
   );
 };
 
-export default compose(withAuthSync, withLecturers)(Lecturers);
+export default compose(withAuthSync)(Lecturers);

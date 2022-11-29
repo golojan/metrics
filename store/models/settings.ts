@@ -1,12 +1,12 @@
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
-import { AccountInfo, UserInfo, SchoolTypes } from "../../interfaces";
+import { UserInfo, SchoolTypes } from "../../interfaces";
 import { AccountTypes, AccountRoles, StateTypes } from "../../interfaces/enums";
 
 export const settings = createModel<RootModel>()({
   state: {
     accid: "",
-    domain: "localhost",
+    domain: "",
     page: "home",
     school: {} as SchoolTypes,
     loaded: false,
