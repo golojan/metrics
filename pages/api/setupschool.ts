@@ -19,11 +19,11 @@ export default async function handler(
       // Encrypt Password//
       const { Schools } = await dbCon();
       const created = await Schools.create({
-        domain: "localhost",
-        name: "ESUT Enugu",
-        shortname: "ESUT",
+        domain: "metrics.ng",
+        name: "Metrics Admin",
+        shortname: "METRICS",
         accounts: {
-          email: "agu.chux@gmail.com",
+          email: "agu.chux@yahoo.com",
           firstname: "Agu",
           lastname: "Chux",
           mobile: "08068573376",
