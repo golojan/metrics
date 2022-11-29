@@ -8,10 +8,11 @@ import { Dispatch } from "../store";
 import { useDispatch } from "react-redux";
 
 // Login & Create session for a given minutes time
-export const authLogin = ({ token }: Token) => {
+export const authLogin = ({ token, domain }: Token) => {
   const expire_time: any = process.env.COOKIE_TIME_IN_MINS || 10;
   const inMinutes = new Date(new Date().getTime() + expire_time * 60 * 1000);
   cookie.set("token", token as string, { expires: inMinutes });
+  cookie.set("domain", domain as string, { expires: inMinutes });
   Router.push("/dashboard");
 };
 
@@ -49,8 +50,14 @@ export const authlogout = () => {
   Router.push("/?~out+");
 };
 
-const updateUser = async (_token: any) => {
+const getAccountInfo = async (_token: string) => {
   const response = await fetch(`/api/accounts/${_token}/info`);
+  const userinfo = await response.json();
+  return userinfo;
+};
+
+const getSchoolInfo = async (domain: string) => {
+  const response = await fetch(`/api/schools/${domain}/info`);
   const userinfo = await response.json();
   return userinfo;
 };
@@ -58,24 +65,39 @@ const updateUser = async (_token: any) => {
 export const withAuthSync = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const dispatch = useDispatch<Dispatch>();
-
     const syncLogout = (event: any) => {
       if (event.key === "logout") {
         console.log("logged out from storage!");
         Router.push("/");
       }
     };
+
     useEffect(() => {
       window.addEventListener("storage", syncLogout);
       const token = cookie.get("token");
       if (token) {
-        updateUser(token)
+        dispatch.settings.setIsLogged(true);
+        dispatch.settings.setAccid(token);
+        // Get account info to state //
+        getAccountInfo(token)
           .then((info) => {
             dispatch.settings.setUserInfo(info);
           })
           .catch();
-        dispatch.settings.setIsLogged(true);
-        dispatch.settings.setAccid(token);
+        // Get account info to state //
+        // ========================== //
+      }
+
+      const domain = cookie.get("domain");
+      if (domain) {
+        dispatch.settings.setDomain(domain as string);
+        // Get school info to state //
+        getSchoolInfo(domain as string)
+          .then((school) => {
+            dispatch.settings.setSchool(school.data);
+          })
+          .catch();
+        // Get school info to state //
       }
       return () => {
         window.removeEventListener("storage", syncLogout);
@@ -83,16 +105,31 @@ export const withAuthSync = (WrappedComponent: any) => {
       };
     }, [dispatch.settings]);
 
+    // useEffect(() => {
+    //   window.addEventListener("storage", syncLogout);
+    //   const token = cookie.get("token");
+    //   if (token) {
+    //     updateUser(token)
+    //       .then((info) => {
+    //         dispatch.settings.setUserInfo(info);
+    //       })
+    //       .catch();
+    //     dispatch.settings.setIsLogged(true);
+    //     dispatch.settings.setAccid(token);
+    //   }
+    //   return () => {
+    //     window.removeEventListener("storage", syncLogout);
+    //     window.localStorage.removeItem("logout");
+    //   };
+    // }, [dispatch.settings]);
+
     return <WrappedComponent {...props} />;
   };
   Wrapper.getInitialProps = async (ctx: any) => {
-    const token = auth(ctx);
-    const { req, res } = ctx;
-    console.log(token);
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));
-    return { ...componentProps, token };
+    return { ...componentProps };
   };
   return Wrapper;
 };

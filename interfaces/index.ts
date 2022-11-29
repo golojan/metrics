@@ -25,7 +25,7 @@ export interface ResponseFunctions {
 }
 
 export type Logon = {
-  domain: string;
+  domain?: string;
   username: string;
   password: string;
 };
@@ -96,6 +96,7 @@ export type PageInfo = {
 };
 
 export type Token = {
+  domain?: string;
   token?: string;
   url?: string;
 };

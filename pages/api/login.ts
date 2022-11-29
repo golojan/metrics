@@ -13,41 +13,40 @@ export default async function handler(
   const handleCase: ResponseFunctions = {
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
       const { username, password } = req.body;
-      const { Schools } = await dbCon();
 
-      // =================== Get hostnmame // ===================
-      const { host }: any = req.headers;
-      const domain = host.split(":", 1).pop();
-      // =================== Get hostnmame // ===================
+      // Try capture domain //
+      const { host } = req.headers;
+      const domain = host?.split(":", 1).pop();
+      // Try capture domain //
 
-      await Schools.findOne({
-        domain: domain,
+      const { Accounts, Schools } = await dbCon();
+
+      // Get the School info with domain //
+      let schoolid: string = "";
+      const school = await Schools.findOne({ domain: domain }).catch(catcher);
+      if (school) {
+        schoolid = school._id;
+      }
+      // Get the School info with domain //
+      await Accounts.findOne({
+        schoolid: schoolid,
+        email: username,
       })
-        .then((school) => {
-          // Check if school document dropped //
-          if (school) {
-            let account = school.accounts
-              .filter((user: any) => {
-                return user.email === username;
-              })
-              .pop();
-            if (account) {
-              // Check if account document dropped //
-              const isPasswordValid = bcrypt.compareSync(
-                password,
-                account.password
-              );
-              if (isPasswordValid) {
-                // Check if [password] matched //
-                res.status(200).json({ status: true, token: account._id });
-              } else {
-                res.status(400).json({ status: false });
-              }
+        .then((account) => {
+          if (account) {
+            const isPasswordValid = bcrypt.compareSync(
+              password,
+              account.password
+            );
+            if (isPasswordValid) {
+              res
+                .status(200)
+                .json({ status: true, token: account._id, domain: domain });
             } else {
-              res.status(400).json({ status: false });
+              res.status(400).json({ status: false, domain: domain });
             }
           } else {
-            res.status(400).json({ status: false });
+            res.status(400).json({ status: false, domain: domain });
           }
         })
         .catch(catcher);

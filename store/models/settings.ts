@@ -64,5 +64,5 @@ export const settings = createModel<RootModel>()({
     setIdelTime(state, payload: number) {
       return { ...state, idelTime: payload };
     },
-  },
+  }
 });

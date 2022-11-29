@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../../models";
-import { ResponseFunctions } from "../../../../interfaces";
+import { dbCon } from "../../../models";
+import { ResponseFunctions } from "../../../interfaces";
 const slugify = require("slugify");
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

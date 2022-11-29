@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../../../models";
-import { ResponseFunctions } from "../../../../../interfaces";
+import { dbCon } from "../../../../models";
+import { ResponseFunctions } from "../../../../interfaces";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method: keyof ResponseFunctions = req.method as keyof ResponseFunctions;
@@ -12,19 +12,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const { Schools } = await dbCon();
       const account = await Schools.findOne({ _id: token }).catch(catcher);
       res.status(200).json({
-        role: account.role,
-        accountType: account.accountType,
-        university: account.university,
         status: true,
-        accid: account._id,
-        avatar: account.avatar,
-        email: account.email,
-        mobile: account.mobile,
-        firstname: account.firstname,
-        lastname: account.lastname,
-        address: account.address,
-        country: account.addresses.contact.country,
-        enabled: account.enabled,
+        data: {
+          _id: account._id,
+          accid: account._id,
+          avatar: account.avatar,
+          email: account.email,
+          mobile: account.mobile,
+          firstname: account.firstname,
+          lastname: account.lastname,
+          role: account.role,
+          country: account.addresses.contact.country,
+          enabled: account.enabled,
+        },
       });
     },
   };

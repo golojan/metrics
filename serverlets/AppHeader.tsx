@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   faArrowLeft,
   faHome,
@@ -15,15 +15,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
 interface AppHeaderProps {
-  token?: string;
   isroot: boolean;
 }
 
-function AppHeader({ token, isroot }: AppHeaderProps) {
-  const { school, user, idelTime } = useSelector(
-    (state: RootState) => state.settings
-  );
-
+function AppHeader({ isroot }: AppHeaderProps) {
+  const { school } = useSelector((state: RootState) => state.settings);
+  const { name, shortname } = school;
   return (
     <>
       {isroot ? (
@@ -41,7 +38,7 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
               </a>
             </div>
             <div className="pageTitle">
-              <h2 className="text-white mt-2">{`${school.name} (${school.shortname})`}</h2>
+              <h2 className="text-white mt-2">{`${name} (${shortname})`}</h2>
             </div>
             <div className="right">
               <a href="#" className="headerButton">
@@ -62,7 +59,7 @@ function AppHeader({ token, isroot }: AppHeaderProps) {
                 onClick={authlogout}
               >
                 <FontAwesomeIcon icon={faUserLock} />
-                <span className="badge badge-success">{idelTime}</span>
+                <span className="badge badge-success">0</span>
               </a>
             </div>
           </div>

@@ -17,12 +17,17 @@ export default async function handler(
       const salt = bcrypt.genSaltSync(10);
       var hashedPassword = bcrypt.hashSync("admin", salt);
       // Encrypt Password//
-      const { Schools } = await dbCon();
-      const created = await Schools.create({
-        domain: "localhost",
-        name: "Abia State University",
-        shortname: "ABSU",
+      const { Accounts } = await dbCon();
+      const created = await Accounts.create({
+        schoolid: "638631c82ed2a84306b56094",
+        email: "agu.chux@yahoo.com",
+        firstname: "Agu",
+        lastname: "Chux",
+        mobile: "08068573376",
+        enabled: true,
+        password: hashedPassword,
       }).catch(catcher);
+
       if (created?._id) {
         res.status(200).json({ status: true, schoolid: created?._id });
       } else {

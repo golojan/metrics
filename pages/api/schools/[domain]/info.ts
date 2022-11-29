@@ -22,11 +22,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           data: school,
         });
       } else {
-        res.status(404).json({ status: 0, err: "Account not found" });
+        res.status(404).json({ status: false, err: "Account not found" });
       }
     },
   };
-
   const response = handleCase[method];
   if (response) response(req, res);
   else res.status(400).json({ error: "No Response for This Request" });

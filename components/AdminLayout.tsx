@@ -11,6 +11,7 @@ interface MyProps {
 
 const AdminLayout = ({ children }: MyProps) => {
   const { school } = useSelector((state: RootState) => state.settings);
+  const { name, shortname } = school;
   return (
     <>
       <Head>
@@ -19,7 +20,7 @@ const AdminLayout = ({ children }: MyProps) => {
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
         />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{`${school.shortname} | ${school.name}`}</title>
+        <title>{`${shortname} | ${name}`}</title>
       </Head>
       {children}
       <Script src="/assets/js/base.js" strategy="lazyOnload" />

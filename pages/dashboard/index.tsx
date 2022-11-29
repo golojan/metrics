@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import AppDrawer from "../../serverlets/AppDrawer";
 import AdminLayout from "../../components/AdminLayout";
 
@@ -20,23 +20,29 @@ import { withAuthSync } from "../../utils/withAuthSync";
 import AppAnalytics from "../../serverlets/AppAnalytics";
 import AppSummary from "../../serverlets/AppSummary";
 
-import { compose } from "redux";
 import SchoolRanking from "../../serverlets/SchoolRanking";
-import { withDomain } from "../../utils/withDomain";
 
-const Dashboard: NextPage = ({ token, domain }: any) => {
+import { Dispatch } from "../../store";
+import { useDispatch } from "react-redux";
+
+const Dashboard: NextPage = ({ token, school }: any) => {
+  const dispatch = useDispatch<Dispatch>();
+  useEffect(() => {
+    if (school) {
+      dispatch.settings.setSchool(school);
+    }
+  });
+
   return (
     <>
       <AdminLayout>
-        <AppHeader isroot={true} token={token} />
+        <AppHeader isroot={true} />
         <div id="appCapsule">
           <div className="section wallet-card-section pt-1">
             <div className="wallet-card">
               <div className="balance">
                 <div className="left">
-                  <span className="title">
-                    Total University Ranking {domain}
-                  </span>
+                  <span className="title">Total University Ranking</span>
                   <h1 className="total">
                     <FontAwesomeIcon
                       className="text-danger"
@@ -111,4 +117,4 @@ const Dashboard: NextPage = ({ token, domain }: any) => {
   );
 };
 
-export default compose(withDomain, withAuthSync)(Dashboard);
+export default withAuthSync(Dashboard);

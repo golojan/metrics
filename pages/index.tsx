@@ -4,19 +4,20 @@ import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { Logon } from "../interfaces";
 import { authLogin } from "../utils/withAuthSync";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
-import { RootState, Dispatch } from "../store";
-import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "../store";
+import { useDispatch } from "react-redux";
 
-const Home: NextPage = ({ status, domain, school }: any) => {
+const Home: NextPage = () => {
   const dispatch = useDispatch<Dispatch>();
+
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState("");
+
   const [logon, setLogon] = useState<Logon>({
-    domain: domain,
     username: "",
     password: "",
   });
@@ -31,9 +32,9 @@ const Home: NextPage = ({ status, domain, school }: any) => {
       },
       body: JSON.stringify(logon),
     });
-    const { status, token } = await response.json();
+    const { status, token, domain } = await response.json();
     if (status) {
-      authLogin({ token });
+      authLogin({ token, domain });
     } else {
       setErrorMsg("Invalid Username and Password.");
     }
@@ -129,18 +130,6 @@ const Home: NextPage = ({ status, domain, school }: any) => {
       </div>
     </Layout>
   );
-};
-
-Home.getInitialProps = async (ctx: any) => {
-  const { req } = ctx;
-  // =================== Get hostnmame // ===================
-  const { host } = req.headers;
-  const domain = host.split(":", 1).pop();
-  // =================== Get hostnmame // ===================
-  const { DOMAIN } = process.env;
-  const response = await fetch(`${DOMAIN}/api/schools/${domain}/info`);
-  const { status, data } = await response.json();
-  return { status: status, domain: domain, school: data };
 };
 
 export default Home;
