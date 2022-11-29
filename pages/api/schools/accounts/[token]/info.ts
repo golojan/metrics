@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../../models";
-import { ResponseFunctions } from "../../../../interfaces";
+import { dbCon } from "../../../../../models";
+import { ResponseFunctions } from "../../../../../interfaces";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method: keyof ResponseFunctions = req.method as keyof ResponseFunctions;
@@ -9,8 +9,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const handleCase: ResponseFunctions = {
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { token } = req.query;
-      const { Accounts } = await dbCon();
-      const account = await Accounts.findOne({ _id: token }).catch(catcher);
+      const { Schools } = await dbCon();
+      const account = await Schools.findOne({ _id: token }).catch(catcher);
       res.status(200).json({
         role: account.role,
         accountType: account.accountType,

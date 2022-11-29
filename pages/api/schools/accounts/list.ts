@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../models";
-import { ResponseFunctions } from "../../../interfaces";
-import { AccountTypes } from "../../../interfaces/enums";
+import { dbCon } from "../../../../models";
+import { ResponseFunctions } from "../../../../interfaces";
+import { AccountTypes } from "../../../../interfaces/enums";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method: keyof ResponseFunctions = req.method as keyof ResponseFunctions;
@@ -14,8 +14,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         .json({ status: false, err: "Only GET Method is allowed" });
     },
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
-      const { Accounts } = await dbCon();
-      const account = await Accounts.find({
+      const { Schools } = await dbCon();
+      const account = await Schools.find({
         membership: AccountTypes.ADMIN,
       }).catch(catcher);
       if (account) {

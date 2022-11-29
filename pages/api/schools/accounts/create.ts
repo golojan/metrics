@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../models";
-import { ResponseFunctions } from "../../../interfaces";
+import { dbCon } from "../../../../models";
+import { ResponseFunctions } from "../../../../interfaces";
 const slugify = require("slugify");
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,9 +11,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
       const { lastname, firstname, middlename, email, mobile, regfee } =
         req.body;
-      const { Accounts } = await dbCon();
+      const { Schools } = await dbCon();
 
-      const created = await Accounts.create({
+      const created = await Schools.create({
         lastname: lastname,
         firstname: firstname,
         middlename: middlename,

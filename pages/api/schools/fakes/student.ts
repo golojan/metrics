@@ -1,7 +1,7 @@
-import { Gender } from "./../../../interfaces/enums";
+import { Gender } from "../../../../interfaces/enums";
 import { NextApiRequest, NextApiResponse } from "next";
-import { ResponseFunctions } from "../../../interfaces";
-import { dbCon } from "../../../models";
+import { ResponseFunctions } from "../../../../interfaces";
+import { dbCon } from "../../../../models";
 
 import { faker } from "@faker-js/faker";
 

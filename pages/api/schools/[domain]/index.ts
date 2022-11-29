@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../../models";
-import { ResponseFunctions } from "../../../interfaces";
+import { dbCon } from "../../../../models";
+import { ResponseFunctions } from "../../../../interfaces";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method: keyof ResponseFunctions = req.method as keyof ResponseFunctions;
