@@ -12,13 +12,14 @@ import { RootState, Dispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home: NextPage = () => {
-  const { domain, school } = useSelector((state: RootState) => state.settings);
+  const { domain } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch<Dispatch>();
 
   const router = useRouter();
 
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
+    domain: domain,
     username: "",
     password: "",
   });

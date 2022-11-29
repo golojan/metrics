@@ -25,6 +25,7 @@ export interface ResponseFunctions {
 }
 
 export type Logon = {
+  domain: string;
   username: string;
   password: string;
 };
