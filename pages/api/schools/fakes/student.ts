@@ -15,10 +15,10 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { sex, type } = req.query;
 
-      const { Students } = await dbCon();
+      const { Schools } = await dbCon();
       const gender = sex == Gender.MALE ? "male" : "female";
 
-      const created = await Students.create({
+      const created = await Schools.create({
         avatar: faker.image.avatar(),
         regNumber: faker.random.numeric(10),
         firstname: faker.name.firstName(gender),
