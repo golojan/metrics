@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ResponseFunctions } from "../../interfaces";
 import { dbCon } from "../../models";
+import { getDomain } from "../../utils/queries";
 
 const bcrypt = require("bcryptjs");
 
@@ -16,7 +17,7 @@ export default async function handler(
 
       // Try capture domain //
       const { host } = req.headers;
-      const domain = host?.split(":", 1).pop();
+      const domain = getDomain(host as string);
       // Try capture domain //
 
       const { Accounts, Schools } = await dbCon();

@@ -1,3 +1,9 @@
+export const getDomain = (host: string) => {
+  const _domain: any = host?.split(":", 1).pop();
+  const domain = _domain.replace("www.", "");
+  return domain;
+};
+
 export const loadStudents = async (domain: string) => {
   const response = await fetch(`/api/students/${domain}/list`);
   const students = await response.json();
