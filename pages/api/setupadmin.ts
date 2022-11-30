@@ -29,7 +29,7 @@ export default async function handler(
       }).catch(catcher);
 
       if (created?._id) {
-        res.status(200).json({ status: true, schoolid: created?._id });
+        res.status(200).json({ status: true, accid: created?._id });
       } else {
         res.status(400).json({ status: false, err: "Failed to create School" });
       }
