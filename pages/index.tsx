@@ -31,6 +31,7 @@ const Home: NextPage = () => {
       body: JSON.stringify(logon),
     });
     const { status, token, domain } = await response.json();
+    alert(domain);
     if (status) {
       authLogin({ token, domain });
     } else {
