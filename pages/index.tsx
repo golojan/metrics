@@ -59,6 +59,7 @@ const Home: NextPage = () => {
           <h4>Artifical Intelligence Education Ranking Engine</h4>
         </div>
         <div className="section mb-5 p-2">
+          <div className="text-red-600">{errorMsg}</div>
           <form autoComplete="off" onSubmit={adminLogon} method="POST">
             <Card>
               <Card.Body className="pb-1">
