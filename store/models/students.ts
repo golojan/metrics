@@ -1,7 +1,7 @@
 import { FakerStudent, StudentInfo } from "./../../interfaces/index";
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
-import { loadStudents, loadLecturers } from "../../utils/queries";
+import { loadStudents } from "../../utils/queries";
 
 export const students = createModel<RootModel>()({
   state: {
@@ -9,6 +9,8 @@ export const students = createModel<RootModel>()({
     sBusy: false,
     students: [] as StudentInfo[],
     loaded: false,
+    maleStudents: 0,
+    femaleStudents: 0,
   },
   reducers: {
     setBusy(state, payload: boolean) {
@@ -26,6 +28,10 @@ export const students = createModel<RootModel>()({
       const response = await fetch("/api/students/count");
       const {} = await response.json();
     },
+    getMale: async () => {
+      const response = await fetch("/api/students/count");
+      const {} = await response.json();
+    },
     async addFakeStudent(payload: FakerStudent, rootState) {
       this.setBusy(true);
       const response = await fetch(
@@ -33,11 +39,16 @@ export const students = createModel<RootModel>()({
       );
       const { status } = await response.json();
       if (status) {
-        // dispatch.students.setBusy(BusyStatus.SUCCESS);
-      } else {
-        // dispatch.students.setBusy(BusyStatus.FAIL);
+        const domain = rootState.settings.domain;
+        loadStudents(domain)
+          .then((students) => {
+            this.setStudents(students.data);
+            this.setStudentsCount(students.data.length);
+          })
+          .catch();
       }
       this.setBusy(false);
+      return status;
     },
   }),
 });

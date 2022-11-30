@@ -45,16 +45,37 @@ export type Logon = {
 };
 
 export type LecturerInfo = {
+  _id?: string;
   domain?: string;
   avatar?: string;
 };
 
+export type FacultiesInfo = {
+  _id?: string;
+  domain?: string;
+  name?: string;
+  description?: string;
+  enabled?: boolean;
+};
+
+export type DepartmentsInfo = {
+  _id?: string;
+  domain?: string;
+  facultyId?: string;
+  name?: string;
+  description?: string;
+  accredited?: boolean;
+  enabled?: boolean;
+};
+
 export type StudentInfo = {
+  _id?: string;
   domain?: string;
   avatar?: string;
 };
 
 export type UserInfo = {
+  _id?: string;
   avatar?: string;
   accid?: string;
   membership?: string;

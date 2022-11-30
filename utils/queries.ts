@@ -4,6 +4,18 @@ export const getDomain = (host: string) => {
   return domain;
 };
 
+export const loadFaculties = async (domain: string) => {
+  const response = await fetch(`/api/faculties/${domain}/list`);
+  const faculties = await response.json();
+  return faculties;
+};
+
+export const loadDepartments = async (domain: string) => {
+  const response = await fetch(`/api/departments/${domain}/list`);
+  const departments = await response.json();
+  return departments;
+};
+
 export const loadStudents = async (domain: string) => {
   const response = await fetch(`/api/students/${domain}/list`);
   const students = await response.json();

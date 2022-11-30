@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 
 const Home: NextPage = () => {
   const dispatch = useDispatch<Dispatch>();
-  const router = useRouter();
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
     username: "",
@@ -31,7 +30,6 @@ const Home: NextPage = () => {
       body: JSON.stringify(logon),
     });
     const { status, token, domain } = await response.json();
-    alert(domain);
     if (status) {
       authLogin({ token, domain });
     } else {

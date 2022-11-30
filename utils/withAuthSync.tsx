@@ -74,6 +74,18 @@ const loadLecturers = async (domain: string) => {
   return lecturers;
 };
 
+const loadFaculties = async (domain: string) => {
+  const response = await fetch(`/api/faculties/${domain}/list`);
+  const faculties = await response.json();
+  return faculties;
+};
+
+const loadDepartments = async (domain: string) => {
+  const response = await fetch(`/api/departments/${domain}/list`);
+  const departments = await response.json();
+  return departments;
+};
+
 export const withAuthSync = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const dispatch = useDispatch<Dispatch>();
@@ -130,11 +142,35 @@ export const withAuthSync = (WrappedComponent: any) => {
         .catch();
       // Load All Lecturers //
 
+      // Load All Faculties //
+      loadFaculties(domain as string)
+        .then((faculties) => {
+          dispatch.faculties.setFaculties(faculties.data);
+          dispatch.faculties.setFacultiesCount(faculties.data.length);
+        })
+        .catch();
+      // Load All Faculties //
+
+      // Load All Departments //
+      loadDepartments(domain as string)
+        .then((departments) => {
+          dispatch.departments.setDepartments(departments.data);
+          dispatch.departments.setDepartmentsCount(departments.data.length);
+        })
+        .catch();
+      // Load All Faculties //
+
       return () => {
         window.removeEventListener("storage", syncLogout);
         window.localStorage.removeItem("logout");
       };
-    }, [dispatch.settings, dispatch.students, dispatch.lecturers]);
+    }, [
+      dispatch.settings,
+      dispatch.students,
+      dispatch.lecturers,
+      dispatch.departments,
+      dispatch.faculties,
+    ]);
 
     return <WrappedComponent {...props} />;
   };

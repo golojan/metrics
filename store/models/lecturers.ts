@@ -1,6 +1,7 @@
 import { FakerLecturer, LecturerInfo } from "../../interfaces/index";
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
+import { loadLecturers } from "../../utils/queries";
 
 export const lecturers = createModel<RootModel>()({
   state: {
@@ -31,6 +32,15 @@ export const lecturers = createModel<RootModel>()({
         `/api/fakes/lecturer?sex=${payload.sex}&type=${payload.type}&isprofessor=${payload.isprofessor}&isfullprofessor=${payload.isfullprofessor}`
       );
       const { status } = await response.json();
+      if (status) {
+        const domain = rootState.settings.domain;
+        loadLecturers(domain)
+          .then((lecturers) => {
+            this.setLecturers(lecturers.data);
+            this.setLecturersCount(lecturers.data.length);
+          })
+          .catch();
+      }
       this.setBusy(false);
       return status;
     },
