@@ -5,7 +5,7 @@ import Script from "next/script";
 interface MyProps {
   children: ReactNode;
 }
-const DashboardLayout = ({ children }: MyProps) => {
+const Layout = ({ children }: MyProps) => {
   return (
     <>
       <Head>
@@ -21,4 +21,4 @@ const DashboardLayout = ({ children }: MyProps) => {
     </>
   );
 };
-export default DashboardLayout;
+export default Layout;

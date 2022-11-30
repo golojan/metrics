@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { Logon } from "../interfaces";
 import { authLogin } from "../utils/withAuthSync";
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
@@ -13,10 +13,8 @@ import { useDispatch } from "react-redux";
 
 const Home: NextPage = () => {
   const dispatch = useDispatch<Dispatch>();
-
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState("");
-
   const [logon, setLogon] = useState<Logon>({
     username: "",
     password: "",
