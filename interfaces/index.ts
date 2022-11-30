@@ -1,4 +1,18 @@
 import { ReactNode } from "react";
+import { Gender, StudentType } from "./enums";
+
+export type FakerLecturer = {
+  sex?: Gender;
+  type?: StudentType;
+  isprofessor?: boolean;
+  isfullprofessor?: boolean;
+};
+
+export type FakerStudent = {
+  sex?: Gender;
+  type?: StudentType;
+  challanged?: boolean;
+};
 
 export type IndustryProps = {
   indystryType: string;
@@ -28,6 +42,16 @@ export type Logon = {
   domain?: string;
   username: string;
   password: string;
+};
+
+export type LecturerInfo = {
+  domain?: string;
+  avatar?: string;
+};
+
+export type StudentInfo = {
+  domain?: string;
+  avatar?: string;
 };
 
 export type UserInfo = {
@@ -83,36 +107,8 @@ export type AccountInfo = {
   enabled?: boolean;
 };
 
-export type PageInfo = {
-  _id?: string;
-  avatar?: string;
-  slug?: string;
-  pageType?: string;
-  title?: string;
-  content?: string;
-  published?: boolean;
-  tags?: string;
-  enabled?: string;
-};
-
 export type Token = {
   domain?: string;
   token?: string;
   url?: string;
-};
-
-export type JobConfig = {
-  filter?: boolean;
-  region?: string;
-  shows?: number;
-  sortBy?: string;
-  view?: string;
-  industry?: string[];
-  salaryRange?: {
-    min?: number;
-    max?: number;
-  };
-  jobSite?: string[];
-  postedDate?: string;
-  jobType?: string;
 };

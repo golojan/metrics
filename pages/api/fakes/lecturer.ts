@@ -4,7 +4,7 @@ import { ResponseFunctions } from "../../../interfaces";
 import { dbCon } from "../../../models";
 
 import { faker } from "@faker-js/faker";
-import { getCookies, getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,21 +18,27 @@ export default async function handler(
       if (!domain) {
         res.status(400).json({ error: "Invalid School ID" });
       }
-      const { sex, type, challanged } = req.query;
-      const { Students } = await dbCon();
+      const { sex, type, isprofessor, isfullprofessor } = req.query;
+
+      console.log(req.query);
+
+      const { Lecturers } = await dbCon();
       const gender = sex == Gender.MALE ? "male" : "female";
 
-      const created = await Students.create({
+      const created = await Lecturers.create({
         domain: domain,
         avatar: faker.image.avatar(),
-        regNumber: faker.random.numeric(10),
+        staffNumber: faker.random.numeric(10),
         firstname: faker.name.firstName(gender),
         lastname: faker.name.lastName(gender),
         mobile: faker.phone.number(),
         email: faker.internet.email(),
         gender: sex,
-        studentType: type,
-        challanged: challanged,
+        lecturerType: type,
+        professor: {
+          isProfessor: isprofessor,
+          isFullProfessor: isfullprofessor,
+        },
         enabled: true,
       }).catch(catcher);
       if (created?._id) {

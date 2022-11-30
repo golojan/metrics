@@ -22,17 +22,7 @@ import AppSummary from "../../serverlets/AppSummary";
 
 import SchoolRanking from "../../serverlets/SchoolRanking";
 
-import { Dispatch } from "../../store";
-import { useDispatch } from "react-redux";
-
-const Dashboard: NextPage = ({ token, school }: any) => {
-  const dispatch = useDispatch<Dispatch>();
-  useEffect(() => {
-    if (school) {
-      dispatch.settings.setSchool(school);
-    }
-  });
-
+const Dashboard: NextPage = () => {
   return (
     <>
       <AdminLayout>

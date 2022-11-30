@@ -13,11 +13,11 @@ import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
 import DepartmentsRanking from "../../../serverlets/DepartmentsRanking";
 
-const Departments: NextPage = ({ token }: any) => {
+const Departments: NextPage = () => {
   return (
     <>
       <AdminLayout>
-        <AppHeader isroot={true} token={token} />
+        <AppHeader isroot={true} />
         <div id="appCapsule" className="mb-5">
           <div className="section wallet-card-section pt-1">
             <div className="wallet-card">

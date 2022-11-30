@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import AppDrawer from "../../serverlets/AppDrawer";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,19 @@ import { withAuthSync } from "../../utils/withAuthSync";
 import AdminLayout from "../../components/AdminLayout";
 import DashboardMenu from "../../components/DashboardMenu";
 
+import { Dispatch, RootState } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+
 const ToDos: NextPage = () => {
+  const { students, loaded } = useSelector(
+    (state: RootState) => state.students
+  );
+  const dispatch = useDispatch<Dispatch>();
+  useEffect(() => {
+    if (!loaded) {
+    }
+  }, [loaded, dispatch.students]);
+
   return (
     <>
       <AdminLayout>

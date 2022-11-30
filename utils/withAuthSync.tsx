@@ -62,6 +62,18 @@ const getSchoolInfo = async (domain: string) => {
   return userinfo;
 };
 
+const loadStudents = async (domain: string) => {
+  const response = await fetch(`/api/students/${domain}/list`);
+  const students = await response.json();
+  return students;
+};
+
+const loadLecturers = async (domain: string) => {
+  const response = await fetch(`/api/lecturers/${domain}/list`);
+  const lecturers = await response.json();
+  return lecturers;
+};
+
 export const withAuthSync = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const dispatch = useDispatch<Dispatch>();
@@ -86,42 +98,43 @@ export const withAuthSync = (WrappedComponent: any) => {
           .catch();
         // Get account info to state //
         // ========================== //
+      } else {
+        authlogout();
       }
 
       const domain = cookie.get("domain");
-      if (domain) {
-        dispatch.settings.setDomain(domain as string);
-        // Get school info to state //
-        getSchoolInfo(domain as string)
-          .then((school) => {
-            dispatch.settings.setSchool(school.data);
-          })
-          .catch();
-        // Get school info to state //
-      }
+      dispatch.settings.setDomain(domain as string);
+      // Get school info to state //
+      getSchoolInfo(domain as string)
+        .then((school) => {
+          dispatch.settings.setSchool(school.data);
+        })
+        .catch();
+      // Get school info to state //
+
+      // Load All Students //
+      loadStudents(domain as string)
+        .then((students) => {
+          dispatch.students.setStudents(students.data);
+          dispatch.students.setStudentsCount(students.data.length);
+        })
+        .catch();
+      // Load All Students //
+
+      // Load All Lecturers //
+      loadLecturers(domain as string)
+        .then((lecturers) => {
+          dispatch.lecturers.setLecturers(lecturers.data);
+          dispatch.lecturers.setLecturersCount(lecturers.data.length);
+        })
+        .catch();
+      // Load All Lecturers //
+
       return () => {
         window.removeEventListener("storage", syncLogout);
         window.localStorage.removeItem("logout");
       };
-    }, [dispatch.settings]);
-
-    // useEffect(() => {
-    //   window.addEventListener("storage", syncLogout);
-    //   const token = cookie.get("token");
-    //   if (token) {
-    //     updateUser(token)
-    //       .then((info) => {
-    //         dispatch.settings.setUserInfo(info);
-    //       })
-    //       .catch();
-    //     dispatch.settings.setIsLogged(true);
-    //     dispatch.settings.setAccid(token);
-    //   }
-    //   return () => {
-    //     window.removeEventListener("storage", syncLogout);
-    //     window.localStorage.removeItem("logout");
-    //   };
-    // }, [dispatch.settings]);
+    }, [dispatch.settings, dispatch.students]);
 
     return <WrappedComponent {...props} />;
   };

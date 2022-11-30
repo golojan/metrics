@@ -7,6 +7,7 @@ export const settings = createModel<RootModel>()({
   state: {
     accid: "",
     domain: "",
+    schoolid: null,
     page: "home",
     school: {} as SchoolTypes,
     loaded: false,
@@ -64,5 +65,5 @@ export const settings = createModel<RootModel>()({
     setIdelTime(state, payload: number) {
       return { ...state, idelTime: payload };
     },
-  }
+  },
 });
