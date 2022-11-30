@@ -1,19 +1,13 @@
-export const listBlogs: any = async () => {
-  const response = await fetch("/api/blogs/list");
-  const blogs = await response.json();
-  if (blogs.status) {
-    return blogs.data;
-  }
-  return {};
+export const loadStudents = async (domain: string) => {
+  const response = await fetch(`/api/students/${domain}/list`);
+  const students = await response.json();
+  return students;
 };
 
-export const loadIntakes: any = async () => {
-  const response = await fetch("/api/accounts/list");
-  const intakes = await response.json();
-  if (intakes.status) {
-    return intakes.data;
-  }
-  return {};
+export const loadLecturers = async (domain: string) => {
+  const response = await fetch(`/api/lecturers/${domain}/list`);
+  const lecturers = await response.json();
+  return lecturers;
 };
 
 export const loadUsers: any = async () => {

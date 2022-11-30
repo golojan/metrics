@@ -8,10 +8,15 @@ import { Dispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import Busy from "./Busy";
 import { FakerLecturer, FakerStudent } from "../interfaces";
+import CounterTick from "./CounterTick";
 
 const DashboardMenu = () => {
-  const sBusy = useSelector((state: RootState) => state.students.sBusy);
-  const lBusy = useSelector((state: RootState) => state.lecturers.lBusy);
+  const { sBusy, studentsCount } = useSelector(
+    (state: RootState) => state.students
+  );
+  const { lBusy, lecturersCount } = useSelector(
+    (state: RootState) => state.lecturers
+  );
 
   const dispatch = useDispatch<Dispatch>();
   const addStudent = async ({ sex, type, challanged }: FakerStudent) => {
@@ -39,7 +44,7 @@ const DashboardMenu = () => {
     <>
       <div className="col-12 col-md-4 col-sm-12 col-lg-4 mb-2">
         <div className="stat-box">
-          {sBusy ? <Busy /> : null}
+          {sBusy ? <Busy /> : <CounterTick count={studentsCount} />}
           <div className="title">
             <strong className="text-black">STUDENTS</strong> (Male & Female)
           </div>
@@ -135,7 +140,7 @@ const DashboardMenu = () => {
       </div>
       <div className="col-12 col-md-4 col-sm-12 col-lg-4 mb-2">
         <div className="stat-box">
-          {lBusy ? <Busy /> : null}
+          {lBusy ? <Busy /> : <CounterTick count={lecturersCount} />}
           <div className="title">
             <strong className="text-black">LECTURERS</strong> (Male & Female)
           </div>

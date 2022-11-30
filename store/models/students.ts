@@ -1,6 +1,7 @@
 import { FakerStudent, StudentInfo } from "./../../interfaces/index";
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
+import { loadStudents, loadLecturers } from "../../utils/queries";
 
 export const students = createModel<RootModel>()({
   state: {
@@ -31,7 +32,6 @@ export const students = createModel<RootModel>()({
         `/api/fakes/student?sex=${payload.sex}&type=${payload.type}&challanged=${payload.challanged}`
       );
       const { status } = await response.json();
-      // alert(status);
       if (status) {
         // dispatch.students.setBusy(BusyStatus.SUCCESS);
       } else {

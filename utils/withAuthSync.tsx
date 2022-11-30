@@ -134,7 +134,7 @@ export const withAuthSync = (WrappedComponent: any) => {
         window.removeEventListener("storage", syncLogout);
         window.localStorage.removeItem("logout");
       };
-    }, [dispatch.settings, dispatch.students]);
+    }, [dispatch.settings, dispatch.students, dispatch.lecturers]);
 
     return <WrappedComponent {...props} />;
   };
