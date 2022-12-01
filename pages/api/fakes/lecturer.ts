@@ -18,6 +18,7 @@ export default async function handler(
       if (!domain) {
         res.status(400).json({ error: "Invalid School ID" });
       }
+
       const { sex, type, isprofessor, isfullprofessor } = req.query;
 
       console.log(req.query);

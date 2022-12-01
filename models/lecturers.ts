@@ -14,7 +14,7 @@ const lecturersScheme = new mongoose.Schema(
     firstname: { type: String },
     middlename: { type: String },
     lastname: { type: String },
-    preffessor: {
+    professor: {
       isProfessor: { type: Boolean, default: false },
       isFullProfessor: { type: Boolean, default: false },
     },

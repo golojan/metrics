@@ -50,6 +50,25 @@ export type LecturerInfo = {
   avatar?: string;
 };
 
+export type LecturerStats = {
+  status?: string;
+  count?: number;
+  countLocal?: number;
+  countIntl?: number;
+  countMale?: number;
+  countFemale?: number;
+  countLocalFemale?: number;
+  countLocalMale?: number;
+  countIntlFemale?: number;
+  countIntlMale?: number;
+  countPreffessors?: number;
+  countFullPreffessors?: number;
+};
+
+export type LecturerAnalitics = {
+  female?: number;
+};
+
 export type FacultiesInfo = {
   _id?: string;
   domain?: string;
@@ -72,6 +91,28 @@ export type StudentInfo = {
   _id?: string;
   domain?: string;
   avatar?: string;
+};
+
+export type StudentStats = {
+  status?: boolean;
+  count?: number;
+  countLocal?: number;
+  countIntl?: number;
+  countMale?: number;
+  countFemale?: number;
+  countLocalMale?: number;
+  countLocalFemale?: number;
+  countIntlMale?: number;
+  countIntlFemale?: number;
+  countChallanged?: number;
+  countChallangedMale?: number;
+  countChallangedFemale?: number;
+};
+
+export type StudentAnalitics = {
+  STUDENT_TEACHER_RATIO?: number;
+  PERCENTAGE_FEMALE?: number;
+  INTERNATIONAL_STUDENTS?: number;
 };
 
 export type UserInfo = {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,10 +20,12 @@ const DashboardMenu = () => {
   // [+] //
   const [newDepartment, setNewDepartment] = useState<DepartmentsInfo>({
     domain: domain,
+    name: "",
     accredited: false,
   });
   const [newFaculty, setNewFaculty] = useState<FacultiesInfo>({
     domain: domain,
+    name: "",
   });
   const { sBusy, studentsCount } = useSelector(
     (state: RootState) => state.students
@@ -60,6 +62,9 @@ const DashboardMenu = () => {
       isfullprofessor: isfullprofessor,
     });
   };
+
+  const facultyRef = useRef(null);
+  const departmentRef = useRef(null);
 
   const createNewFaculty = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -401,6 +406,7 @@ const DashboardMenu = () => {
                 <input
                   type="text"
                   className="form-control"
+                  ref={facultyRef}
                   required={true}
                   autoComplete={"off"}
                   placeholder="Name of Department"
@@ -455,6 +461,7 @@ const DashboardMenu = () => {
                 <input
                   type="text"
                   className="form-control"
+                  ref={departmentRef}
                   required={true}
                   autoComplete={"off"}
                   placeholder=" Name of Faculty"

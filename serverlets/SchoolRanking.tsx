@@ -4,14 +4,25 @@ import React from "react";
 import ChartComponent from "../components/ChartComponent";
 import ShowChartButton from "../components/ShowChartButton";
 
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
+import LooseBusy from "../components/LooseBusy";
+
 const SchoolRanking = () => {
+  const { analytics_students, statistics_students } = useSelector(
+    (state: RootState) => state.students
+  );
+
+  const { analytics_lecturers, statistics_lecturers } = useSelector(
+    (state: RootState) => state.lecturers
+  );
   return (
     <>
       <div className="section">
         <div className="row mt-2">
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
-              <ShowChartButton />
+            <div className="stat-box ">
+              <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Student-Teacher Ratio</strong>
                 <h1 className="total mt-2">
@@ -19,13 +30,23 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {0.8}
+                  {typeof analytics_students.STUDENT_TEACHER_RATIO ===
+                  "string" ? (
+                    analytics_students.STUDENT_TEACHER_RATIO
+                  ) : (
+                    <LooseBusy />
+                  )}
                 </h1>
+                <ChartComponent
+                  labels={["Stud", "Lects"]}
+                  data={[statistics_students.count, statistics_lecturers.count]}
+                  color={["pink", "gray"]}
+                />
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box ">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Percentage Female</strong>
@@ -34,18 +55,21 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {15.7}%
+                  {analytics_students.PERCENTAGE_FEMALE}%
                 </h1>
                 <ChartComponent
                   labels={["M", "F"]}
-                  data={[500, 140]}
+                  data={[
+                    statistics_students.countMale,
+                    statistics_students.countFemale,
+                  ]}
                   color={["black", "green"]}
                 />
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">
@@ -77,11 +101,14 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {17.8}%
+                {analytics_students.INTERNATIONAL_STUDENTS}%
               </h1>
               <ChartComponent
                 labels={["Int.St", "Loc.St"]}
-                data={[5, 10]}
+                data={[
+                  statistics_students.countIntl,
+                  statistics_students.count,
+                ]}
                 color={["red", "black"]}
               />
             </div>
@@ -90,7 +117,7 @@ const SchoolRanking = () => {
 
         <div className="row mt-2">
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">% Full Accreditation</strong>
@@ -111,7 +138,7 @@ const SchoolRanking = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">Efficiency</strong>
@@ -127,7 +154,7 @@ const SchoolRanking = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">Citations Per Capita</strong>
@@ -143,7 +170,7 @@ const SchoolRanking = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">H-index Per Capita</strong>
@@ -162,7 +189,7 @@ const SchoolRanking = () => {
         <div className="row mt-2">
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">i-10-index Per Capita</strong>
@@ -180,7 +207,7 @@ const SchoolRanking = () => {
 
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Google Scholar Presence</strong>
@@ -203,7 +230,7 @@ const SchoolRanking = () => {
 
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">Knowledge Economy</strong>
@@ -221,7 +248,7 @@ const SchoolRanking = () => {
 
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box">
+            <div className="stat-box disabled">
               <ShowChartButton />
               <div className="title">
                 <strong className="text-black">Total score</strong>

@@ -37,3 +37,10 @@
 // Blocks
 ////////////////////////////////////////////////////////////////
 @import 'blocks';
+
+div.stat-box.disabled
+{
+  pointer-events: none;
+  opacity: 0.2;
+  color: #585b5f;
+}

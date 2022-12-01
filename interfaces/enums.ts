@@ -1,3 +1,7 @@
+export enum LEcturerssSTATS {
+  STUDENT_TEACHER_RATIO = "STUDENT_TEACHER_RATIO",
+}
+
 export enum StateTypes {
   ABIA = "ABIA",
   ANAMBRA = "ANAMBRA",
