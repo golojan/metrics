@@ -6,13 +6,15 @@ import { NextPage } from "next";
 import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
-import { Dispatch, RootState } from "../store";
-import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../utils/withAuthSync";
 
 const Home: NextPage = () => {
-  const { school } = useSelector((state: RootState) => state.settings);
-  const dispatch = useDispatch<Dispatch>();
+  const [school, setSchool] = useState({
+    name: "",
+    shortname: "",
+    domain: "",
+    logo: "",
+  });
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
     username: "",
@@ -24,16 +26,14 @@ const Home: NextPage = () => {
       const result = await fetch(`/api/schools/info`);
       const { status, data, domain } = await result.json();
       if (status) {
-        dispatch.settings.setSchool(data);
-        dispatch.settings.setDomain(domain);
+        setSchool(data);
       }
     };
     domainInfo();
-  }, [dispatch.settings]);
+  }, []);
 
   const adminLogon = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch.settings.setBusy(true);
     setErrorMsg("");
     const response = await fetch("/api/login", {
       method: "POST",
@@ -48,7 +48,6 @@ const Home: NextPage = () => {
     } else {
       setErrorMsg("Invalid Username and Password.");
     }
-    dispatch.settings.setBusy(false);
   };
   return (
     <Layout>
@@ -60,7 +59,7 @@ const Home: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src={`${process.env.DOMAIN}${school.logo}`}
+              src={`${school.logo}`}
               alt={`${school.shortname}`}
               style={{ margin: "0 auto" }}
             />
