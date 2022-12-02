@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { Card } from "react-bootstrap";
 import { Logon } from "../interfaces";
-import { authLogin } from "../utils/withAuthSync";
 import { NextPage } from "next";
 import Layout from "../components/Layout";
 import SiteBusy from "../components/SiteBusy";
 
-import { Dispatch } from "../store";
-import { useDispatch } from "react-redux";
+import { Dispatch, RootState } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../utils/withAuthSync";
 
 const Home: NextPage = () => {
+  const { school } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch<Dispatch>();
   const [errorMsg, setErrorMsg] = useState("");
   const [logon, setLogon] = useState<Logon>({
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    const domainInfo = async () => {
+      const result = await fetch(`/api/schools/info`);
+      const { status, data, domain } = await result.json();
+      if (status) {
+        dispatch.settings.setSchool(data);
+        dispatch.settings.setDomain(domain);
+      }
+    };
+    domainInfo();
+  }, [dispatch.settings]);
+
   const adminLogon = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch.settings.setBusy(true);
@@ -47,12 +60,13 @@ const Home: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src="/assets/img/logo-icon.png"
+              src={`/${school.name}`}
               alt="Metrics AI Ranking Engine"
               style={{ margin: "0 auto" }}
             />
             <br />
-            Metrics Admin
+            <div>Metrics AI Ranking Engine</div>
+            <div className="small">{school.name}</div>
           </h1>
           <h4>Artifical Intelligence Education Ranking Engine</h4>
         </div>
