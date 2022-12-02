@@ -59,7 +59,7 @@ const Home: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src={`${process.env}${school.logo}`}
+              src={`/assets/img/logo-icon.png`}
               alt={`${school.shortname}`}
               style={{ margin: "0 auto" }}
             />
