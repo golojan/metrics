@@ -60,8 +60,8 @@ const Home: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src={`/${school.name}`}
-              alt={school.shortname}
+              src={`${school.name}`}
+              alt={`${school.shortname}`}
               style={{ margin: "0 auto" }}
             />
             <br />
