@@ -19,7 +19,7 @@ export default async function handler(
       // Encrypt Password//
       const { Accounts } = await dbCon();
       const created = await Accounts.create({
-        schoolid: "63877dbe1332f0c4be5a0395",
+        schoolid: "638a7617dfa1be141ca74281",
         email: "agu.chux@yahoo.com",
         firstname: "Agu",
         lastname: "Chux",
