@@ -8,6 +8,7 @@ import "../public/DataTables/datatables.min.css";
 import "../styles/globals.scss";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {

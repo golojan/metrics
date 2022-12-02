@@ -1,24 +1,30 @@
 import { faAreaChart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import ChartComponent from "../components/ChartComponent";
-import ShowChartButton from "../components/ShowChartButton";
-
+import React, { useEffect } from "react";
+import ChartComponent from "./ChartComponent";
+import ShowChartButton from "./ShowChartButton";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
-import LooseBusy from "../components/LooseBusy";
 
 const SchoolRanking = () => {
-  const { analytics_students, statistics_students } = useSelector(
+  const { analytics_students, statistics_students, sBusy } = useSelector(
     (state: RootState) => state.students
   );
-
-  const { analytics_lecturers, statistics_lecturers } = useSelector(
+  const { analytics_lecturers, statistics_lecturers, lBusy } = useSelector(
     (state: RootState) => state.lecturers
   );
+  const { analytics_faculties, statistics_faculties, fBusy } = useSelector(
+    (state: RootState) => state.faculties
+  );
+  const { analytics_departments, statistics_departments, dBusy } = useSelector(
+    (state: RootState) => state.departments
+  );
+
+  useEffect(() => {});
+
   return (
     <>
-      <div className="section">
+      <div className="section mb-10">
         <div className="row mt-2">
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box ">
@@ -30,17 +36,12 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {typeof analytics_students.STUDENT_TEACHER_RATIO ===
-                  "string" ? (
-                    analytics_students.STUDENT_TEACHER_RATIO
-                  ) : (
-                    <LooseBusy />
-                  )}
+                  {analytics_students.STUDENT_TEACHER_RATIO}
                 </h1>
                 <ChartComponent
                   labels={["Stud", "Lects"]}
                   data={[statistics_students.count, statistics_lecturers.count]}
-                  color={["pink", "gray"]}
+                  color={["#3265af", "black"]}
                 />
               </div>
             </div>
@@ -49,7 +50,7 @@ const SchoolRanking = () => {
             <div className="stat-box ">
               <ShowChartButton show={false} />
               <div className="title">
-                <strong className="text-black">Percentage Female</strong>
+                <strong className="text-black">Female Students</strong>
                 <h1 className="total mt-2">
                   <FontAwesomeIcon
                     className="text-secondary"
@@ -63,29 +64,30 @@ const SchoolRanking = () => {
                     statistics_students.countMale,
                     statistics_students.countFemale,
                   ]}
-                  color={["black", "green"]}
+                  color={["#3265af", "black"]}
                 />
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
+            <div className="stat-box">
               <ShowChartButton show={false} />
               <div className="title">
-                <strong className="text-black">
-                  Percentage Full Professors
-                </strong>
+                <strong className="text-black">Full Professors</strong>
                 <h1 className="total mt-2">
                   <FontAwesomeIcon
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {30}%
+                  {analytics_lecturers.PERCENTAGE_FULL_ACCREDITATION}%
                 </h1>
                 <ChartComponent
                   labels={["P.full", "P.normal"]}
-                  data={[5, 10]}
-                  color={["blue", "black"]}
+                  data={[
+                    statistics_lecturers.countFullPreffessors,
+                    statistics_lecturers.countPreffessors,
+                  ]}
+                  color={["#3265af", "black"]}
                 />
               </div>
             </div>
@@ -109,15 +111,61 @@ const SchoolRanking = () => {
                   statistics_students.countIntl,
                   statistics_students.count,
                 ]}
-                color={["red", "black"]}
+                color={["#3265af", "black"]}
               />
             </div>
           </div>
-        </div>
 
-        <div className="row mt-2">
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
+            <div className="stat-box">
+              <ShowChartButton show={false} />
+              <div className="title">
+                <strong className="text-black">International Lecturers</strong>
+              </div>
+              <h1 className="total mt-2">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {analytics_lecturers.INTERNATIONAL_LECTURERS}%
+              </h1>
+              <ChartComponent
+                labels={["Int.St", "Loc.St"]}
+                data={[
+                  statistics_lecturers.countIntl,
+                  statistics_lecturers.count,
+                ]}
+                color={["#3265af", "black"]}
+              />
+            </div>
+          </div>
+
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box">
+              <ShowChartButton show={false} />
+              <div className="title">
+                <strong className="text-black">Female Lecturers</strong>
+              </div>
+              <h1 className="total mt-2">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {analytics_lecturers.FEMALE_LECTURERS}%
+              </h1>
+              <ChartComponent
+                labels={["Int.St", "Loc.St"]}
+                data={[
+                  statistics_lecturers.countFemale,
+                  statistics_lecturers.count,
+                ]}
+                color={["#3265af", "black"]}
+              />
+            </div>
+          </div>
+
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">% Full Accreditation</strong>
@@ -127,12 +175,15 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {98}%
+                {analytics_departments.FULL_ACCREDITATION}%
               </h1>
               <ChartComponent
                 labels={["full.accr", "others"]}
-                data={[98, 2]}
-                color={["red", "black"]}
+                data={[
+                  statistics_departments.countAccredited,
+                  statistics_departments.countNonAccredited,
+                ]}
+                color={["#3265af", "black"]}
               />
             </div>
           </div>
@@ -184,9 +235,7 @@ const SchoolRanking = () => {
               </h1>
             </div>
           </div>
-        </div>
 
-        <div className="row mt-2">
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
             <div className="stat-box disabled">
@@ -241,24 +290,6 @@ const SchoolRanking = () => {
                   icon={faAreaChart}
                 />{" "}
                 {45}
-              </h1>
-            </div>
-          </div>
-          {/*  */}
-
-          {/*  */}
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
-              <ShowChartButton />
-              <div className="title">
-                <strong className="text-black">Total score</strong>
-              </div>
-              <h1 className="total mt-2">
-                <FontAwesomeIcon
-                  className="text-secondary"
-                  icon={faAreaChart}
-                />{" "}
-                {345}
               </h1>
             </div>
           </div>

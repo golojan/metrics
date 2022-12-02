@@ -66,7 +66,9 @@ export type LecturerStats = {
 };
 
 export type LecturerAnalitics = {
-  female?: number;
+  PERCENTAGE_FULL_ACCREDITATION?: number;
+  INTERNATIONAL_LECTURERS?: number;
+  FEMALE_LECTURERS?: number;
 };
 
 export type FacultiesInfo = {
@@ -113,6 +115,26 @@ export type StudentAnalitics = {
   STUDENT_TEACHER_RATIO?: number;
   PERCENTAGE_FEMALE?: number;
   INTERNATIONAL_STUDENTS?: number;
+};
+
+export type FacultyAnalitics = {
+  STUDENT_TEACHER_RATIO?: number;
+};
+
+export type FacultyStats = {
+  status?: boolean;
+  count?: number;
+};
+
+export type DepartmentAnalitics = {
+  FULL_ACCREDITATION?: number;
+};
+
+export type DepartmentStats = {
+  status?: boolean;
+  count?: number;
+  countAccredited?: number;
+  countNonAccredited?: number;
 };
 
 export type UserInfo = {

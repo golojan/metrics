@@ -8,7 +8,7 @@ const departmentsScheme = new mongoose.Schema(
     facultyId: { type: String },
     name: { type: String },
     description: { type: String },
-    accredited:Boolean,
+    accredited: { type: Boolean, default: false },
     enabled: {
       type: Boolean,
       default: false,

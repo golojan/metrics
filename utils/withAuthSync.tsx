@@ -71,7 +71,6 @@ const loadStudents = async (domain: string) => {
   const students = await response.json();
   return students;
 };
-
 const loadStudentsStats = async (domain: string) => {
   const response = await fetch(`/api/students/${domain}/stats`);
   const stats = await response.json();
@@ -83,22 +82,32 @@ const loadLecturers = async (domain: string) => {
   const lecturers = await response.json();
   return lecturers;
 };
-
 const loadLecturersStats = async (domain: string) => {
   const response = await fetch(`/api/lecturers/${domain}/stats`);
   const stats = await response.json();
   return stats;
 };
+
 const loadFaculties = async (domain: string) => {
   const response = await fetch(`/api/faculties/${domain}/list`);
   const faculties = await response.json();
   return faculties;
+};
+const loadFacultiesStats = async (domain: string) => {
+  const response = await fetch(`/api/faculties/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
 };
 
 const loadDepartments = async (domain: string) => {
   const response = await fetch(`/api/departments/${domain}/list`);
   const departments = await response.json();
   return departments;
+};
+const loadDepartmentsStats = async (domain: string) => {
+  const response = await fetch(`/api/departments/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
 };
 
 export const withAuthSync = (WrappedComponent: any) => {
@@ -110,6 +119,12 @@ export const withAuthSync = (WrappedComponent: any) => {
     );
     const { statistics_lecturers } = useSelector(
       (state: RootState) => state.lecturers
+    );
+    const { statistics_faculties } = useSelector(
+      (state: RootState) => state.faculties
+    );
+    const { statistics_departments } = useSelector(
+      (state: RootState) => state.departments
     );
 
     const syncLogout = (event: any) => {
@@ -157,7 +172,7 @@ export const withAuthSync = (WrappedComponent: any) => {
       loadStudentsStats(domain as string)
         .then((stats: StudentStats) => {
           dispatch.students.setStatistics(stats);
-          //Do other lecturers maths and Stat Displays//
+          //Do other students maths and Stat Displays//
           dispatch.students.setAnalytics({
             STUDENT_TEACHER_RATIO: div(
               statistics_students.count as number,
@@ -172,7 +187,7 @@ export const withAuthSync = (WrappedComponent: any) => {
               statistics_students.count as number
             ),
           });
-          //Do other lecturers maths and Stat Displays//
+          //Do other students maths and Stat Displays//
         })
         .catch(); // Load All Students //
 
@@ -187,6 +202,20 @@ export const withAuthSync = (WrappedComponent: any) => {
         .then((stats) => {
           dispatch.lecturers.setStatistics(stats);
           //Do other lecturers maths and Stat Displays//
+          dispatch.lecturers.setAnalytics({
+            PERCENTAGE_FULL_ACCREDITATION: perc(
+              statistics_lecturers.countFullPreffessors as number,
+              statistics_lecturers.count as number
+            ),
+            INTERNATIONAL_LECTURERS: perc(
+              statistics_lecturers.countIntl as number,
+              statistics_lecturers.count as number
+            ),
+            FEMALE_LECTURERS: perc(
+              statistics_lecturers.countFemale as number,
+              statistics_lecturers.count as number
+            ),
+          });
           //Do other lecturers maths and Stat Displays//
         })
         .catch();
@@ -199,6 +228,14 @@ export const withAuthSync = (WrappedComponent: any) => {
           dispatch.faculties.setFacultiesCount(faculties.data.length);
         })
         .catch();
+      loadFacultiesStats(domain as string)
+        .then((stats) => {
+          dispatch.faculties.setStatistics(stats);
+          //Do other faculties maths and Stat Displays//
+          dispatch.faculties.setAnalytics({});
+          //Do other faculties maths and Stat Displays//
+        })
+        .catch();
       // Load All Faculties //
 
       // Load All Departments //
@@ -208,7 +245,19 @@ export const withAuthSync = (WrappedComponent: any) => {
           dispatch.departments.setDepartmentsCount(departments.data.length);
         })
         .catch();
-      // Load All Departments //
+      loadDepartmentsStats(domain as string)
+        .then(async (stats) => {
+          await dispatch.departments.setStatistics(stats);
+          //Do other departments maths and Stat Displays//
+          await dispatch.departments.setAnalytics({
+            FULL_ACCREDITATION: perc(
+              statistics_departments.countAccredited as number,
+              statistics_departments.count as number
+            ),
+          });
+          //Do other departments maths and Stat Displays//
+        })
+        .catch(); // Load All Departments //
 
       return () => {
         window.removeEventListener("storage", syncLogout);
@@ -222,6 +271,10 @@ export const withAuthSync = (WrappedComponent: any) => {
       dispatch.faculties,
       statistics_lecturers.count,
       statistics_students.count,
+      statistics_students.countFemale,
+      statistics_students.countIntl,
+      statistics_departments.countAccredited,
+      statistics_departments.countNonAccredited,
     ]);
 
     return <WrappedComponent {...props} />;

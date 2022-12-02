@@ -421,7 +421,6 @@ const DashboardMenu = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    required={true}
                     defaultChecked={false}
                     onChange={(e) =>
                       setNewDepartment({

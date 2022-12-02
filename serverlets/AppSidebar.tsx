@@ -134,14 +134,14 @@ function AppSidebar() {
                 </li>
 
                 <li>
-                  <Link href="#" legacyBehavior>
+                  <a href={"/dashboard/reports"}>
                     <a className="item">
                       <div className="icon-box bg-primary">
                         <FontAwesomeIcon icon={faHome} />
                       </div>
                       <div className="in">Reports</div>
                     </a>
-                  </Link>
+                  </a>
                 </li>
               </ul>
               {/* * others */}

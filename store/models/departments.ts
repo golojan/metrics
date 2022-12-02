@@ -1,3 +1,4 @@
+import { DepartmentStats, DepartmentAnalitics } from "./../../interfaces/index";
 import { loadDepartments } from "./../../utils/queries";
 import { DepartmentsInfo } from "../../interfaces/index";
 import { createModel } from "@rematch/core";
@@ -9,10 +10,22 @@ export const departments = createModel<RootModel>()({
     dBusy: false,
     departments: [] as DepartmentsInfo[],
     loaded: false,
+    statistics_departments: {
+      count: 0,
+      countAccredited: 0,
+      countNonAccredited: 0,
+    } as DepartmentStats,
+    analytics_departments: { FULL_ACCREDITATION: 0 } as DepartmentAnalitics,
   },
   reducers: {
     setBusy(state, payload: boolean) {
       return { ...state, dBusy: payload };
+    },
+    setStatistics(state, payload: object) {
+      return { ...state, statistics_departments: payload };
+    },
+    setAnalytics(state, payload: object) {
+      return { ...state, analytics_departments: payload };
     },
     setDepartments(state, payload: any) {
       return { ...state, departments: payload };

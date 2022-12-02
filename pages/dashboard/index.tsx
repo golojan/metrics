@@ -20,7 +20,7 @@ import { withAuthSync } from "../../utils/withAuthSync";
 import AppAnalytics from "../../serverlets/AppAnalytics";
 import AppSummary from "../../serverlets/AppSummary";
 
-import SchoolRanking from "../../serverlets/SchoolRanking";
+import SchoolRanking from "../../components/SchoolRanking";
 
 const Dashboard: NextPage = () => {
   return (
@@ -38,7 +38,7 @@ const Dashboard: NextPage = () => {
                       className="text-danger"
                       icon={faBriefcase}
                     />{" "}
-                    568.90
+                    {0}
                   </h1>
                 </div>
                 <div className="right flex">
@@ -50,7 +50,7 @@ const Dashboard: NextPage = () => {
                 </div>
               </div>
 
-              <div className="wallet-footer">
+              {/* <div className="wallet-footer">
                 <div className="item">
                   <Link href="/dashboard/faculties" legacyBehavior>
                     <a>
@@ -92,13 +92,10 @@ const Dashboard: NextPage = () => {
                     </a>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <SchoolRanking />
-          <AppAnalytics />
-          <AppSummary />
-
           <Copyright />
         </div>
         <AppDrawer onchat={false} menuitem="dashboard" />

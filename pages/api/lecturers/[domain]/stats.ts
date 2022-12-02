@@ -65,6 +65,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         lecturerType: LecturerType.INTERNATIONAL,
       }).catch(catcher);
 
+      const countPreffessors = await Lecturers.count({
+        domain: domain,
+        "professor.isProfessor": true,
+      }).catch(catcher);
+
+      const countFullPreffessors = await Lecturers.count({
+        domain: domain,
+        "professor.isProfessor": true,
+        "professor.isFullProfessor": true,
+      }).catch(catcher);
+
       res.status(200).json({
         status: true,
         count: count,
@@ -76,8 +87,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         countLocalMale: countLocalMale,
         countIntlFemale: countIntlFemale,
         countIntlMale: countIntlMale,
-        countPreffessors: 0,
-        countFullPreffessors: 0,
+        countPreffessors: countPreffessors,
+        countFullPreffessors: countFullPreffessors,
       });
     },
   };

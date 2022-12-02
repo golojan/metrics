@@ -1,4 +1,9 @@
-import { FacultiesInfo } from "../../interfaces/index";
+import {
+  FacultiesInfo,
+  FacultyAnalitics,
+  FacultyStats,
+} from "../../interfaces/index";
+
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
 import { loadFaculties } from "../../utils/queries";
@@ -9,10 +14,18 @@ export const faculties = createModel<RootModel>()({
     fBusy: false,
     faculties: [] as FacultiesInfo[],
     loaded: false,
+    statistics_faculties: {} as FacultyStats,
+    analytics_faculties: {} as FacultyAnalitics,
   },
   reducers: {
     setBusy(state, payload: boolean) {
       return { ...state, fBusy: payload };
+    },
+    setStatistics(state, payload: object) {
+      return { ...state, statistics_faculties: payload };
+    },
+    setAnalytics(state, payload: object) {
+      return { ...state, analytics_faculties: payload };
     },
     setFaculties(state, payload: any) {
       return { ...state, faculties: payload };
