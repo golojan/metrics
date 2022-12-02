@@ -11,15 +11,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { authlogout } from "../utils/withAuthSync";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, Dispatch } from "../store";
 
 interface AppHeaderProps {
   isroot: boolean;
 }
 
 function AppHeader({ isroot }: AppHeaderProps) {
-  const { school } = useSelector((state: RootState) => state.settings);
+  const dispatch = useDispatch<Dispatch>();
+
+  const { school, menuOpened } = useSelector(
+    (state: RootState) => state.settings
+  );
   const { name, shortname } = school;
   return (
     <>
@@ -31,8 +35,7 @@ function AppHeader({ isroot }: AppHeaderProps) {
               <a
                 href="#"
                 className="headerButton"
-                data-toggle="modal"
-                data-target="#sidebarPanel"
+                onClick={() => dispatch.settings.toggleMenu(!menuOpened)}
               >
                 <FontAwesomeIcon icon={faListUl} size={"2x"} />
               </a>

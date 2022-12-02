@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
 import AdminLayout from "../../../components/AdminLayout";
-import AppDrawer from "../../../serverlets/AppDrawer";
 
 import { faPlus, faSchoolCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import AppHeader from "../../../serverlets/AppHeader";
 import Copyright from "../../../serverlets/Copyright";
-import { withAuthSync } from "../../../utils/withAuthSync";
-import { compose } from "redux";
-import DepartmentsRanking from "../../../serverlets/DepartmentsRanking";
 import AppAnalytics from "../../../serverlets/AppAnalytics";
 import AppSummary from "../../../serverlets/AppSummary";
+import { withAuthSync } from "../../../utils/withAuthSync";
+import AppDrawer from "../../../serverlets/AppDrawer";
 
-const Departments: NextPage = () => {
+const Reports: NextPage = () => {
   return (
     <>
       <AdminLayout>
@@ -44,10 +42,10 @@ const Departments: NextPage = () => {
           <AppSummary />
           <Copyright />
         </div>
-        <AppDrawer onchat={false} menuitem="departments" />
+        <AppDrawer onchat={false} menuitem="dashboard" />
       </AdminLayout>
     </>
   );
 };
 
-export default compose(withAuthSync)(Departments);
+export default withAuthSync(Reports);

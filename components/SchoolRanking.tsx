@@ -36,12 +36,14 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {analytics_students.STUDENT_TEACHER_RATIO}
+                  <span className="text-green-700 animate-pulse">
+                    {analytics_students.STUDENT_TEACHER_RATIO}
+                  </span>
                 </h1>
                 <ChartComponent
                   labels={["Stud", "Lects"]}
                   data={[statistics_students.count, statistics_lecturers.count]}
-                  color={["#3265af", "black"]}
+                  color={["#3265af", "#8494a8"]}
                 />
               </div>
             </div>
@@ -64,7 +66,7 @@ const SchoolRanking = () => {
                     statistics_students.countMale,
                     statistics_students.countFemale,
                   ]}
-                  color={["#3265af", "black"]}
+                  color={["#3265af", "#8494a8"]}
                 />
               </div>
             </div>
@@ -87,7 +89,7 @@ const SchoolRanking = () => {
                     statistics_lecturers.countFullPreffessors,
                     statistics_lecturers.countPreffessors,
                   ]}
-                  color={["#3265af", "black"]}
+                  color={["#3265af", "#8494a8"]}
                 />
               </div>
             </div>
@@ -111,7 +113,7 @@ const SchoolRanking = () => {
                   statistics_students.countIntl,
                   statistics_students.count,
                 ]}
-                color={["#3265af", "black"]}
+                color={["#3265af", "#8494a8"]}
               />
             </div>
           </div>
@@ -135,7 +137,7 @@ const SchoolRanking = () => {
                   statistics_lecturers.countIntl,
                   statistics_lecturers.count,
                 ]}
-                color={["#3265af", "black"]}
+                color={["#3265af", "#8494a8"]}
               />
             </div>
           </div>
@@ -159,7 +161,7 @@ const SchoolRanking = () => {
                   statistics_lecturers.countFemale,
                   statistics_lecturers.count,
                 ]}
-                color={["#3265af", "black"]}
+                color={["#3265af", "#8494a8"]}
               />
             </div>
           </div>
@@ -183,7 +185,7 @@ const SchoolRanking = () => {
                   statistics_departments.countAccredited,
                   statistics_departments.countNonAccredited,
                 ]}
-                color={["#3265af", "black"]}
+                color={["#3265af", "#8494a8"]}
               />
             </div>
           </div>
@@ -271,7 +273,7 @@ const SchoolRanking = () => {
               <ChartComponent
                 labels={["GSP", "non.GSP"]}
                 data={[20, 80]}
-                color={["green", "black"]}
+                color={["green", "#8494a8"]}
               />
             </div>
           </div>

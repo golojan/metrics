@@ -136,10 +136,15 @@ export const withAuthSync = (WrappedComponent: any) => {
 
     useEffect(() => {
       window.addEventListener("storage", syncLogout);
+
       const token = cookie.get("token");
-      if (token) {
+      const domain = cookie.get("domain");
+
+      if (token && domain) {
         dispatch.settings.setIsLogged(true);
         dispatch.settings.setAccid(token);
+        dispatch.settings.setDomain(domain as string);
+
         // Get account info to state //
         getAccountInfo(token)
           .then((info) => {
@@ -148,116 +153,114 @@ export const withAuthSync = (WrappedComponent: any) => {
           .catch();
         // Get account info to state //
         // ========================== //
+
+        // Get school info to state //
+        getSchoolInfo(domain as string)
+          .then((school) => {
+            dispatch.settings.setSchool(school.data);
+          })
+          .catch();
+        // Get school info to state //
+
+        // Load All Students //
+        loadStudents(domain as string)
+          .then((students) => {
+            dispatch.students.setStudents(students.data);
+            dispatch.students.setStudentsCount(students.data.length);
+          })
+          .catch();
+        loadStudentsStats(domain as string)
+          .then((stats: StudentStats) => {
+            dispatch.students.setStatistics(stats);
+            //Do other students maths and Stat Displays//
+            dispatch.students.setAnalytics({
+              STUDENT_TEACHER_RATIO: div(
+                statistics_students.count as number,
+                statistics_lecturers.count as number
+              ),
+              PERCENTAGE_FEMALE: perc(
+                statistics_students.countFemale as number,
+                statistics_students.count as number
+              ),
+              INTERNATIONAL_STUDENTS: perc(
+                statistics_students.countIntl as number,
+                statistics_students.count as number
+              ),
+            });
+            //Do other students maths and Stat Displays//
+          })
+          .catch(); // Load All Students //
+
+        // Load All Lecturers //
+        loadLecturers(domain as string)
+          .then((lecturers) => {
+            dispatch.lecturers.setLecturers(lecturers.data);
+            dispatch.lecturers.setLecturersCount(lecturers.data.length);
+          })
+          .catch();
+        loadLecturersStats(domain as string)
+          .then((stats) => {
+            dispatch.lecturers.setStatistics(stats);
+            //Do other lecturers maths and Stat Displays//
+            dispatch.lecturers.setAnalytics({
+              PERCENTAGE_FULL_ACCREDITATION: perc(
+                statistics_lecturers.countFullPreffessors as number,
+                statistics_lecturers.count as number
+              ),
+              INTERNATIONAL_LECTURERS: perc(
+                statistics_lecturers.countIntl as number,
+                statistics_lecturers.count as number
+              ),
+              FEMALE_LECTURERS: perc(
+                statistics_lecturers.countFemale as number,
+                statistics_lecturers.count as number
+              ),
+            });
+            //Do other lecturers maths and Stat Displays//
+          })
+          .catch();
+        // Load All Lecturers //
+
+        // Load All Faculties //
+        loadFaculties(domain as string)
+          .then((faculties) => {
+            dispatch.faculties.setFaculties(faculties.data);
+            dispatch.faculties.setFacultiesCount(faculties.data.length);
+          })
+          .catch();
+        loadFacultiesStats(domain as string)
+          .then((stats) => {
+            dispatch.faculties.setStatistics(stats);
+            //Do other faculties maths and Stat Displays//
+            dispatch.faculties.setAnalytics({});
+            //Do other faculties maths and Stat Displays//
+          })
+          .catch();
+        // Load All Faculties //
+
+        // Load All Departments //
+        loadDepartments(domain as string)
+          .then((departments) => {
+            dispatch.departments.setDepartments(departments.data);
+            dispatch.departments.setDepartmentsCount(departments.data.length);
+          })
+          .catch();
+        loadDepartmentsStats(domain as string)
+          .then(async (stats) => {
+            await dispatch.departments.setStatistics(stats);
+            //Do other departments maths and Stat Displays//
+            await dispatch.departments.setAnalytics({
+              FULL_ACCREDITATION: perc(
+                statistics_departments.countAccredited as number,
+                statistics_departments.count as number
+              ),
+            });
+            //Do other departments maths and Stat Displays//
+          })
+          .catch(); // Load All Departments //
       } else {
         authlogout();
       }
-
-      const domain = cookie.get("domain");
-      dispatch.settings.setDomain(domain as string);
-      // Get school info to state //
-      getSchoolInfo(domain as string)
-        .then((school) => {
-          dispatch.settings.setSchool(school.data);
-        })
-        .catch();
-      // Get school info to state //
-
-      // Load All Students //
-      loadStudents(domain as string)
-        .then((students) => {
-          dispatch.students.setStudents(students.data);
-          dispatch.students.setStudentsCount(students.data.length);
-        })
-        .catch();
-      loadStudentsStats(domain as string)
-        .then((stats: StudentStats) => {
-          dispatch.students.setStatistics(stats);
-          //Do other students maths and Stat Displays//
-          dispatch.students.setAnalytics({
-            STUDENT_TEACHER_RATIO: div(
-              statistics_students.count as number,
-              statistics_lecturers.count as number
-            ),
-            PERCENTAGE_FEMALE: perc(
-              statistics_students.countFemale as number,
-              statistics_students.count as number
-            ),
-            INTERNATIONAL_STUDENTS: perc(
-              statistics_students.countIntl as number,
-              statistics_students.count as number
-            ),
-          });
-          //Do other students maths and Stat Displays//
-        })
-        .catch(); // Load All Students //
-
-      // Load All Lecturers //
-      loadLecturers(domain as string)
-        .then((lecturers) => {
-          dispatch.lecturers.setLecturers(lecturers.data);
-          dispatch.lecturers.setLecturersCount(lecturers.data.length);
-        })
-        .catch();
-      loadLecturersStats(domain as string)
-        .then((stats) => {
-          dispatch.lecturers.setStatistics(stats);
-          //Do other lecturers maths and Stat Displays//
-          dispatch.lecturers.setAnalytics({
-            PERCENTAGE_FULL_ACCREDITATION: perc(
-              statistics_lecturers.countFullPreffessors as number,
-              statistics_lecturers.count as number
-            ),
-            INTERNATIONAL_LECTURERS: perc(
-              statistics_lecturers.countIntl as number,
-              statistics_lecturers.count as number
-            ),
-            FEMALE_LECTURERS: perc(
-              statistics_lecturers.countFemale as number,
-              statistics_lecturers.count as number
-            ),
-          });
-          //Do other lecturers maths and Stat Displays//
-        })
-        .catch();
-      // Load All Lecturers //
-
-      // Load All Faculties //
-      loadFaculties(domain as string)
-        .then((faculties) => {
-          dispatch.faculties.setFaculties(faculties.data);
-          dispatch.faculties.setFacultiesCount(faculties.data.length);
-        })
-        .catch();
-      loadFacultiesStats(domain as string)
-        .then((stats) => {
-          dispatch.faculties.setStatistics(stats);
-          //Do other faculties maths and Stat Displays//
-          dispatch.faculties.setAnalytics({});
-          //Do other faculties maths and Stat Displays//
-        })
-        .catch();
-      // Load All Faculties //
-
-      // Load All Departments //
-      loadDepartments(domain as string)
-        .then((departments) => {
-          dispatch.departments.setDepartments(departments.data);
-          dispatch.departments.setDepartmentsCount(departments.data.length);
-        })
-        .catch();
-      loadDepartmentsStats(domain as string)
-        .then(async (stats) => {
-          await dispatch.departments.setStatistics(stats);
-          //Do other departments maths and Stat Displays//
-          await dispatch.departments.setAnalytics({
-            FULL_ACCREDITATION: perc(
-              statistics_departments.countAccredited as number,
-              statistics_departments.count as number
-            ),
-          });
-          //Do other departments maths and Stat Displays//
-        })
-        .catch(); // Load All Departments //
 
       return () => {
         window.removeEventListener("storage", syncLogout);
@@ -275,6 +278,10 @@ export const withAuthSync = (WrappedComponent: any) => {
       statistics_students.countIntl,
       statistics_departments.countAccredited,
       statistics_departments.countNonAccredited,
+      statistics_departments.count,
+      statistics_lecturers.countFemale,
+      statistics_lecturers.countFullPreffessors,
+      statistics_lecturers.countIntl,
     ]);
 
     return <WrappedComponent {...props} />;

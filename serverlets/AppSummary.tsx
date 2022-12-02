@@ -12,8 +12,6 @@ function AppSummary() {
     (state: RootState) => state.departments
   );
 
-  const dispatch = useDispatch<Dispatch>();
-
   return (
     <>
       <div className="mx-5 mb-10  mt-4">

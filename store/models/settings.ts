@@ -5,6 +5,7 @@ import { AccountTypes, AccountRoles, StateTypes } from "../../interfaces/enums";
 
 export const settings = createModel<RootModel>()({
   state: {
+    menuOpened: false,
     accid: "",
     domain: "",
     schoolid: null,
@@ -26,6 +27,9 @@ export const settings = createModel<RootModel>()({
     idelTime: 0,
   },
   reducers: {
+    toggleMenu(state, payload: boolean) {
+      return { ...state, menuOpened: payload };
+    },
     setAccid(state, payload: string) {
       return { ...state, accid: payload };
     },
@@ -66,4 +70,18 @@ export const settings = createModel<RootModel>()({
       return { ...state, idelTime: payload };
     },
   },
+  effects: (dispatch) => ({
+    async getAccountInfo(_token: string, RootState) {
+      const response = await fetch(`/api/accounts/${_token}/info`);
+      const userinfo = await response.json();
+      this.setUserInfo(userinfo.data);
+      return userinfo;
+    },
+    async getSchoolInfo(domain: string, RootState) {
+      const response = await fetch(`/api/schools/${domain}/info`);
+      const schoolinfo = await response.json();
+      this.setSchool(schoolinfo.data);
+      return schoolinfo;
+    },
+  }),
 });

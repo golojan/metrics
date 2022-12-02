@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   faBriefcase,
   faClose,
@@ -22,20 +22,18 @@ function AppSidebar() {
     (state: RootState) => state.settings
   );
   const dispatch = useDispatch<Dispatch>();
-  useEffect(() => {
-    dispatch.settings.toggleMenu(false);
-  }, [dispatch.settings]);
+
   return (
     <>
-      <Modal
-        show={menuOpened}
-        className="fade panelbox panelbox-left"
-        closeButton
-        onHide={() => dispatch.settings.toggleMenu(false)}
-        onBackdropClick={() => dispatch.settings.toggleMenu(false)}
-        onClose={() => dispatch.settings.toggleMenu(false)}
+      <div
+        className={`modal fade panelbox panelbox-left ${
+          menuOpened ? "show d-block" : ""
+        }`}
+        id="sidebarPanel"
+        tabIndex={-1}
+        role="dialog"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-body p-0">
               {/* profile box */}
@@ -56,7 +54,8 @@ function AppSidebar() {
                 <Link href="#" legacyBehavior>
                   <a
                     className="btn btn-link btn-icon sidebar-close"
-                    onClick={() => dispatch.settings.toggleMenu(!menuOpened)}
+                    data-dismiss="modal"
+                    // onClick={() => dispatch.settings.toggleMenu(!menuOpened)}
                   >
                     <FontAwesomeIcon className="" icon={faClose} size={"2x"} />
                   </a>
@@ -147,7 +146,7 @@ function AppSidebar() {
                 </li>
 
                 <li>
-                  <Link href={"/dashboard/reports"} legacyBehavior>
+                  <Link href={"/dashboard/school"} legacyBehavior>
                     <a className="item">
                       <div className="icon-box bg-primary">
                         <FontAwesomeIcon icon={faHome} />
@@ -161,7 +160,7 @@ function AppSidebar() {
             </div>
           </div>
         </div>
-      </Modal>
+      </div>
     </>
   );
 }

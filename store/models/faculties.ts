@@ -61,5 +61,17 @@ export const faculties = createModel<RootModel>()({
       this.setBusy(false);
       return status;
     },
+    async loadFaculties(domain: string, rootState) {
+      const response = await fetch(`/api/faculties/${domain}/list`);
+      const faculties = await response.json();
+      this.setFaculties(faculties.data);
+      return faculties;
+    },
+    async loadFacultiesStats(domain: string, rootState) {
+      const response = await fetch(`/api/faculties/${domain}/stats`);
+      const stats = await response.json();
+      this.setStatistics(stats.data);
+      return stats;
+    },
   }),
 });

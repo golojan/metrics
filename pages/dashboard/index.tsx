@@ -1,16 +1,9 @@
 import { NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import AppDrawer from "../../serverlets/AppDrawer";
 import AdminLayout from "../../components/AdminLayout";
 
-import {
-  faBriefcase,
-  faPlus,
-  faSchool,
-  faSchoolCircleCheck,
-  faUsersBetweenLines,
-  faUsersGear,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBriefcase, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
@@ -22,7 +15,7 @@ import AppSummary from "../../serverlets/AppSummary";
 
 import SchoolRanking from "../../components/SchoolRanking";
 
-const Dashboard: NextPage = () => {
+const Dashboard = () => {
   return (
     <>
       <AdminLayout>

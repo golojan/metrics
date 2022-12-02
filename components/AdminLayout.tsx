@@ -1,31 +1,54 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
-import Script from "next/script";
 import cookie from "js-cookie";
-import { authlogout } from "../utils/withAuthSync";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
+
+import { Dispatch } from "../store";
+import { StudentStats } from "../interfaces";
+import { div, perc } from "../utils/math";
 
 interface MyProps {
   children: ReactNode;
 }
 
 const AdminLayout = ({ children }: MyProps) => {
+  const { statistics_students } = useSelector(
+    (state: RootState) => state.students
+  );
+  const { statistics_lecturers } = useSelector(
+    (state: RootState) => state.lecturers
+  );
+  // const { statistics_faculties } = useSelector(
+  //   (state: RootState) => state.faculties
+  // );
+  const { statistics_departments } = useSelector(
+    (state: RootState) => state.departments
+  );
+
   const { school, isLogged } = useSelector(
     (state: RootState) => state.settings
   );
   const { name, shortname } = school;
+
+  const dispatch = useDispatch<Dispatch>();
+
+  // useEffect(() => {
+  //   setInterval(async () => {
+  //     const token = await cookie.get("token");
+  //     if (!token && !isLogged) {
+  //       //Logout
+  //       await authlogout();
+  //       //Logout
+  //     }
+  //   }, 10000);
+  // }, [isLogged]);
+
   useEffect(() => {
-    setInterval(async () => {
-      const token = await cookie.get("token");
-      if (!token && !isLogged) {
-        //Logout
-        await authlogout();
-        //Logout
-      }
-    }, 10000);
-  }, [isLogged]);
+    const token = cookie.get("token");
+    const domain = cookie.get("domain");
+  }, []);
 
   return (
     <>
@@ -38,7 +61,6 @@ const AdminLayout = ({ children }: MyProps) => {
         <title>{`${shortname} | ${name}`}</title>
       </Head>
       {children}
-      <Script src="/assets/js/base.js" strategy="lazyOnload" />
     </>
   );
 };

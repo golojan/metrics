@@ -57,5 +57,18 @@ export const lecturers = createModel<RootModel>()({
       this.setBusy(false);
       return status;
     },
+
+    async loadLecturers(domain: string) {
+      const response = await fetch(`/api/lecturers/${domain}/list`);
+      const lecturers = await response.json();
+      this.setLecturers(lecturers.data);
+      return lecturers;
+    },
+    async loadLecturersStats(domain: string) {
+      const response = await fetch(`/api/lecturers/${domain}/stats`);
+      const stats = await response.json();
+      this.setStatistics(stats.data);
+      return stats;
+    },
   }),
 });

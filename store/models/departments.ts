@@ -61,5 +61,17 @@ export const departments = createModel<RootModel>()({
       this.setBusy(false);
       return status;
     },
+    async loadDepartments(domain: string, rootState) {
+      const response = await fetch(`/api/departments/${domain}/list`);
+      const departments = await response.json();
+      this.setDepartments(departments.data);
+      return departments;
+    },
+    async loadDepartmentsStats(domain: string) {
+      const response = await fetch(`/api/departments/${domain}/stats`);
+      const stats = await response.json();
+      this.setStatistics(stats.data);
+      return stats;
+    },
   }),
 });

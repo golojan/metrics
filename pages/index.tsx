@@ -56,6 +56,7 @@ const Home: NextPage = () => {
           </h1>
           <h4>Artifical Intelligence Education Ranking Engine</h4>
         </div>
+
         <div className="section mb-5 p-2">
           <div className="text-red-600 text-center">{errorMsg}</div>
           <form autoComplete="off" onSubmit={adminLogon} method="POST">
