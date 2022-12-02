@@ -61,7 +61,7 @@ const Home: NextPage = () => {
               width={80}
               height={80}
               src={`/${school.name}`}
-              alt="Metrics AI Ranking Engine"
+              alt={school.shortname}
               style={{ margin: "0 auto" }}
             />
             <br />
