@@ -64,7 +64,7 @@ const Home: NextPage = () => {
               style={{ margin: "0 auto" }}
             />
             <br />
-            <div>Metrics AI Ranking Engine</div>
+            <div>Metrics AI Ranking System</div>
             <div className="small">{school.name}</div>
           </h1>
           <h4>Artifical Intelligence Education Ranking Engine</h4>
