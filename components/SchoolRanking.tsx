@@ -5,8 +5,11 @@ import ChartComponent from "./ChartComponent";
 import ShowChartButton from "./ShowChartButton";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
+import LooseBusy from "./LooseBusy";
 
 const SchoolRanking = () => {
+  const { busy } = useSelector((state: RootState) => state.settings);
+
   const { analytics_students, statistics_students, sBusy } = useSelector(
     (state: RootState) => state.students
   );
@@ -37,7 +40,11 @@ const SchoolRanking = () => {
                     icon={faAreaChart}
                   />{" "}
                   <span className="text-green-700 animate-pulse">
-                    {analytics_students.STUDENT_TEACHER_RATIO}
+                    {busy ? (
+                      <LooseBusy />
+                    ) : (
+                      analytics_students.STUDENT_TEACHER_RATIO
+                    )}
                   </span>
                 </h1>
                 <ChartComponent
@@ -58,7 +65,7 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {analytics_students.PERCENTAGE_FEMALE}%
+                  {busy ? <LooseBusy /> : analytics_students.PERCENTAGE_FEMALE}%
                 </h1>
                 <ChartComponent
                   labels={["M", "F"]}
@@ -81,7 +88,12 @@ const SchoolRanking = () => {
                     className="text-secondary"
                     icon={faAreaChart}
                   />{" "}
-                  {analytics_lecturers.PERCENTAGE_FULL_ACCREDITATION}%
+                  {busy ? (
+                    <LooseBusy />
+                  ) : (
+                    analytics_lecturers.PERCENTAGE_FULL_ACCREDITATION
+                  )}
+                  %
                 </h1>
                 <ChartComponent
                   labels={["P.full", "P.normal"]}
@@ -105,7 +117,12 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {analytics_students.INTERNATIONAL_STUDENTS}%
+                {busy ? (
+                  <LooseBusy />
+                ) : (
+                  analytics_students.INTERNATIONAL_STUDENTS
+                )}
+                %
               </h1>
               <ChartComponent
                 labels={["Int.St", "Loc.St"]}
@@ -129,7 +146,12 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {analytics_lecturers.INTERNATIONAL_LECTURERS}%
+                {busy ? (
+                  <LooseBusy />
+                ) : (
+                  analytics_lecturers.INTERNATIONAL_LECTURERS
+                )}
+                %
               </h1>
               <ChartComponent
                 labels={["Int.St", "Loc.St"]}
@@ -153,7 +175,7 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {analytics_lecturers.FEMALE_LECTURERS}%
+                {busy ? <LooseBusy /> : analytics_lecturers.FEMALE_LECTURERS}%
               </h1>
               <ChartComponent
                 labels={["Int.St", "Loc.St"]}
@@ -177,7 +199,12 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {analytics_departments.FULL_ACCREDITATION}%
+                {busy ? (
+                  <LooseBusy />
+                ) : (
+                  analytics_departments.FULL_ACCREDITATION
+                )}
+                %
               </h1>
               <ChartComponent
                 labels={["full.accr", "others"]}

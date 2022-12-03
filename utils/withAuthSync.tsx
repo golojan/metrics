@@ -141,6 +141,8 @@ export const withAuthSync = (WrappedComponent: any) => {
       const domain = cookie.get("domain");
 
       if (token && domain) {
+        dispatch.settings.setBusy(true);
+
         dispatch.settings.setIsLogged(true);
         dispatch.settings.setAccid(token);
         dispatch.settings.setDomain(domain as string);
@@ -258,6 +260,7 @@ export const withAuthSync = (WrappedComponent: any) => {
             //Do other departments maths and Stat Displays//
           })
           .catch(); // Load All Departments //
+        dispatch.settings.setBusy(false);
       } else {
         authlogout();
       }
