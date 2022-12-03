@@ -59,13 +59,13 @@ const Home: NextPage = () => {
               className="img-responsive"
               width={80}
               height={80}
-              src={`/assets/img/logo-icon.png`}
-              alt={`${school.shortname}`}
+              src="/assets/img/logo-icon.png"
+              alt="/"
               style={{ margin: "0 auto" }}
             />
             <br />
-            <div>{school.name}</div>
             <div className="small">Metrics AI Ranking Engine</div>
+            <div>{school.name}</div>
           </h1>
           <h4>Artifical Intelligence Education Ranking Engine</h4>
         </div>
