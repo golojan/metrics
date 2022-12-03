@@ -1,4 +1,4 @@
-import { Gender, LecturerType } from "./../../../../interfaces/enums";
+import { Gender, LecturerLevel, LecturerType } from "./../../../../interfaces/enums";
 import { NextApiRequest, NextApiResponse } from "next";
 import { dbCon } from "../../../../models";
 import { ResponseFunctions } from "../../../../interfaces";
@@ -65,15 +65,101 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         lecturerType: LecturerType.INTERNATIONAL,
       }).catch(catcher);
 
-      const countPreffessors = await Lecturers.count({
+      const countProfessors = await Lecturers.count({
         domain: domain,
         "professor.isProfessor": true,
       }).catch(catcher);
 
-      const countFullPreffessors = await Lecturers.count({
+      const countProfessorsMale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.MALE,
+        "professor.isProfessor": true,
+      }).catch(catcher);
+
+      const countProfessorsFemale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.FEMALE,
+        "professor.isProfessor": true,
+      }).catch(catcher);
+
+      const countIntlProfessors = await Lecturers.count({
+        domain: domain,
+        "professor.isProfessor": true,
+        lecturerType: LecturerType.INTERNATIONAL,
+      }).catch(catcher);
+
+      const countFullProfessors = await Lecturers.count({
         domain: domain,
         "professor.isProfessor": true,
         "professor.isFullProfessor": true,
+      }).catch(catcher);
+
+      const countFullProfessorsMale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.MALE,
+        "professor.isProfessor": true,
+        "professor.isFullProfessor": true,
+      }).catch(catcher);
+
+      const countFullProfessorsFemale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.FEMALE,
+        "professor.isProfessor": true,
+        "professor.isFullProfessor": true,
+      }).catch(catcher);
+
+      const countAdjunct = await Lecturers.count({
+        domain: domain,
+        adjunct: true,
+      }).catch(catcher);
+
+      const countAdjunctMale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.MALE,
+        adjunct: true,
+      }).catch(catcher);
+
+      const countAdjunctFemale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.FEMALE,
+        adjunct: true,
+      }).catch(catcher);
+
+      const countAdjunctProfessorsMale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.MALE,
+        adjunct: true,
+        "professor.isProfessor": true,
+        "professor.isFullProfessor": true,
+      }).catch(catcher);
+
+      const countAdjunctProfessorsFemale = await Lecturers.count({
+        domain: domain,
+        gender: Gender.FEMALE,
+        adjunct: true,
+        "professor.isProfessor": true,
+        "professor.isFullProfessor": true,
+      }).catch(catcher);
+
+      const countAdjunctProfessors = await Lecturers.count({
+        domain: domain,
+        adjunct: true,
+        "professor.isProfessor": true,
+      }).catch(catcher);
+
+      const countPHDLecturers = await Lecturers.count({
+        domain: domain,
+        withPhd: true,
+      }).catch(catcher);
+
+      const countSeniorLecturers = await Lecturers.count({
+        domain: domain,
+        level: LecturerLevel.SENIOR,
+      }).catch(catcher);
+
+      const countJuniorLecturers = await Lecturers.count({
+        domain: domain,
+        level: LecturerLevel.SENIOR,
       }).catch(catcher);
 
       res.status(200).json({
@@ -87,8 +173,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         countLocalMale: countLocalMale,
         countIntlFemale: countIntlFemale,
         countIntlMale: countIntlMale,
-        countPreffessors: countPreffessors,
-        countFullPreffessors: countFullPreffessors,
+        countProfessors: countProfessors,
+        countProfessorsMale: countProfessorsMale,
+        countProfessorsFemale: countProfessorsFemale,
+        countIntlProfessors: countIntlProfessors,
+        countFullProfessors: countFullProfessors,
+        countFullProfessorsMale: countFullProfessorsMale,
+        countFullProfessorsFemale: countFullProfessorsFemale,
+        countAdjunct: countAdjunct,
+        countAdjunctFemale: countAdjunctFemale,
+        countAdjunctMale: countAdjunctMale,
+        countAdjunctProfessors: countAdjunctProfessors,
+        countAdjunctProfessorsMale: countAdjunctProfessorsMale,
+        countAdjunctProfessorsFemale: countAdjunctProfessorsFemale,
+        countPHDLecturers: countPHDLecturers,
+        countSeniorLecturers: countSeniorLecturers,
+        countJuniorLecturers: countJuniorLecturers,
       });
     },
   };

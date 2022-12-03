@@ -48,13 +48,12 @@
         margin-right: 0;
         margin-left: 60px;
         .bubble{
-            background: $colorPrimary;
+            background: $colorPrimary !important;
             color: #FFF;
             border-radius: 16px 16px 0 16px;
         }
     }
 }
-
 .chatFooter{
     min-height: 56px;
     background: #FFF;

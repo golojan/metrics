@@ -1,6 +1,13 @@
 #search {
-  display: none;
+  display: block;
   padding: 10px 16px 0 16px;
+  top: -100px;
+  transition: .2s all ease-in-out;
+  margin-top: $safeTop;
+  &.show{
+    display: block;
+    top: 0;
+  }
 }
 .search-form{
     display: block;
@@ -48,3 +55,4 @@
       top: 0;
   }
 }
+

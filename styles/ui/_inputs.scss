@@ -1,5 +1,5 @@
 textarea,
-.form-control{
+.form-control {
   background-clip: padding-box;
   background-image: linear-gradient(transparent, transparent);
 }
@@ -14,7 +14,7 @@ textarea,
     line-height: 1.2em;
     text-align: left;
   }
-  textarea{
+  textarea {
     resize: none;
   }
   .input-info {
@@ -72,10 +72,13 @@ textarea,
       box-shadow: inset 0 -1px 0 0 $colorPrimary;
     }
   }
-  textarea.form-control{
+  .custom-select {
+    padding-right: 0;
+  }
+  textarea.form-control {
     height: auto;
     padding: 7px 40px 7px 0;
-}
+  }
 }
 .form-group.basic.animated {
   .label {
@@ -96,7 +99,7 @@ textarea,
   }
 }
 
-.verification-input{
+.verification-input {
   font-size: 32px !important;
   letter-spacing: 10px;
   text-align: center;
@@ -109,21 +112,30 @@ textarea,
   font-weight: $bold;
   color: $colorHeading !important;
   box-shadow: none !important;
-  background: #FFF !important;
-  &:focus{
+  background: #fff !important;
+  &:focus {
     border-color: $colorHeading !important;
   }
 }
-.form-control-lg{
+.form-control-lg {
   font-size: 20px !important;
 }
-.input-group{
-  .input-group-text{
+.form-select {
+  border: 0;
+  box-shadow: 0 !important;
+  outline: 0 !important;
+  background-color: transparent;
+}
+.form-select-lg {
+  height: 48px;
+  font-size: 20px !important;
+}
+.input-group {
+  .input-group-text {
     background: transparent;
     border: 0;
     border-bottom: 1px solid $colorLine;
     border-radius: 0;
-    font-size: 20px;
     font-weight: $regular;
     color: $colorHeading;
     height: 40px;
@@ -176,16 +188,16 @@ textarea,
       text-align: center;
       border-radius: 0;
       .icon,
-      ion-icon{
+      ion-icon {
         --ionicon-stroke-width: 32px;
         font-size: 48px;
         color: $colorLight;
       }
-      strong{
+      strong {
         display: block;
         font-weight: $medium;
       }
-      i{
+      i {
         font-style: normal;
         display: block;
       }
@@ -193,8 +205,8 @@ textarea,
     &.file-uploaded {
       background-size: cover;
       background-position: center;
-      &:before{
-        content: '';
+      &:before {
+        content: "";
         width: 38px;
         height: 38px;
         background: $colorSuccess;
@@ -224,7 +236,6 @@ textarea,
   }
 }
 
-
 .form-group.boxed {
   margin: 0;
   padding: 8px 0;
@@ -249,5 +260,19 @@ textarea,
   }
   .label {
     margin-bottom: 8px;
+  }
+}
+
+.form-group.boxed,
+.form-group.basic {
+  .form-control.custom-select {
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='13px' height='8px' viewBox='0 0 13 8' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline id='Path' stroke='%23A9ABAD' stroke-width='2' points='1.59326172 1.79663086 6.59326172 6.79663086 11.5932617 1.79663086'%3E%3C/polyline%3E%3C/g%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+  }
+}
+.form-group.boxed {
+  .form-control.custom-select {
+    background-position: right 12px center !important;
   }
 }

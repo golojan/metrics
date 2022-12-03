@@ -42,7 +42,7 @@ export const lecturers = createModel<RootModel>()({
     async addFakeLecturer(payload: FakerLecturer, rootState) {
       this.setBusy(true);
       const response = await fetch(
-        `/api/fakes/lecturer?sex=${payload.sex}&type=${payload.type}&isprofessor=${payload.isprofessor}&isfullprofessor=${payload.isfullprofessor}`
+        `/api/fakes/lecturer?sex=${payload.sex}&type=${payload.type}&isprofessor=${payload.isprofessor}&isfullprofessor=${payload.isfullprofessor}&adjunct=${payload.adjunct}&departmentId=${payload.departmentId}`
       );
       const { status } = await response.json();
       if (status) {

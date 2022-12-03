@@ -10,6 +10,7 @@ const studentsScheme = new mongoose.Schema(
       type: String,
       default: "/images/avatar/user.png",
     },
+    departmentId: { type: String },
     regNumber: { type: String },
     firstname: { type: String },
     middlename: { type: String },

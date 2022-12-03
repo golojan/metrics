@@ -1,3 +1,4 @@
+import { LecturerLevel } from "./../interfaces/enums";
 import mongoose from "mongoose";
 
 mongoose.Promise = global.Promise;
@@ -10,10 +11,24 @@ const lecturersScheme = new mongoose.Schema(
       type: String,
       default: "/images/avatar/user.png",
     },
+    departmentId: { type: String },
     staffNumber: { type: String },
     firstname: { type: String },
     middlename: { type: String },
     lastname: { type: String },
+    adjunct: {
+      type: Boolean,
+      default: false,
+    },
+    level: {
+      type: String,
+      enum: Object.values(LecturerLevel),
+      default: LecturerLevel.JUNIOR,
+    },
+    withPhd: {
+      type: Boolean,
+      default: false,
+    },
     professor: {
       isProfessor: { type: Boolean, default: false },
       isFullProfessor: { type: Boolean, default: false },
@@ -41,6 +56,7 @@ const lecturersScheme = new mongoose.Schema(
         country: { type: String, default: "Nigeria" },
       },
     },
+
     enabled: {
       type: Boolean,
       default: false,

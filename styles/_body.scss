@@ -13,9 +13,9 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 a{
-  transition: .2s all;
   color: $colorPrimary;
   outline: 0 !important;
+  text-decoration: none;
   &:hover,
   &:active,
   &:focus{
@@ -27,18 +27,4 @@ a{
 // hide all the scroll bars
 ::-webkit-scrollbar {
   width: 0;
-}
-
-.editor-wrapper {
-  border: 1px solid #c4cdd5;
-}
-.message-toolbar {
-  border-bottom: 1px solid #c4cdd5;
-  margin-bottom: 0px;
-  padding: 6px 5px;
-}
-.message-editor {
-  height: 150px;
-  font-size: 16px;
-  padding: 0px 10px;
 }

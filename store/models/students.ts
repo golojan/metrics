@@ -21,6 +21,8 @@ export const students = createModel<RootModel>()({
       STUDENT_TEACHER_RATIO: 0,
       PERCENTAGE_FEMALE: 0,
       INTERNATIONAL_STUDENTS: 0,
+      PERCENTAGE_CHALLANGED_STUDENTS: 0,
+      CHALLANGED_STUDENTS_RATIO: 0,
     } as StudentAnalitics,
   },
   reducers: {
@@ -52,7 +54,7 @@ export const students = createModel<RootModel>()({
     async addFakeStudent(payload: FakerStudent, rootState) {
       this.setBusy(true);
       const response = await fetch(
-        `/api/fakes/student?sex=${payload.sex}&type=${payload.type}&challanged=${payload.challanged}`
+        `/api/fakes/student?sex=${payload.sex}&type=${payload.type}&challanged=${payload.challanged}&departmentId=${payload.departmentId}`
       );
       const { status } = await response.json();
       if (status) {

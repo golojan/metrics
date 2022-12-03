@@ -10,6 +10,11 @@ export enum StateTypes {
   IMO = "IMO",
 }
 
+export enum LecturerLevel {
+  JUNIOR = "JUNIOR",
+  SENIOR = "SENIOR",
+}
+
 export enum OwnerTypes {
   STATE = "STATE",
   FEDERAL = "FEDERAL",

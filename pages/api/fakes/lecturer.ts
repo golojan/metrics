@@ -1,3 +1,4 @@
+import { LecturerLevel } from "./../../../interfaces/enums";
 import { Gender } from "../../../interfaces/enums";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ResponseFunctions } from "../../../interfaces";
@@ -19,22 +20,33 @@ export default async function handler(
         res.status(400).json({ error: "Invalid School ID" });
       }
 
-      const { sex, type, isprofessor, isfullprofessor } = req.query;
-
-      console.log(req.query);
+      const { sex, type, isprofessor, isfullprofessor, adjunct, departmentId } =
+        req.query;
 
       const { Lecturers } = await dbCon();
       const gender = sex == Gender.MALE ? "male" : "female";
 
+      // Randomize Level and PHD //
+      const levels = [LecturerLevel.JUNIOR, LecturerLevel.SENIOR];
+      const level = levels[Math.floor(Math.random() * levels.length)];
+
+      const withPhds = [true, false];
+      const withPhd = withPhds[Math.floor(Math.random() * withPhds.length)];
+      // Randomize Level and PHD //
+
       const created = await Lecturers.create({
         domain: domain,
         avatar: faker.image.avatar(),
+        departmentId: departmentId,
         staffNumber: faker.random.numeric(10),
         firstname: faker.name.firstName(gender),
         lastname: faker.name.lastName(gender),
         mobile: faker.phone.number(),
         email: faker.internet.email(),
         gender: sex,
+        adjunct: adjunct,
+        level: level,
+        withPhd: withPhd,
         lecturerType: type,
         professor: {
           isProfessor: isprofessor,

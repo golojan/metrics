@@ -188,6 +188,14 @@ export const withAuthSync = (WrappedComponent: any) => {
                 statistics_students.countIntl as number,
                 statistics_students.count as number
               ),
+              PERCENTAGE_CHALLANGED_STUDENTS: perc(
+                statistics_students.countChallanged as number,
+                statistics_students.count as number
+              ),
+              CHALLANGED_STUDENTS_RATIO: div(
+                statistics_students.countChallanged as number,
+                statistics_students.count as number
+              ),
             });
             //Do other students maths and Stat Displays//
           })
@@ -205,10 +213,6 @@ export const withAuthSync = (WrappedComponent: any) => {
             dispatch.lecturers.setStatistics(stats);
             //Do other lecturers maths and Stat Displays//
             dispatch.lecturers.setAnalytics({
-              PERCENTAGE_FULL_ACCREDITATION: perc(
-                statistics_lecturers.countFullPreffessors as number,
-                statistics_lecturers.count as number
-              ),
               INTERNATIONAL_LECTURERS: perc(
                 statistics_lecturers.countIntl as number,
                 statistics_lecturers.count as number
@@ -216,6 +220,50 @@ export const withAuthSync = (WrappedComponent: any) => {
               FEMALE_LECTURERS: perc(
                 statistics_lecturers.countFemale as number,
                 statistics_lecturers.count as number
+              ),
+              PROFESSORS: perc(
+                statistics_lecturers.countProfessors as number,
+                statistics_lecturers.count as number
+              ),
+              FULL_PROFESSORS: perc(
+                statistics_lecturers.countFullProfessors as number,
+                statistics_lecturers.count as number
+              ),
+              INTERNATIONAL_PROFESSORS: perc(
+                statistics_lecturers.countIntlProfessors as number,
+                statistics_lecturers.count as number
+              ),
+              FEMALE_PROFESSORS: perc(
+                statistics_lecturers.countProfessorsFemale as number,
+                statistics_lecturers.count as number
+              ),
+              MALE_PROFESSORS: perc(
+                statistics_lecturers.countProfessorsMale as number,
+                statistics_lecturers.count as number
+              ),
+              PHD_LECTURERS: perc(
+                statistics_lecturers.countPHDLecturers as number,
+                statistics_lecturers.count as number
+              ),
+              ADJUNCT_LECTURERS: perc(
+                statistics_lecturers.countAdjunct as number,
+                statistics_lecturers.count as number
+              ),
+              ADJUNCT_PROFESSORS: perc(
+                statistics_lecturers.countAdjunctProfessors as number,
+                statistics_lecturers.count as number
+              ),
+              PERCENTAGE_JUNIOR_LECTURERS: perc(
+                statistics_lecturers.countJuniorLecturers as number,
+                statistics_lecturers.count as number
+              ),
+              PERCENTAGE_SENIOR_LECTURERS: perc(
+                statistics_lecturers.countSeniorLecturers as number,
+                statistics_lecturers.count as number
+              ),
+              JUNIO_SENIOR_LECTURERS_RATIO: div(
+                statistics_lecturers.countJuniorLecturers as number,
+                statistics_lecturers.countSeniorLecturers as number
               ),
             });
             //Do other lecturers maths and Stat Displays//
@@ -283,7 +331,7 @@ export const withAuthSync = (WrappedComponent: any) => {
       statistics_departments.countNonAccredited,
       statistics_departments.count,
       statistics_lecturers.countFemale,
-      statistics_lecturers.countFullPreffessors,
+      statistics_lecturers.countFullProfessors,
       statistics_lecturers.countIntl,
     ]);
 

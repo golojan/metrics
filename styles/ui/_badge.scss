@@ -5,6 +5,7 @@
     letter-spacing: 0;
     height: 22px;
     min-width: 22px;
+    width: auto;
     padding: 0 6px;
     display: inline-flex;
     align-items: center;
@@ -72,13 +73,13 @@ a.badge-dark{
     .badge{
         min-width: 16px;
         height: 16px;
-        line-height: 9px !important;
+        line-height: 1em !important;
         font-size: 10px;
         padding: 0 4px !important;
         position: absolute;
         right: 50%;
         transform: translateX(120%);
-        top: -3px;
+        top: 6px;
     }
     .badge-empty{
         transform: translateX(200%);

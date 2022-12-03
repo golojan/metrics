@@ -18,13 +18,15 @@ export default async function handler(
       if (!domain) {
         res.status(400).json({ error: "Invalid School ID" });
       }
-      const { sex, type, challanged } = req.query;
+      const { sex, type, challanged, departmentId } = req.query;
+
       const { Students } = await dbCon();
       const gender = sex == Gender.MALE ? "male" : "female";
 
       const created = await Students.create({
         domain: domain,
         avatar: faker.image.avatar(),
+        departmentId: departmentId,
         regNumber: faker.random.numeric(10),
         firstname: faker.name.firstName(gender),
         lastname: faker.name.lastName(gender),

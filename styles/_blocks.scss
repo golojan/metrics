@@ -64,8 +64,8 @@
         font-size: 26px;
         border-radius: $borderRadius;
         &:hover {
-          background: $colorPrimary;
-          color: #fff;
+          background: $colorPrimary !important;
+          color: #fff !important;
         }
       }
     }
@@ -130,6 +130,28 @@
     color: $colorText;
     font-weight: $medium;
     display: block;
+    margin-bottom: 8px;
+    line-height: 1.4em;
+  }
+  .value {
+    font-size: 24px;
+    font-weight: $bold;
+    letter-spacing: -0.02em;
+    line-height: 1em;
+    color: $colorHeading;
+  }
+}
+
+
+.card-box {
+  background: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
+  padding: 20px 24px;
+  .title {
+    font-size: $fontSizeSub;
+    color: $colorText;
+    font-weight: $medium;
+    display: inline-block;
     margin-bottom: 8px;
     line-height: 1.4em;
   }
@@ -309,12 +331,11 @@
   }
 }
 
-
-.listed-detail{
-  .icon-wrapper{
+.listed-detail {
+  .icon-wrapper {
     text-align: center;
   }
-  .iconbox{
+  .iconbox {
     width: 64px;
     height: 64px;
     border-radius: 100%;
@@ -323,15 +344,13 @@
     justify-content: center;
     background: $colorPrimary;
     font-size: 26px;
-    color: #FFF;
+    color: #fff;
   }
 }
 
-
-
-.splash-page{
+.splash-page {
   text-align: center;
-  .iconbox{
+  .iconbox {
     width: 72px;
     height: 72px;
     background: $colorPrimary;
@@ -340,52 +359,51 @@
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    color: #FFF;
+    color: #fff;
     margin: auto;
   }
 }
 
-.fixed-bar{
+.fixed-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 0 16px;
-  background: #FFF;
+  background: #fff;
   min-height: 84px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: env(safe-area-inset-bottom);
-  > div{
+  > div {
     flex: 1;
   }
 }
 
-
-.blog-header-info{
+.blog-header-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 0;
   font-size: $fontSizeSub;
-  img{
+  img {
     padding: 0;
     margin: 0;
   }
 }
 
-.avatar-section{
+.avatar-section {
   text-align: center;
   position: relative;
   display: inline-flex;
-  .imaged{
-    border: 5px solid #FFF;
+  .imaged {
+    border: 5px solid #fff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
   }
-  .button{
-    background:$colorPrimary;
-    color: #FFF;
+  .button {
+    background: $colorPrimary;
+    color: #fff;
     width: 32px;
     height: 32px;
     border-radius: 100%;
@@ -399,16 +417,15 @@
   }
 }
 
-
-.card-block{
+.card-block {
   height: 220px;
   background: $colorPrimary;
   border-radius: $borderRadius;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.09);
-  color: #FFF;
+  color: #fff;
   position: relative;
-  .card-main{
-    background-image: linear-gradient(-180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.23) 100%);
+  .card-main {
+    background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.23) 100%);
     position: absolute;
     border-radius: $borderRadius;
     left: 0;
@@ -419,55 +436,370 @@
     align-items: flex-end;
     padding: 20px 24px;
   }
-  .card-button{
+  .card-button {
     position: absolute;
     right: 10px;
     top: 10px;
-    > .btn{
+    > .btn {
       background: transparent !important;
-      color: #FFF !important;
+      color: #fff !important;
     }
   }
-  span.label{
+  span.label {
     font-size: $fontSizeCaption;
     letter-spacing: 1px;
-    opacity: .5;
+    opacity: 0.5;
     line-height: 1em;
     margin-bottom: 5px;
     text-transform: uppercase;
     display: block;
     font-weight: $medium;
   }
-  .in{
-    .card-number{
+  .in {
+    .card-number {
       font-size: $fontSizeHeading;
       letter-spacing: 3px;
       font-weight: $medium;
     }
-    .card-expiry{
+    .card-expiry {
       font-size: 14px;
       font-weight: $medium;
       margin-right: 20px;
     }
-    .card-ccv{
+    .card-ccv {
       font-weight: $medium;
       font-size: 14px;
     }
   }
-  .bottom{
+  .bottom {
     display: flex;
     align-items: center;
     margin-top: 20px;
   }
-  .balance{
+  .balance {
     position: absolute;
     left: 24px;
     top: 24px;
-    .title{
+    .title {
       font-weight: $bold;
-      color: #FFF;
+      color: #fff;
       margin-top: 7px;
       font-size: 24px;
     }
   }
+}
+.transfer-verification {
+  padding: 0 10px;
+  .from-to-block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    .item {
+      position: relative;
+      z-index: 2;
+      strong {
+        line-height: 1.3em;
+        margin-top: 8px;
+        display: block;
+        color: $colorText;
+        font-weight: $medium;
+        font-size: $fontSizeCaption;
+      }
+    }
+    .arrow {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 24px;
+      z-index: 1;
+      background: $colorLine;
+      height: 2px;
+      &:after {
+        content: "";
+        border: solid $colorLine;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 6px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        position: absolute;
+        top: -6px;
+        right: 0;
+      }
+    }
+  }
+  .transfer-amount {
+    margin-bottom: -16px;
+    .caption {
+      font-size: $fontSizeCaption;
+      color: $colorHeading;
+      line-height: 1.2em;
+    }
+  }
+}
+
+.gradientSection {
+  position: relative;
+  text-align: center;
+  background: $colorPrimary;
+  background-image: linear-gradient(-208deg, $colorPrimary 38%, lighten($colorPrimary, 10%) 100%);
+  .in {
+    position: relative;
+    z-index: 10;
+    padding: 50px 16px 40px 16px;
+  }
+  .title {
+    font-size: $fontSizeSub;
+    color: #fff;
+    opacity: 0.6;
+  }
+  .total {
+    letter-spacing: -0.01em;
+    color: #fff;
+    font-size: $fontSizeHeadingXLarge;
+  }
+  .caption {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .iconbox {
+      font-size: 20px;
+      margin: 0 8px -2px 8px;
+    }
+    strong {
+      opacity: 0.4;
+      margin-left: 10px;
+    }
+  }
+  .chart {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.1;
+    z-index: 1;
+  }
+}
+.wallet-inline-button {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  text-align: center;
+  padding: 0;
+  border-radius: $borderRadius;
+  .item {
+    color: #fff;
+    font-size: $fontSizeCaption;
+    strong {
+      opacity: 0.6;
+      display: block;
+      margin-top: 3px;
+    }
+    &:active {
+      transform: scale(0.94);
+    }
+  }
+
+  .iconbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    border-radius: 100px;
+  }
+}
+
+.detailed-list {
+  li {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    line-height: 1.5em;
+    > a.item {
+      padding-right: 16px;
+      border-radius: 0 !important;
+      &:after {
+        display: none !important;
+      }
+    }
+  }
+  .text-small {
+    font-size: $fontSizeCaption !important;
+  }
+  .badge {
+    font-size: $fontSizeCaption;
+    padding: 3px 7px;
+    line-height: 1.2em;
+    height: auto;
+    border: 0;
+    ion-icon,
+    .icon {
+      margin-right: 3px;
+    }
+  }
+}
+
+.card-with-icon {
+  line-height: 1.2em;
+  .card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 100px;
+    background: $colorPrimary;
+    font-size: 32px;
+    color: #fff;
+  }
+  p {
+    font-size: $fontSizeSub;
+  }
+}
+
+.coinbox {
+  overflow: hidden;
+  .card-body {
+    padding: 20px;
+  }
+  .badge {
+    font-size: $fontSizeCaption;
+    padding: 3px 7px;
+    line-height: 1.2em;
+    height: auto;
+    border: 0;
+    ion-icon,
+    .icon {
+      margin-right: 3px;
+    }
+  }
+  h4 {
+    font-size: $fontSizeSub;
+    color: $colorLight;
+    margin: 0 0 10px 0;
+  }
+  .text {
+    color: $colorHeading;
+    font-weight: $medium;
+    margin-bottom: 6px;
+    strong {
+      font-weight: $regular;
+    }
+  }
+  .fixed-button {
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $colorLight;
+    font-size: 18px;
+    transition: 0.2s all;
+    &:hover {
+      color: $colorText;
+    }
+  }
+}
+
+.coin-head {
+  padding-bottom: 130px !important;
+}
+.coin-chart {
+  margin-top: -100px;
+  position: relative;
+  z-index: 100;
+}
+
+.exchange-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px -8px;
+  .input-col {
+    padding: 0 8px;
+    width: 100% !important;
+  }
+  .select-col {
+    padding: 0 8px;
+  }
+  input {
+    font-weight: $bold;
+    font-size: 28px !important;
+  }
+  .form-control-lg,
+  .form-select-lg {
+    min-height: 50px;
+  }
+  .form-select {
+    cursor: pointer;
+    width: auto;
+    display: inline-block;
+    font-weight: $bold;
+    color: $colorHeading;
+    padding-right: 24px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23958D9F' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-position: right 0.1rem center;
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+  &.small {
+    .form-control {
+      font-size: 20px !important;
+    }
+  }
+}
+.exchange-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .group-label {
+    color: $colorHeading;
+    font-weight: $medium;
+    font-size: $fontSizeCaption;
+  }
+  .exchange-wallet-info {
+    font-size: $fontSizeCaption;
+    color: $colorLight;
+    text-align: right;
+    strong {
+      font-weight: $bold;
+    }
+  }
+}
+
+.exchange-line {
+  position: relative;
+  text-align: center;
+  padding: 10px 0;
+  &:after {
+    content: "";
+    display: block;
+    width: 1px;
+    background: darken($colorLine, 5%);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+  }
+}
+.exchange-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 200px;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 999;
+  color: #fff;
+  background: darken($colorLine, 5%);
 }

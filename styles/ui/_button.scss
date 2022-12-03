@@ -47,6 +47,9 @@
     margin-right: 4px;
   }
 }
+.btn-block{
+  width: 100%;
+}
 .btn-group {
   .btn {
     &:active {
@@ -242,4 +245,43 @@
     .btn{
         margin-left: -2px !important;
     }
+}
+
+
+
+@mixin radiobuttons($color) {
+  background: $color !important;
+  border-color: $color !important;
+}
+.btn-check:checked + .btn-outline-primary,
+.btn-check:checked + .btn-outline-secondary,
+.btn-check:checked + .btn-outline-danger,
+.btn-check:checked + .btn-outline-warning,
+.btn-check:checked + .btn-outline-success,
+.btn-check:checked + .btn-outline-info,
+.btn-check:checked + .btn-outline-dark{
+  color: #fff !important;
+  transition: 0.1s all;
+}
+
+.btn-check:checked + .btn-outline-primary {
+  @include radiobuttons($colorPrimary);
+}
+.btn-check:checked + .btn-outline-secondary {
+  @include radiobuttons($colorSecondary);
+}
+.btn-check:checked + .btn-outline-warning {
+  @include radiobuttons($colorWarning);
+}
+.btn-check:checked + .btn-outline-danger {
+  @include radiobuttons($colorDanger);
+}
+.btn-check:checked + .btn-outline-success {
+  @include radiobuttons($colorSuccess);
+}
+.btn-check:checked + .btn-outline-info {
+  @include radiobuttons($colorInfo);
+}
+.btn-check:checked + .btn-outline-dark {
+  @include radiobuttons(#222);
 }

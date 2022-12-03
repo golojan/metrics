@@ -52,7 +52,6 @@
       font-size: 24px;
       line-height: 1em;
       color: $colorHeading;
-      transition: 0.1s all;
       display: block;
       margin-top: 1px;
       margin-bottom: 3px;
@@ -86,7 +85,6 @@
       display: block;
       color: $colorHeading;
       font-weight: $regular;
-      transition: 0.1s all;
     }
     &:active{
       opacity: .8;

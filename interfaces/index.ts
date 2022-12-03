@@ -1,17 +1,20 @@
 import { ReactNode } from "react";
-import { Gender, StudentType } from "./enums";
+import { Gender, LecturerType, StudentType } from "./enums";
 
 export type FakerLecturer = {
   sex?: Gender;
-  type?: StudentType;
+  type?: LecturerType;
   isprofessor?: boolean;
   isfullprofessor?: boolean;
+  adjunct?: boolean;
+  departmentId?: string;
 };
 
 export type FakerStudent = {
   sex?: Gender;
   type?: StudentType;
   challanged?: boolean;
+  departmentId?: string;
 };
 
 export type IndustryProps = {
@@ -61,14 +64,38 @@ export type LecturerStats = {
   countLocalMale?: number;
   countIntlFemale?: number;
   countIntlMale?: number;
-  countPreffessors?: number;
-  countFullPreffessors?: number;
+  countProfessors?: number;
+  countProfessorsMale?: number;
+  countProfessorsFemale?: number;
+  countIntlProfessors?: number;
+  countFullProfessors?: number;
+  countFullProfessorsMale?: number;
+  countFullProfessorsFemale?: number;
+  countAdjunct?: number;
+  countAdjunctFemale?: number;
+  countAdjunctMale?: number;
+  countAdjunctProfessors?: number;
+  countAdjunctProfessorsMale?: number;
+  countAdjunctProfessorsFemale?: number;
+  countPHDLecturers?: number;
+  countSeniorLecturers?: number;
+  countJuniorLecturers?: number;
 };
 
 export type LecturerAnalitics = {
-  PERCENTAGE_FULL_ACCREDITATION?: number;
   INTERNATIONAL_LECTURERS?: number;
   FEMALE_LECTURERS?: number;
+  MALE_PROFESSORS?: number;
+  PHD_LECTURERS?: number;
+  ADJUNCT_LECTURERS?: number;
+  ADJUNCT_PROFESSORS?: number;
+  PROFESSORS?: number;
+  FULL_PROFESSORS?: number;
+  INTERNATIONAL_PROFESSORS?: number;
+  FEMALE_PROFESSORS?: number;
+  PERCENTAGE_JUNIOR_LECTURERS?: number;
+  PERCENTAGE_SENIOR_LECTURERS?: number;
+  JUNIO_SENIOR_LECTURERS_RATIO?: number;
 };
 
 export type FacultiesInfo = {
@@ -115,6 +142,8 @@ export type StudentAnalitics = {
   STUDENT_TEACHER_RATIO?: number;
   PERCENTAGE_FEMALE?: number;
   INTERNATIONAL_STUDENTS?: number;
+  PERCENTAGE_CHALLANGED_STUDENTS?: number;
+  CHALLANGED_STUDENTS_RATIO?: number;
 };
 
 export type FacultyAnalitics = {

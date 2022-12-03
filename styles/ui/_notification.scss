@@ -96,7 +96,8 @@
       font-size: $fontSizeSub;
       border-right: 1px solid $colorLine;
       padding: 16px 6px;
-      ion-icon {
+      ion-icon,
+      .icon{
         font-size: 20px;
         line-height: 1em;
         margin-right: 8px;

@@ -1,8 +1,12 @@
 #appCapsule {
   padding: 56px 0;
   margin-bottom: env(safe-area-inset-bottom);
+  margin-top: $safeTop;
   &.extra-header-active{
     padding-top: 106px;
+  }
+  &.full-height{
+    min-height: 100vh;
   }
 }
 .section{

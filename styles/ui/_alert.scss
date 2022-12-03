@@ -4,16 +4,48 @@
   border: 0;
   font-size: $fontSizeSub;
   border-radius: $borderRadius;
-  .close{
-      text-shadow: none !important;
-      outline: 0;
-      opacity: 1;
-      width: 40px;
-      padding: 0;
-      top: 4px;
-      line-height: 1em;
-      height: 36px !important;
-      font-size: 24px;
+  .btn-close {
+    text-shadow: none !important;
+    width: 40px;
+    padding: 0;
+    opacity: 1;
+    margin-top: 3px;
+    line-height: 1em;
+    height: 36px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: none;
+    &:hover,
+    &:active,
+    &:focus{
+      outline: 0 !important;
+    }
+    &:hover{
+      opacity: .7;
+    }
+    &:before,
+    &:after{
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      left: 12px;
+      top: 16px;
+      content: '';
+      display: block;
+      background: #FFF;
+      border-radius: 20px;
+    }
+    &:before{
+      transform: rotate(45deg);
+    }
+    &:after{
+      transform: rotate(-45deg);
+    }
+  }
+  .alert-title{
+    margin: 4px 0;
+    font-size: $fontSize;
+    font-weight: $medium;
   }
   &.alert-dismissible{
       padding-right: 56px;
@@ -49,6 +81,9 @@
       color: #fff !important;
       text-decoration: underline;
   }
+  .alert-title{
+    color: #FFF;
+  }
   .close{
       color: #FFF;
   }
@@ -61,8 +96,16 @@
       color: $color !important;
       text-decoration: underline !important;
   }
-  .close{
-      color: $color;
+  .alert-title{
+    color: $color;
+  }
+  .btn-close {
+    color: $color;
+    opacity: 1;
+    &:before,
+    &:after{
+      background: $color;
+    }
   }
 }
 
@@ -119,3 +162,4 @@
     color: #333;
     border: 2px solid #333;
   }
+
