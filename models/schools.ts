@@ -19,6 +19,12 @@ const schoolsScheme = new mongoose.Schema(
     location: String,
     ownedBy: { type: String, enum: Object.values(OwnerTypes) },
     founded: Number,
+    ranking: {
+      googlePresence: { type: Number, default: 0 },
+      citations: { type: Number, default: 0 },
+      hindex: { type: Number, default: 0 },
+      i10hindex: { type: Number, default: 0 },
+    },
     enabled: {
       type: Boolean,
       default: false,

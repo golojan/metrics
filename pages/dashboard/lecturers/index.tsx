@@ -1,14 +1,9 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../../../components/AdminLayout";
 import AppDrawer from "../../../serverlets/AppDrawer";
-import Image from "next/image";
 
-import {
-  faPlus,
-  faUsersBetweenLines,
-  faUsersCog,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faUsersCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
@@ -17,18 +12,56 @@ import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import { compose } from "redux";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import ShowChartButton from "../../../components/ShowChartButton";
-import ChartComponent from "../../../components/ChartComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../../store";
 
-import { TableVirtuoso, Virtuoso } from "react-virtuoso";
-import { LineChart } from "../../../components/Charts";
+import LecturersListBox from "../../../components/LecturersListBox";
+import { LecturerInfo } from "../../../interfaces";
+import { Gender } from "../../../interfaces/enums";
 
+type lFilters = {
+  male: boolean;
+  female: boolean;
+  withPhd: boolean;
+  isProfessor: boolean;
+};
 const Lecturers: NextPage = () => {
-  const { lecturers, lecturersCount } = useSelector(
+  const dispatch = useDispatch<Dispatch>();
+  const [query, setQuery] = useState<string>("");
+  const { lecturersCount, lecturers, list } = useSelector(
     (state: RootState) => state.lecturers
   );
+  const [filter, setFilter] = useState<lFilters>({
+    male: false,
+    female: false,
+    withPhd: false,
+    isProfessor: false,
+  });
+
+  useEffect(() => {
+    dispatch.lecturers.setList(lecturers);
+  }, [dispatch.lecturers, lecturers]);
+
+  const searchFilter = (q: string) => {
+    setQuery(q);
+    const newData = lecturers.filter((lecturer: LecturerInfo) => {
+      return (
+        lecturer.firstname?.toLowerCase().startsWith(q.toLowerCase()) ||
+        lecturer.lastname?.toLowerCase().startsWith(q.toLowerCase()) ||
+        lecturer.middlename?.toLowerCase().startsWith(q.toLowerCase()) ||
+        lecturer.staffNumber?.toLowerCase().startsWith(q.toLowerCase())
+      );
+    });
+    dispatch.lecturers.setList(newData);
+  };
+
+  const doFilter = (_list: LecturerInfo[], _filter: lFilters) => {
+    const newData = _list.filter((_list: LecturerInfo) => {
+      return _list.gender?.startsWith(Gender.MALE);
+    });
+    dispatch.lecturers.setList(newData);
+  };
+
   return (
     <>
       <AdminLayout>
@@ -55,73 +88,131 @@ const Lecturers: NextPage = () => {
           </div>
           <div className="section pt-1">
             <div className="row ">
-              <div className="col-12 col-md-5 col-lg-3 fa-border">
+              <div className="col-12 col-md-12 col-lg-4 fa-border">
                 <div className="card-box border-0">
-                  <h4>We move... {lecturersCount}</h4>
-                </div>
-              </div>
-              <div className="col-12 col-md-7 col-lg-9 min-h-screen">
-                <Virtuoso
-                  data={lecturers}
-                  totalCount={lecturersCount}
-                  itemContent={(index, lecturer) => (
-                    <div
-                      className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-2 row-auto stat-box"
-                      key={index}
-                    >
-                      <Image
-                        src={`${lecturer.avatar}`}
-                        alt="/"
-                        width={70}
-                        height={70}
-                        className="float-left mr-2 imaged"
-                      />
-                      <ShowChartButton show={false} />
-                      <div className="title my-0">
-                        <strong className="text-black">
-                          Political Science
-                        </strong>
-                      </div>
-                      <h4 className="h3 my-0">
-                        <strong className="text-green-700">
-                          {lecturer.lastname}
-                        </strong>
-                        , {lecturer.firstname} {lecturer.middlename}
-                      </h4>
-                      <p>SEX: {lecturer.gender}</p>
-                      <div className="float-right text-center absolute top-6 right-5 flex">
-                        <h4 className="text-center mx-1">
-                          <strong className="text-green-900 h2">
-                            {lecturer.googlePresence}
-                          </strong>
-                          <br />
-                          <small>g.scholar</small>
-                        </h4>
-                        <h4 className="text-center mx-1">
-                          <strong className="text-green-900 h2">
-                            {lecturer.citations}
-                          </strong>
-                          <br />
-                          <small>citations</small>
-                        </h4>
-                        <h4 className="text-center mx-1">
-                          <strong className="text-green-900 h2">
-                            {lecturer.hindex}
-                          </strong>
-                          <br />
-                          <small>h-index</small>
-                        </h4>
-                        <h4 className="text-center mx-1">
-                          <strong className="text-green-900 h2">
-                            {lecturer.i10hindex}
-                          </strong>
-                          <br />
-                          <small>i10-h-index</small>
-                        </h4>
+                  <div className="flex justify-center">
+                    <div className="w-full">
+                      <div className="input-group relative flex flex-wrap items-stretch w-full mb-1">
+                        <input
+                          type="search"
+                          className="form-control form-control-lg relative flex-auto min-w-0 block w-full p-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          placeholder={`Search [${lecturersCount}] records...`}
+                          aria-label="Search"
+                          aria-describedby="button-addon2"
+                          onChange={(e) => searchFilter(e.target.value)}
+                        />
                       </div>
                     </div>
-                  )}
-                />
+                  </div>
+                  <h4 className="pl-1">
+                    Found {list.length} record for {query}...
+                  </h4>
+                  <ul className="listview image-listview text border-0  no-line">
+                    <li className="flex-auto">
+                      <div className="item">
+                        <div className="in">
+                          <div className="text-lg">Males</div>
+                          <div className="form-check form-switch">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="maleSwitch"
+                              checked={filter.male}
+                              onChange={(e) =>
+                                setFilter({
+                                  ...filter,
+                                  male: e.target.checked,
+                                })
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="maleSwitch"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item">
+                        <div className="in">
+                          <div className="text-lg">Female</div>
+                          <div className="form-check form-switch">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="femaleSwitch"
+                              checked={filter.female}
+                              onChange={(e) =>
+                                setFilter({
+                                  ...filter,
+                                  female: e.target.checked,
+                                })
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="femaleSwitch"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul className="listview image-listview text no-line">
+                    <li className="flex-auto">
+                      <div className="item">
+                        <div className="in">
+                          <div className="text-lg">Professors</div>
+                          <div className="form-check form-switch">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="professorSwitch"
+                              checked={filter.isProfessor}
+                              onChange={(e) =>
+                                setFilter({
+                                  ...filter,
+                                  isProfessor: e.target.checked,
+                                })
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="professorSwitch"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li className="flex-auto">
+                      <div className="item">
+                        <div className="in">
+                          <div className="text-lg">PHD Holders</div>
+                          <div className="form-check form-switch">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="withPhdSwitch"
+                              checked={filter.withPhd}
+                              onChange={(e) =>
+                                setFilter({
+                                  ...filter,
+                                  withPhd: e.target.checked,
+                                })
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="withPhdSwitch"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="col-12 col-md-12 col-lg-8 min-h-screen">
+                <LecturersListBox lecturers={list} />
               </div>
             </div>
           </div>

@@ -25,11 +25,17 @@ export type SchoolTypes = {
   logo?: string;
   domain?: string;
   name?: string;
-  shortname?: { type: String };
+  shortname?: String;
   state?: string;
   location?: String;
   ownedBy?: string;
   founded?: Number;
+  ranking?: {
+    googlePresence?: Number;
+    citations?: Number;
+    hindex?: Number;
+    i10hindex?: Number;
+  };
 };
 
 export interface Props {
@@ -66,10 +72,6 @@ export type LecturerInfo = {
   mobile?: string;
   gender?: Gender;
   lecturerType?: LecturerType;
-  googlePresence?: number;
-  citations?: number;
-  hindex?: number;
-  i10hindex: number;
   addresses?: {
     contact?: {
       street?: string;
@@ -80,6 +82,10 @@ export type LecturerInfo = {
       country?: string;
     };
   };
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex: number;
   enabled?: boolean;
 };
 
@@ -169,6 +175,10 @@ export type StudentInfo = {
       country?: string;
     };
   };
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex: number;
   enabled?: boolean;
 };
 

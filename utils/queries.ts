@@ -1,7 +1,28 @@
+import { DepartmentsInfo } from "./../interfaces/index";
+import { div, perc, sub } from "./math";
 export const getDomain = (host: string) => {
   const _domain: any = host?.split(":", 1).pop();
   const domain = _domain.replace("www.", "");
   return domain;
+};
+
+export const getDepartment = (arrData: Array<DepartmentsInfo>, id: string) => {
+  return arrData.find((e) => e._id === id);
+};
+
+export const getLiveStats = (arrData: any, statVal: any) => {
+  const max = Math.max(...arrData.map((o: any) => o.points));
+  const min = Math.min(...arrData.map((o: any) => o.points));
+  const mid = parseFloat(div(max, 2));
+  const ndif = parseFloat(sub(statVal, mid));
+  if (statVal > mid) {
+    let _perc = perc(ndif, mid);
+    return { max: max, min: min, mid: mid, dir: "up", perc: _perc };
+  }
+  if (statVal <= mid) {
+    let _perc = perc(ndif, mid);
+    return { max: max, min: min, mid: mid, dir: "down", perc: _perc };
+  }
 };
 
 export const loadFaculties = async (domain: string) => {

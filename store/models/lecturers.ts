@@ -13,6 +13,7 @@ export const lecturers = createModel<RootModel>()({
     lecturersCount: 0,
     lBusy: false,
     lecturers: [] as LecturerInfo[],
+    list: [] as LecturerInfo[],
     loaded: false,
     statistics_lecturers: {} as LecturerStats,
     analytics_lecturers: {} as LecturerAnalitics,
@@ -29,6 +30,9 @@ export const lecturers = createModel<RootModel>()({
     },
     setLecturers(state, payload: any) {
       return { ...state, lecturers: payload };
+    },
+    setList(state, payload: any) {
+      return { ...state, list: payload };
     },
     setLecturersCount(state, payload: number) {
       return { ...state, lecturersCount: payload };

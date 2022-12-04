@@ -3,7 +3,9 @@ import {
   faBriefcase,
   faClose,
   faDashboard,
+  faDatabase,
   faHome,
+  faSave,
   faSchool,
   faSchoolCircleCheck,
   faUserGear,
@@ -153,6 +155,28 @@ function AppSidebar() {
                         <FontAwesomeIcon icon={faHome} />
                       </div>
                       <div className="in">Reports</div>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href={"/dashboard/rankings"} legacyBehavior>
+                    <a className="item">
+                      <div className="icon-box bg-success">
+                        <FontAwesomeIcon icon={faDatabase} />
+                      </div>
+                      <div className="in">Live Ranking</div>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href={"/dashboard/history"} legacyBehavior>
+                    <a className="item">
+                      <div className="icon-box bg-primary">
+                        <FontAwesomeIcon icon={faSave} />
+                      </div>
+                      <div className="in">Ranking History</div>
                     </a>
                   </Link>
                 </li>

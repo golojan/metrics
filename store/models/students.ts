@@ -13,6 +13,7 @@ export const students = createModel<RootModel>()({
     studentsCount: 0,
     sBusy: false,
     students: [] as StudentInfo[],
+    list: [] as StudentInfo[],
     loaded: false,
     maleStudents: 0,
     femaleStudents: 0,
@@ -37,6 +38,9 @@ export const students = createModel<RootModel>()({
     },
     setStudents(state, payload: any) {
       return { ...state, students: payload };
+    },
+    setList(state, payload: StudentInfo[]) {
+      return { ...state, list: payload };
     },
     setStudentsCount(state, payload: number) {
       return { ...state, studentsCount: payload };
