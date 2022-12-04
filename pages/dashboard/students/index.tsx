@@ -71,23 +71,24 @@ const Students: NextPage = () => {
                       <Image
                         src={`${student.avatar}`}
                         alt="/"
-                        width={300}
-                        height={300}
+                        width={70}
+                        height={70}
+                        className="float-left mr-2 imaged"
                       />
                       <ShowChartButton show={true} />
-                      <div className="title">
+                      <div className="title my-0">
                         <strong className="text-black">
                           <strong className="text-blue-800">DEPARTMENT</strong>:
                           Political Science
                         </strong>
                       </div>
-                      <h2 className="total mt-2">
-                        <FontAwesomeIcon
-                          className="text-secondary"
-                          icon={faAreaChart}
-                        />{" "}
-                        Agu Chux Kenechukwu
-                      </h2>
+                      <span className="h3 my-0">
+                        <strong className="text-green-700">
+                          {student.lastname}
+                        </strong>
+                        , {student.firstname} {student.middlename}
+                      </span>
+                      <p>SEX: {student.gender}</p>
                     </div>
                   )}
                 />

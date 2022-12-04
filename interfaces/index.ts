@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Gender, LecturerType, StudentType } from "./enums";
+import { Gender, LecturerLevel, LecturerType, StudentType } from "./enums";
 
 export type FakerLecturer = {
   sex?: Gender;
@@ -49,8 +49,38 @@ export type Logon = {
 
 export type LecturerInfo = {
   _id?: string;
-  domain?: string;
   avatar?: string;
+  departmentId?: string;
+  staffNumber?: string;
+  firstname?: string;
+  middlename?: string;
+  lastname?: string;
+  adjunct?: boolean;
+  level?: LecturerLevel;
+  withPhd?: boolean;
+  professor?: {
+    isProfessor?: boolean;
+    isFullProfessor?: boolean;
+  };
+  email?: string;
+  mobile?: string;
+  gender?: Gender;
+  lecturerType?: LecturerType;
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex: number;
+  addresses?: {
+    contact?: {
+      street?: string;
+      city?: string;
+      lga?: string;
+      state?: string;
+      zip?: string;
+      country?: string;
+    };
+  };
+  enabled?: boolean;
 };
 
 export type LecturerStats = {
@@ -118,8 +148,28 @@ export type DepartmentsInfo = {
 
 export type StudentInfo = {
   _id?: string;
-  domain?: string;
   avatar?: string;
+  departmentId?: string;
+  regNumber?: string;
+  firstname?: string;
+  middlename?: string;
+  lastname?: string;
+  email?: string;
+  mobile?: string;
+  gender?: Gender;
+  studentType: StudentType;
+  challanged?: boolean;
+  addresses?: {
+    contact?: {
+      street?: string;
+      city?: string;
+      lga?: string;
+      state?: string;
+      zip?: string;
+      country?: string;
+    };
+  };
+  enabled?: boolean;
 };
 
 export type StudentStats = {

@@ -8,13 +8,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'upcdn.io',
-        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'cloudflare-ipfs.com',
-        port: '',
         pathname: '/**',
       }
     ],
