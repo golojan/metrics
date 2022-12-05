@@ -25,10 +25,11 @@ type lFilters = {
   withPhd: boolean;
   isProfessor: boolean;
 };
+
 const Lecturers: NextPage = () => {
   const dispatch = useDispatch<Dispatch>();
   const [query, setQuery] = useState<string>("");
-  const { lecturersCount, lecturers, list } = useSelector(
+  const { lecturersCount, lecturers, list, lecturerId } = useSelector(
     (state: RootState) => state.lecturers
   );
   const [filter, setFilter] = useState<lFilters>({
@@ -37,6 +38,15 @@ const Lecturers: NextPage = () => {
     withPhd: false,
     isProfessor: false,
   });
+
+  const { windows } = useSelector((state: RootState) => state.settings);
+  const isSmallWindow: boolean =
+    windows.size === "xs" ||
+    windows.size === "sm" ||
+    windows.size === "xm" ||
+    windows.size === "md"
+      ? true
+      : false;
 
   useEffect(() => {
     dispatch.lecturers.setList(lecturers);
@@ -211,7 +221,7 @@ const Lecturers: NextPage = () => {
                   </ul>
                 </div>
               </div>
-              <div className="col-12 col-md-12 col-lg-8 min-h-screen">
+              <div className={`col-12 col-md-12 col-lg-8 min-h-screen`}>
                 <LecturersListBox lecturers={list} />
               </div>
             </div>

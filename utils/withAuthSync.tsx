@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Router from "next/router";
 import nextCookie from "next-cookies";
 import cookie from "js-cookie";
-import { StudentStats, Token } from "../interfaces";
+import { SchoolStats, StudentStats, Token } from "../interfaces";
 
 import { Dispatch } from "../store";
 import { useDispatch } from "react-redux";
@@ -65,7 +65,11 @@ const getSchoolInfo = async (domain: string) => {
   const userinfo = await response.json();
   return userinfo;
 };
-
+const loadSchoolsStats = async (domain: string) => {
+  const response = await fetch(`/api/schools/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
+};
 const loadStudents = async (domain: string) => {
   const response = await fetch(`/api/students/${domain}/list`);
   const students = await response.json();
@@ -127,6 +131,10 @@ export const withAuthSync = (WrappedComponent: any) => {
       (state: RootState) => state.departments
     );
 
+    const { statistics_school } = useSelector(
+      (state: RootState) => state.settings
+    );
+
     const syncLogout = (event: any) => {
       if (event.key === "logout") {
         console.log("logged out from storage!");
@@ -162,6 +170,19 @@ export const withAuthSync = (WrappedComponent: any) => {
             dispatch.settings.setSchool(school.data);
           })
           .catch();
+        loadSchoolsStats(domain as string)
+          .then((stats: SchoolStats) => {
+            // dispatch.schools.setStatistics(stats);
+            //Do other students maths and Stat Displays//
+            // dispatch.schools.setAnalytics({
+            //   STUDENT_TEACHER_RATIO: div(
+            //     statistics_students.count as number,
+            //     statistics_lecturers.count as number
+            //   ),
+            // });
+            //Do other students maths and Stat Displays//
+          })
+          .catch(); // Load All Students //
         // Get school info to state //
 
         // Load All Students //
@@ -204,6 +225,45 @@ export const withAuthSync = (WrappedComponent: any) => {
         // Load All Lecturers //
         loadLecturers(domain as string)
           .then((lecturers) => {
+            let lCts = lecturers.data;
+            //Total GS //
+            let totalGooglePresence = lCts.reduce(function (
+              total: any,
+              current: any
+            ) {
+              return total + current.googlePresence;
+            },
+            0);
+
+            //Total Citation //
+            let totalCitations = lCts.reduce(function (
+              total: any,
+              current: any
+            ) {
+              return total + current.citations;
+            },
+            0);
+
+            //Total Hindex //
+            let totalHindex = lCts.reduce(function (total: any, current: any) {
+              return total + current.hindex;
+            }, 0);
+
+            //Total Hindex //
+            let totalI10hindex = lCts.reduce(function (
+              total: any,
+              current: any
+            ) {
+              return total + current.i10hindex;
+            },
+            0);
+            dispatch.settings.setRank({
+              googlePresence: totalGooglePresence,
+              citations: totalCitations,
+              hindex: totalHindex,
+              i10hindex: totalI10hindex,
+            });
+
             dispatch.lecturers.setLecturers(lecturers.data);
             dispatch.lecturers.setLecturersCount(lecturers.data.length);
           })
@@ -333,6 +393,17 @@ export const withAuthSync = (WrappedComponent: any) => {
       statistics_lecturers.countFemale,
       statistics_lecturers.countFullProfessors,
       statistics_lecturers.countIntl,
+      // = //
+      statistics_lecturers.countAdjunct,
+      statistics_lecturers.countAdjunctProfessors,
+      statistics_lecturers.countIntlProfessors,
+      statistics_lecturers.countJuniorLecturers,
+      statistics_lecturers.countPHDLecturers,
+      statistics_lecturers.countProfessors,
+      statistics_lecturers.countProfessorsFemale,
+      statistics_lecturers.countProfessorsMale,
+      statistics_lecturers.countSeniorLecturers,
+      statistics_students.countChallanged,
     ]);
 
     return <WrappedComponent {...props} />;

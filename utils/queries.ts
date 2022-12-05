@@ -1,5 +1,6 @@
 import { DepartmentsInfo } from "./../interfaces/index";
 import { div, perc, sub } from "./math";
+
 export const getDomain = (host: string) => {
   const _domain: any = host?.split(":", 1).pop();
   const domain = _domain.replace("www.", "");

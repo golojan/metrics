@@ -10,6 +10,7 @@ import LooseBusy from "./LooseBusy";
 const SchoolRanking = () => {
   const { busy } = useSelector((state: RootState) => state.settings);
 
+  const { ranking } = useSelector((state: RootState) => state.settings);
   const { analytics_students, statistics_students, sBusy } = useSelector(
     (state: RootState) => state.students
   );
@@ -31,17 +32,35 @@ const SchoolRanking = () => {
         <div className="row mt-2">
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
+            <div className="stat-box">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">Efficiency</strong>
+                <strong className="text-black">Citations Per Capita</strong>
               </div>
               <h1 className="total mt-2">
                 <FontAwesomeIcon
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {99.9}
+                {ranking.citations}
+              </h1>
+            </div>
+          </div>
+          {/*  */}
+
+          {/*  */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box">
+              <ShowChartButton />
+              <div className="title">
+                <strong className="text-black">H-index Per Capita</strong>
+              </div>
+              <h1 className="total mt-2">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {ranking.hindex}
               </h1>
             </div>
           </div>
@@ -52,60 +71,6 @@ const SchoolRanking = () => {
             <div className="stat-box ">
               <ShowChartButton />
               <div className="title">
-                <strong className="text-black">Localized Efficiency</strong>
-              </div>
-              <h1 className="total mt-2 text-red-500">
-                <FontAwesomeIcon
-                  className="text-secondary"
-                  icon={faAreaChart}
-                />{" "}
-                {0}
-              </h1>
-            </div>
-          </div>
-          {/*  */}
-
-          {/*  */}
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
-              <ShowChartButton />
-              <div className="title">
-                <strong className="text-black">Citations Per Capita</strong>
-              </div>
-              <h1 className="total mt-2">
-                <FontAwesomeIcon
-                  className="text-secondary"
-                  icon={faAreaChart}
-                />{" "}
-                {7.89}
-              </h1>
-            </div>
-          </div>
-          {/*  */}
-
-          {/*  */}
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
-              <ShowChartButton />
-              <div className="title">
-                <strong className="text-black">H-index Per Capita</strong>
-              </div>
-              <h1 className="total mt-2">
-                <FontAwesomeIcon
-                  className="text-secondary"
-                  icon={faAreaChart}
-                />{" "}
-                {346}
-              </h1>
-            </div>
-          </div>
-          {/*  */}
-
-          {/*  */}
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
-              <ShowChartButton />
-              <div className="title">
                 <strong className="text-black">i-10-index Per Capita</strong>
               </div>
               <h1 className="total mt-2">
@@ -113,7 +78,7 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {345}
+                {ranking.i10hindex}
               </h1>
             </div>
           </div>
@@ -121,7 +86,7 @@ const SchoolRanking = () => {
 
           {/*  */}
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
-            <div className="stat-box disabled">
+            <div className="stat-box">
               <ShowChartButton show={false} />
               <div className="title">
                 <strong className="text-black">Google Scholar Presence</strong>
@@ -131,7 +96,7 @@ const SchoolRanking = () => {
                   className="text-secondary"
                   icon={faAreaChart}
                 />{" "}
-                {20}%
+                {ranking.googlePresence}%
               </h1>
               <ChartComponent
                 labels={["GSP", "non.GSP"]}
@@ -599,6 +564,42 @@ const SchoolRanking = () => {
                   %
                 </h1>
               </div>
+            </div>
+          </div>
+          {/*  */}
+
+          {/*  */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box disabled">
+              <ShowChartButton />
+              <div className="title">
+                <strong className="text-black">Efficiency</strong>
+              </div>
+              <h1 className="total mt-2">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {99.9}
+              </h1>
+            </div>
+          </div>
+          {/*  */}
+
+          {/*  */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box ">
+              <ShowChartButton />
+              <div className="title">
+                <strong className="text-black">Localized Efficiency</strong>
+              </div>
+              <h1 className="total mt-2 text-red-500">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {0}
+              </h1>
             </div>
           </div>
           {/*  */}

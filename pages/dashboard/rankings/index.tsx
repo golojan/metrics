@@ -25,7 +25,7 @@ import allschools from "../../../data/nuc-2021.json";
 import { getLiveStats } from "../../../utils/queries";
 
 const Rankings: NextPage = () => {
-  const { school } = useSelector((state: RootState) => state.settings);
+  const { school, ranking } = useSelector((state: RootState) => state.settings);
   return (
     <>
       <AdminLayout>
@@ -88,33 +88,25 @@ const Rankings: NextPage = () => {
               <div className="wallet-footer">
                 <div className="item">
                   <div>
-                    <span className="h1">
-                      {school?.ranking?.googlePresence as number}
-                    </span>
+                    <span className="h1">{ranking.googlePresence}</span>
                     <strong>Googgle Presence</strong>
                   </div>
                 </div>
                 <div className="item">
                   <div>
-                    <span className="h1">
-                      {school?.ranking?.citations as number}
-                    </span>
+                    <span className="h1">{ranking.citations}</span>
                     <strong>Citations</strong>
                   </div>
                 </div>
                 <div className="item">
                   <div>
-                    <span className="h1">
-                      {school?.ranking?.hindex as number}
-                    </span>
+                    <span className="h1">{ranking.hindex}</span>
                     <strong>H-Index</strong>
                   </div>
                 </div>
                 <div className="item">
                   <div>
-                    <span className="h1">
-                      {school?.ranking?.i10hindex as number}
-                    </span>
+                    <span className="h1">{ranking.i10hindex}</span>
                     <strong>i10-H-Index</strong>
                   </div>
                 </div>

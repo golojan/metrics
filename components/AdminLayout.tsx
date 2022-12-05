@@ -6,27 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 
 import { Dispatch } from "../store";
-import { StudentStats } from "../interfaces";
-import { div, perc } from "../utils/math";
+import { getWindowDimensions } from "../utils/windows";
 
 interface MyProps {
   children: ReactNode;
 }
 
 const AdminLayout = ({ children }: MyProps) => {
-  const { statistics_students } = useSelector(
-    (state: RootState) => state.students
-  );
-  const { statistics_lecturers } = useSelector(
-    (state: RootState) => state.lecturers
-  );
-  // const { statistics_faculties } = useSelector(
-  //   (state: RootState) => state.faculties
-  // );
-  const { statistics_departments } = useSelector(
-    (state: RootState) => state.departments
-  );
-
   const { school, isLogged } = useSelector(
     (state: RootState) => state.settings
   );
@@ -34,21 +20,16 @@ const AdminLayout = ({ children }: MyProps) => {
 
   const dispatch = useDispatch<Dispatch>();
 
-  // useEffect(() => {
-  //   setInterval(async () => {
-  //     const token = await cookie.get("token");
-  //     if (!token && !isLogged) {
-  //       //Logout
-  //       await authlogout();
-  //       //Logout
-  //     }
-  //   }, 10000);
-  // }, [isLogged]);
-
   useEffect(() => {
     const token = cookie.get("token");
     const domain = cookie.get("domain");
-  }, []);
+    dispatch.settings.setWebWindow(getWindowDimensions());
+    const handleResize = () => {
+      dispatch.settings.setWebWindow(getWindowDimensions());
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [dispatch.settings]);
 
   return (
     <>

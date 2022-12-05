@@ -60,6 +60,7 @@ const lecturersScheme = new mongoose.Schema(
     citations: { type: Number, default: 0 },
     hindex: { type: Number, default: 0 },
     i10hindex: { type: Number, default: 0 },
+    publications: [{}],
     enabled: {
       type: Boolean,
       default: false,

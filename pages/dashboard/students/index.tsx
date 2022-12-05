@@ -26,7 +26,7 @@ type sFilters = {
 const Students: NextPage = () => {
   const dispatch = useDispatch<Dispatch>();
   const [query, setQuery] = useState<string>("");
-  const { studentsCount, students, list } = useSelector(
+  const { studentsCount, students, list, studentId } = useSelector(
     (state: RootState) => state.students
   );
   const [filter, setFilter] = useState<sFilters>({
@@ -108,7 +108,7 @@ const Students: NextPage = () => {
                       <div className="item">
                         <div className="in">
                           <div className="text-lg">Males</div>
-                          <div className="form-check form-switch ml-2">
+                          <div className="form-check form-switch">
                             <input
                               className="form-check-input"
                               type="checkbox"
@@ -131,7 +131,7 @@ const Students: NextPage = () => {
                       <div className="item">
                         <div className="in">
                           <div className="text-lg">Female</div>
-                          <div className="form-check form-switch ml-2">
+                          <div className="form-check form-switch">
                             <input
                               className="form-check-input"
                               type="checkbox"
@@ -207,7 +207,7 @@ const Students: NextPage = () => {
                   </ul> */}
                 </div>
               </div>
-              <div className="col-12 col-md-12 col-lg-8 min-h-screen accordion-item">
+              <div className={`col-12 col-md-12 col-lg-8 min-h-screen`}>
                 <StudentsListBox students={list} />
               </div>
             </div>

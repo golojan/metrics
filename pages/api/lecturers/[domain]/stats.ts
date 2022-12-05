@@ -1,4 +1,8 @@
-import { Gender, LecturerLevel, LecturerType } from "./../../../../interfaces/enums";
+import {
+  Gender,
+  LecturerLevel,
+  LecturerType,
+} from "./../../../../interfaces/enums";
 import { NextApiRequest, NextApiResponse } from "next";
 import { dbCon } from "../../../../models";
 import { ResponseFunctions } from "../../../../interfaces";

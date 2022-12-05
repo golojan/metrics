@@ -1,6 +1,32 @@
 import { ReactNode } from "react";
 import { Gender, LecturerLevel, LecturerType, StudentType } from "./enums";
 
+export type GSRanking = {
+  scrap?: boolean;
+  url?: string;
+  scrapper?: string;
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex?: number;
+};
+
+export type SchoolRank = {
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex?: number;
+};
+
+export type ScholarsProps = { lecturers: LecturerInfo[] };
+
+export type WebWindow = {
+  addEventListener(arg0: string, handleResize: () => void): unknown;
+  width?: number;
+  height?: number;
+  size?: string;
+};
+
 export type FakerLecturer = {
   sex?: Gender;
   type?: LecturerType;
@@ -29,14 +55,25 @@ export type SchoolTypes = {
   state?: string;
   location?: String;
   ownedBy?: string;
-  founded?: Number;
+  founded?: number;
   ranking?: {
-    googlePresence?: Number;
-    citations?: Number;
-    hindex?: Number;
-    i10hindex?: Number;
+    googlePresence?: number;
+    citations?: number;
+    hindex?: number;
+    i10hindex?: number;
   };
 };
+
+export type SchoolStats = {
+  status?: boolean;
+  count?: number;
+  googlePresence?: number;
+  citation?: number;
+  hindex?: number;
+  i10hindex?: number;
+};
+
+export type SchoolAnalitics = {};
 
 export interface Props {
   children?: ReactNode;

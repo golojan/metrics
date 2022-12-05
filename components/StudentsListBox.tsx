@@ -19,6 +19,9 @@ import Link from "next/link";
 const StudentsListBox = ({ students }: SchoolProps) => {
   const dispatch = useDispatch<Dispatch>();
   const { departments } = useSelector((state: RootState) => state.departments);
+  const { studentId } = useSelector((state: RootState) => state.students);
+
+  const hasStudentID: boolean = studentId.length > 0 ? true : false;
 
   return (
     <>
@@ -52,8 +55,17 @@ const StudentsListBox = ({ students }: SchoolProps) => {
               </span>
             </div>
             <h4 className="h3 my-1">
-              <strong className="text-green-700">{student.lastname}</strong>,{" "}
-              {student.firstname} {student.middlename}
+              <strong className="text-green-700">
+                <Link
+                  href={"#"}
+                  onClick={() =>
+                    dispatch.students.setStudentId(student._id as string)
+                  }
+                >
+                  {student.lastname}
+                </Link>
+              </strong>
+              , {student.firstname} {student.middlename}
             </h4>
             <div className="text-md mt-0">
               <span>REG:</span>{" "}

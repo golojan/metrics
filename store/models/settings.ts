@@ -1,10 +1,12 @@
+import { SchoolAnalitics, SchoolRank } from "./../../interfaces/index";
 import { createModel } from "@rematch/core";
 import { RootModel } from ".";
-import { UserInfo, SchoolTypes } from "../../interfaces";
+import { UserInfo, SchoolTypes, WebWindow } from "../../interfaces";
 import { AccountTypes, AccountRoles, StateTypes } from "../../interfaces/enums";
 
 export const settings = createModel<RootModel>()({
   state: {
+    windows: { width: 0, height: 0, size: "xxl" } as WebWindow,
     menuOpened: false,
     accid: "",
     domain: "",
@@ -25,8 +27,21 @@ export const settings = createModel<RootModel>()({
     dynamicPages: "",
     uploaded: false,
     idelTime: 0,
+
+    ranking: {
+      googlePresence: 0,
+      citations: 0,
+      hindex: 0,
+      i10hindex: 0,
+    } as SchoolRank,
+
+    statistics_school: {} as SchoolTypes,
+    analytics_school: {} as SchoolAnalitics,
   },
   reducers: {
+    setWebWindow(state, payload: WebWindow) {
+      return { ...state, windows: payload };
+    },
     toggleMenu(state, payload: boolean) {
       return { ...state, menuOpened: payload };
     },
@@ -50,6 +65,15 @@ export const settings = createModel<RootModel>()({
     },
     setSchool(state, payload: object) {
       return { ...state, school: payload };
+    },
+    setStatistics(state, payload: object) {
+      return { ...state, statistics_school: payload };
+    },
+    setAnalytics(state, payload: object) {
+      return { ...state, analytics_school: payload };
+    },
+    setRank(state, payload: object) {
+      return { ...state, ranking: payload };
     },
     setNewUser(state, payload: object) {
       return { ...state, newUser: payload };

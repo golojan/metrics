@@ -21,7 +21,7 @@ interface AppHeaderProps {
 function AppHeader({ isroot }: AppHeaderProps) {
   const dispatch = useDispatch<Dispatch>();
 
-  const { school, menuOpened } = useSelector(
+  const { school, menuOpened, windows } = useSelector(
     (state: RootState) => state.settings
   );
   const { name, shortname } = school;
@@ -30,7 +30,7 @@ function AppHeader({ isroot }: AppHeaderProps) {
       {isroot ? (
         <>
           <AppSidebar />
-          <div className="appHeader bg-primary text-light">
+          <div className="appHeader bg-primary text-light relative">
             <div className="left">
               <a
                 href="#"
@@ -62,7 +62,9 @@ function AppHeader({ isroot }: AppHeaderProps) {
                 onClick={authlogout}
               >
                 <FontAwesomeIcon icon={faUserLock} />
-                <span className="badge badge-success">0</span>
+                <span className="badge badge-black bg-black p-1">
+                  {windows.size}
+                </span>
               </a>
             </div>
           </div>

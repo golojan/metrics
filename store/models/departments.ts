@@ -67,11 +67,13 @@ export const departments = createModel<RootModel>()({
       this.setDepartments(departments.data);
       return departments;
     },
+
     async showDepartment(id: string) {
-      const response = await fetch(`/api/departments/${id}/info`);
+      const response = await fetch(`/api/departments/info/${id}`);
       const department = await response.json();
       return department;
     },
+
     async loadDepartmentsStats(domain: string) {
       const response = await fetch(`/api/departments/${domain}/stats`);
       const stats = await response.json();

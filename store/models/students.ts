@@ -10,6 +10,7 @@ import { loadStudents } from "../../utils/queries";
 
 export const students = createModel<RootModel>()({
   state: {
+    studentId: "",
     studentsCount: 0,
     sBusy: false,
     students: [] as StudentInfo[],
@@ -38,6 +39,9 @@ export const students = createModel<RootModel>()({
     },
     setStudents(state, payload: any) {
       return { ...state, students: payload };
+    },
+    setStudentId(state, payload: any) {
+      return { ...state, studentId: payload };
     },
     setList(state, payload: StudentInfo[]) {
       return { ...state, list: payload };
