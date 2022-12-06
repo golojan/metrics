@@ -77,7 +77,7 @@ const Rankings: NextPage = () => {
                     <FontAwesomeIcon icon={faSchoolCircleCheck} />{" "}
                     <span
                       className={`${
-                        800 <= getLiveStats(allschools, 900)?.mid
+                        800 <= 266
                           ? " text-red-600 hover:text-red-200 hover:shadow-red-600 h-[90%]"
                           : " text-green-600 hover:text-green-200 hover:shadow-green-600 h-[90%]"
                       }`}
