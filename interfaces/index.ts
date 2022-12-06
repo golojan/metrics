@@ -62,6 +62,19 @@ export type SchoolTypes = {
     hindex?: number;
     i10hindex?: number;
   };
+  history?: [
+    {
+      name?: string;
+      lecturers?: LecturerInfo[];
+      students?: StudentInfo[];
+      googlePresence?: Number;
+      citations?: Number;
+      hindex?: Number;
+      i10hindex?: Number;
+      allschools: [{}];
+      adminId: String;
+    }
+  ];
 };
 
 export type SchoolStats = {

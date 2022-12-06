@@ -169,6 +169,7 @@ const LecturersListBox = ({ lecturers }: ScholarsProps) => {
                             className="form-control  text-center relative flex-auto min-w-0 block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder={"citations"}
                             value={ranking.citations}
+                            readOnly={true}
                             onChange={(e) =>
                               setRanking({
                                 ...ranking,
@@ -181,6 +182,7 @@ const LecturersListBox = ({ lecturers }: ScholarsProps) => {
                             className="form-control text-center relative flex-auto min-w-0 block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder={"hindex"}
                             value={ranking.hindex}
+                            readOnly={true}
                             onChange={(e) =>
                               setRanking({
                                 ...ranking,
@@ -193,6 +195,7 @@ const LecturersListBox = ({ lecturers }: ScholarsProps) => {
                             className="form-control text-center relative flex-auto min-w-0 block w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder={"i10-h"}
                             value={ranking.i10hindex}
+                            readOnly={true}
                             onChange={(e) =>
                               setRanking({
                                 ...ranking,

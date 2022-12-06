@@ -22,6 +22,7 @@ import LiveRankingTable from "../../../components/LiveRankingTable";
 
 import allschools from "../../../data/nuc-2021.json";
 import { getLiveStats } from "../../../utils/queries";
+import RankingHostoryTable from "../../../components/RankingHostoryTable";
 
 const RankingsHistory: NextPage = () => {
   const { school, ranking } = useSelector((state: RootState) => state.settings);
@@ -32,58 +33,6 @@ const RankingsHistory: NextPage = () => {
         <div id="appCapsule" className="mb-5">
           <div className="section wallet-card-section pt-1">
             <div className="wallet-card">
-              <div className="balance row">
-                <div className="left">
-                  <span className="title">Ranking History</span>
-                  <h1 className="total m-0 p-0">
-                    <FontAwesomeIcon icon={faSchoolCircleCheck} />{" "}
-                    <span
-                      className={`${
-                        0 <= getLiveStats(allschools, 0)?.mid
-                          ? " text-red-600 hover:text-red-200 hover:shadow-red-600 h-[90%]"
-                          : " text-green-600 hover:text-green-200 hover:shadow-green-600 h-[90%]"
-                      }`}
-                    >
-                      0.00
-                    </span>
-                  </h1>
-                  <span>
-                    {getLiveStats(allschools, 0)?.dir === "up" ? (
-                      <>
-                        <FontAwesomeIcon
-                          className="text-green-600"
-                          icon={faUpLong}
-                        />{" "}
-                        Up by{" "}
-                        <span className="text-green-600">
-                          {getLiveStats(allschools, 0)?.perc}
-                        </span>
-                        %
-                      </>
-                    ) : (
-                      <>
-                        <FontAwesomeIcon
-                          className="text-red-600"
-                          icon={faDownLong}
-                        />{" "}
-                        Down by{" "}
-                        <span className="text-red-600">
-                          {getLiveStats(allschools, 0)?.perc}
-                        </span>
-                        %
-                      </>
-                    )}
-                  </span>
-                </div>
-
-                <div className="right flex">
-                  <Link href="#" legacyBehavior>
-                    <a className="button ">
-                      <FontAwesomeIcon icon={faPlus} />
-                    </a>
-                  </Link>
-                </div>
-              </div>
               <div className="wallet-footer">
                 <div className="item">
                   <div>
@@ -116,7 +65,8 @@ const RankingsHistory: NextPage = () => {
           <div className="section pt-1">
             <div className="row ">
               <div className="col-12 col-md-12 col-lg-12 min-h-screen">
-                <LiveRankingTable school={school} allschools={allschools} />
+                <RankingHostoryTable history={school.history} />
+                {/* <LiveRankingTable school={school} allschools={allschools} /> */}
               </div>
             </div>
           </div>

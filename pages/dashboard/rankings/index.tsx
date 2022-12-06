@@ -1,10 +1,9 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import AdminLayout from "../../../components/AdminLayout";
 
 import {
   faDownLong,
-  faPlus,
   faSave,
   faSchoolCircleCheck,
   faUpLong,
@@ -17,15 +16,53 @@ import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 import AppDrawer from "../../../serverlets/AppDrawer";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch, RootState } from "../../../store";
 import LiveRankingTable from "../../../components/LiveRankingTable";
 
 import allschools from "../../../data/nuc-2021.json";
 import { getLiveStats } from "../../../utils/queries";
+import Loading from "../../../components/Loading";
+import cookie from "js-cookie";
+import { Button, Modal } from "react-bootstrap";
 
 const Rankings: NextPage = () => {
-  const { school, ranking } = useSelector((state: RootState) => state.settings);
+  const dispatch = useDispatch<Dispatch>();
+  const { lecturers } = useSelector((state: RootState) => state.lecturers);
+  const { students } = useSelector((state: RootState) => state.students);
+  const { school, ranking, busy, user } = useSelector(
+    (state: RootState) => state.settings
+  );
+
+  const [fileName, setFileName] = useState(Date.now());
+  const [toggle, setToggle] = useState(false);
+
+  const saveRankingHistory = async () => {
+    dispatch.settings.setBusy(true);
+    const _domain = cookie.get("domain");
+    const response: any = await fetch(`/api/schools/${_domain}/save`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: fileName,
+        lecturers: lecturers,
+        students: students,
+        school: {
+          googlePresence: ranking.googlePresence,
+          citations: ranking.citations,
+          hindex: ranking.hindex,
+          i10hindex: ranking.i10hindex,
+        },
+        allschools: allschools,
+      }),
+    });
+    const { status } = await response.json();
+    setToggle(false);
+    dispatch.settings.setBusy(false);
+  };
+
   return (
     <>
       <AdminLayout>
@@ -40,16 +77,16 @@ const Rankings: NextPage = () => {
                     <FontAwesomeIcon icon={faSchoolCircleCheck} />{" "}
                     <span
                       className={`${
-                        0 <= getLiveStats(allschools, 0)?.mid
+                        800 <= getLiveStats(allschools, 900)?.mid
                           ? " text-red-600 hover:text-red-200 hover:shadow-red-600 h-[90%]"
                           : " text-green-600 hover:text-green-200 hover:shadow-green-600 h-[90%]"
                       }`}
                     >
-                      0.00
+                      800
                     </span>
                   </h1>
                   <span>
-                    {getLiveStats(allschools, 0)?.dir === "up" ? (
+                    {getLiveStats(allschools, 900)?.dir === "up" ? (
                       <>
                         <FontAwesomeIcon
                           className="text-green-600"
@@ -57,7 +94,7 @@ const Rankings: NextPage = () => {
                         />{" "}
                         Up by{" "}
                         <span className="text-green-600">
-                          {getLiveStats(allschools, 0)?.perc}
+                          {getLiveStats(allschools, 900)?.perc}
                         </span>
                         %
                       </>
@@ -69,7 +106,7 @@ const Rankings: NextPage = () => {
                         />{" "}
                         Down by{" "}
                         <span className="text-red-600">
-                          {getLiveStats(allschools, 0)?.perc}
+                          {getLiveStats(allschools, 900)?.perc}
                         </span>
                         %
                       </>
@@ -78,11 +115,50 @@ const Rankings: NextPage = () => {
                 </div>
 
                 <div className="right flex">
-                  <Link href="#" legacyBehavior>
-                    <a className="button ">
-                      <FontAwesomeIcon icon={faSave} />
-                    </a>
-                  </Link>
+                  {busy ? (
+                    <Loading />
+                  ) : (
+                    <>
+                      <Link href="#" legacyBehavior>
+                        <a className="button" onClick={() => setToggle(true)}>
+                          <FontAwesomeIcon icon={faSave} />
+                        </a>
+                      </Link>
+                      <Modal show={toggle}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>
+                            Save Ranking History {busy ? <Loading /> : ""}
+                          </Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                          <div className="input-group relative flex flex-wrap items-stretch w-full mb-1">
+                            <input
+                              type="text"
+                              className="form-control relative flex-auto min-w-0 block text-md w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                              placeholder={`Name this track...`}
+                              value={`${fileName}`}
+                              onChange={(e: any) => setFileName(e.target.value)}
+                            />
+                          </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            variant="secondary"
+                            onClick={() => setToggle(false)}
+                          >
+                            Close
+                          </Button>
+                          <Button
+                            variant="primary"
+                            onClick={saveRankingHistory}
+                          >
+                            Save History
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="wallet-footer">

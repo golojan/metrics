@@ -1,3 +1,4 @@
+import { LecturerInfo } from "./../interfaces/index";
 import mongoose from "mongoose";
 
 mongoose.Promise = global.Promise;
@@ -25,6 +26,20 @@ const schoolsScheme = new mongoose.Schema(
       hindex: { type: Number, default: 0 },
       i10hindex: { type: Number, default: 0 },
     },
+    history: [
+      {
+        name: String,
+        lecturers: [],
+        students: [],
+        googlePresence: { type: Number, default: 0 },
+        citations: { type: Number, default: 0 },
+        hindex: { type: Number, default: 0 },
+        i10hindex: { type: Number, default: 0 },
+        allschools: [],
+        adminId: String,
+      },
+      { timestamps: true },
+    ],
     enabled: {
       type: Boolean,
       default: false,

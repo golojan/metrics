@@ -4,6 +4,7 @@ import {
   faClose,
   faDashboard,
   faDatabase,
+  faGear,
   faHome,
   faSave,
   faSchool,
@@ -138,23 +139,12 @@ function AppSidebar() {
               <div className="listview-title mt-1">Others</div>
               <ul className="listview flush transparent no-line image-listview">
                 <li>
-                  <Link href={"#"} legacyBehavior>
-                    <a className="item">
-                      <div className="icon-box bg-primary">
-                        <FontAwesomeIcon icon={faBriefcase} />
-                      </div>
-                      <div className="in">Security &amp; Settings</div>
-                    </a>
-                  </Link>
-                </li>
-
-                <li>
                   <Link href={"/dashboard/reports"} legacyBehavior>
                     <a className="item">
                       <div className="icon-box bg-primary">
                         <FontAwesomeIcon icon={faHome} />
                       </div>
-                      <div className="in">Reports</div>
+                      <div className="in">Status Report</div>
                     </a>
                   </Link>
                 </li>
@@ -177,6 +167,17 @@ function AppSidebar() {
                         <FontAwesomeIcon icon={faSave} />
                       </div>
                       <div className="in">Ranking History</div>
+                    </a>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href={"#"} legacyBehavior>
+                    <a className="item">
+                      <div className="icon-box bg-primary">
+                        <FontAwesomeIcon icon={faGear} />
+                      </div>
+                      <div className="in">Settings</div>
                     </a>
                   </Link>
                 </li>

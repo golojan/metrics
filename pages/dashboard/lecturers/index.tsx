@@ -39,15 +39,6 @@ const Lecturers: NextPage = () => {
     isProfessor: false,
   });
 
-  const { windows } = useSelector((state: RootState) => state.settings);
-  const isSmallWindow: boolean =
-    windows.size === "xs" ||
-    windows.size === "sm" ||
-    windows.size === "xm" ||
-    windows.size === "md"
-      ? true
-      : false;
-
   useEffect(() => {
     dispatch.lecturers.setList(lecturers);
   }, [dispatch.lecturers, lecturers]);

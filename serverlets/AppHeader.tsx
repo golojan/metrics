@@ -44,7 +44,7 @@ function AppHeader({ isroot }: AppHeaderProps) {
               <h2 className="text-white mt-2">{`${name} (${shortname})`}</h2>
             </div>
             <div className="right">
-              <a href="#" className="headerButton">
+              <a href={"/dashboard/reports"} className="headerButton">
                 <FontAwesomeIcon icon={faHome} />
               </a>
               <a href="#" className="headerButton">
