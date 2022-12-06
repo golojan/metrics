@@ -1,4 +1,4 @@
-import { DepartmentsInfo } from "./../interfaces/index";
+import { DepartmentsInfo, IStats } from "./../interfaces/index";
 import { div, perc, sub } from "./math";
 
 export const getDomain = (host: string) => {

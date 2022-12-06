@@ -18,6 +18,14 @@ export type SchoolRank = {
   i10hindex?: number;
 };
 
+export type IStats = {
+  max?: number;
+  min: number;
+  mid: number;
+  dir: string;
+  perc: number;
+};
+
 export type ScholarsProps = { lecturers: LecturerInfo[] };
 
 export type WebWindow = {

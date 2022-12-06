@@ -15,11 +15,11 @@ import {
 import { getLiveStats } from "../utils/queries";
 
 type LRProps = {
-  school: SchoolTypes;
-  allschools: any;
+  school?: SchoolTypes;
+  allschools?: any;
 };
 
-const LiveRankingTable = ({ school, allschools }: LRProps) => {
+const LiveRankingTable = ({ allschools }: LRProps) => {
   return (
     <>
       <Virtuoso
@@ -33,7 +33,7 @@ const LiveRankingTable = ({ school, allschools }: LRProps) => {
             >
               <Image
                 src={`/assets/img/nuc.png`}
-                alt={`${ischool.name}`}
+                alt={`${ischool?.name}`}
                 width={80}
                 height={80}
                 className="float-left mr-2"
@@ -43,8 +43,7 @@ const LiveRankingTable = ({ school, allschools }: LRProps) => {
                   Ranking Total :{" "}
                   <span
                     className={`font-extrabold text-lg ${
-                      ischool.points <=
-                      getLiveStats(allschools, ischool.points)?.mid
+                      ischool?.points <= 266
                         ? " text-red-600 hover:text-red-200 hover:shadow-red-600 h-[90%]"
                         : " text-green-600 hover:text-green-200 hover:shadow-green-600 h-[90%]"
                     }`}
