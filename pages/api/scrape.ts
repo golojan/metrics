@@ -1,11 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { dbCon } from "../../models";
 import { ResponseFunctions } from "../../interfaces";
-import cookie from "js-cookie";
 
-const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
-const chrome = require("chrome-aws-lambda");
 
 import { GSRanking } from "../../interfaces";
 
@@ -20,7 +16,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         .json({ status: false, err: "Only POST Method is allowed" });
     },
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
-      const inOneMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
       const url = req.body.url;
       //   console.log(url);
       try {
@@ -28,11 +23,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const htmlString = await response.text();
         const $ = cheerio.load(htmlString);
 
-        const nextRank = {};
         const keys = [];
         const result: any = [];
-
-        let ranking: string[] = [];
 
         $(`td.gsc_rsb_std`).each((idx: number, ref: any) => {
           const value = $(ref).text().trim();
