@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Router from "next/router";
 import nextCookie from "next-cookies";
+
 import cookie from "js-cookie";
 import { SchoolStats, StudentStats, Token } from "../interfaces";
 
@@ -19,12 +20,17 @@ export const authLogin = ({ token, domain }: Token) => {
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
 
-  const { OWNER_DOMAIN } = process.env;
-  if (domain === OWNER_DOMAIN) {
-    Router.push("/admin");
-  } else {
-    Router.push("/dashboard");
-  }
+  alert(JSON.stringify(process.env));
+
+  // const DOMAIN = process.env.DOMAIN;
+
+  // Router.push(`${DOMAIN}`);
+
+  // if (domain === OWNER_DOMAIN) {
+  //   Router.push("/admin");
+  // } else {
+  //   Router.push("/dashboard");
+  // }
 };
 
 export const auth = (ctx: any) => {
