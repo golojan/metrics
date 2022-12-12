@@ -10,18 +10,19 @@ export default async function handler(
   const catcher = (error: Error) => res.status(400).json({ error });
   const handleCase: ResponseFunctions = {
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
-      const { Schools } = await dbCon();
-      const created = await Schools.create({
-        owner: true,
-        domain: "metrics.ng",
-        name: "Metrics AI Ranking System",
-        shortname: "METRICS",
-      }).catch(catcher);
-      if (created?._id) {
-        res.status(200).json({ status: true, schoolid: created?._id });
-      } else {
-        res.status(400).json({ status: false, err: "Failed to create School" });
-      }
+      // const { Schools } = await dbCon();
+      // const created = await Schools.create({
+      //   owner: true,
+      //   domain: "metrics.ng",
+      //   name: "Metrics AI Ranking System",
+      //   shortname: "METRICS",
+      // }).catch(catcher);
+      // if (created?._id) {
+      //   res.status(200).json({ status: true, schoolid: created?._id });
+      // } else {
+      //   res.status(400).json({ status: false, err: "Failed to create School" });
+      // }
+      res.status(200).json({ status: true });
     },
   };
   const response = handleCase[method];
