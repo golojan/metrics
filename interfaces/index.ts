@@ -125,7 +125,7 @@ export type Logon = {
 
 export type LecturerInfo = {
   _id?: string;
-  staffNumber: number;
+  staffNumber?: number;
   avatar?: string;
   departmentId?: string;
   staffnumber?: string;

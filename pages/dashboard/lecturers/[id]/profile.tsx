@@ -4,10 +4,6 @@ import AdminLayout from "../../../../components/AdminLayout";
 import AppDrawer from "../../../../serverlets/AppDrawer";
 import Image from "next/image";
 
-import { faPlus, faUsersCog } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import Link from "next/link";
 import AppHeader from "../../../../serverlets/AppHeader";
 import Copyright from "../../../../serverlets/Copyright";
 import { withAuthSync } from "../../../../utils/withAuthSync";
@@ -19,7 +15,6 @@ import { useRouter } from "next/router";
 import { GSRanking, LecturerInfo } from "../../../../interfaces";
 import cookie from "js-cookie";
 import { loadLecturers } from "../../../../utils/queries";
-import ShowChartButton from "../../../../components/ShowChartButton";
 import ScholarRatingLarge from "../../../../components/ScholarRatingLarge";
 import ScholarRatingSmall from "../../../../components/ScholarRatingSmall";
 
