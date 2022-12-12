@@ -20,7 +20,7 @@ export const authLogin = ({ token, domain }: Token) => {
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
 
-  alert(JSON.stringify(process.env));
+  alert(JSON.stringify(process.env.COOKIE_TIME_IN_MINS));
 
   // const DOMAIN = process.env.DOMAIN;
 
