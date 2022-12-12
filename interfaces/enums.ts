@@ -22,6 +22,7 @@ export enum OwnerTypes {
 }
 
 export enum AccountTypes {
+  OWNER ="OWNER",
   ADMIN = "ADMIN",
   LECTURER = "LECTURER",
   STUDENT = "STUDENT",

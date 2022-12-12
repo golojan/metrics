@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ResponseFunctions } from "../../interfaces";
 import { dbCon } from "../../models";
+import { AccountTypes, AccountRoles } from "../../interfaces/enums";
 
 const bcrypt = require("bcryptjs");
 
@@ -20,9 +21,11 @@ export default async function handler(
       const { Accounts } = await dbCon();
       const created = await Accounts.create({
         schoolid: "638a7617dfa1be141ca74281",
-        email: "agu.chux@yahoo.com",
-        firstname: "Agu",
-        lastname: "Chux",
+        email: "admin@yhttps://www.metrics.ng/",
+        firstname: "Metrics",
+        lastname: "Admin",
+        role: AccountRoles.OWNER,
+        accountType: AccountTypes.OWNER,
         mobile: "08068573376",
         enabled: true,
         password: hashedPassword,
