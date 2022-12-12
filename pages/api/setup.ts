@@ -2,8 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ResponseFunctions } from "../../interfaces";
 import { dbCon } from "../../models";
 
-const bcrypt = require("bcryptjs");
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
