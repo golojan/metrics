@@ -14,23 +14,18 @@ import { div, perc } from "./math";
 
 // Login & Create session for a given minutes time
 export const authLogin = ({ token, domain }: Token) => {
-  const expire_time: any = process.env.COOKIE_TIME_IN_MINS || 10;
+  const expire_time: any = process.env.NEXT_PUBLIC_COOKIE_TIME_IN_MINS || 10;
   const inMinutes = new Date(new Date().getTime() + expire_time * 60 * 1000);
 
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
 
-  alert(JSON.stringify(process.env.COOKIE_TIME_IN_MINS));
-
-  // const DOMAIN = process.env.DOMAIN;
-
-  // Router.push(`${DOMAIN}`);
-
-  // if (domain === OWNER_DOMAIN) {
-  //   Router.push("/admin");
-  // } else {
-  //   Router.push("/dashboard");
-  // }
+  const { NEXT_PUBLIC_OWNER_DOMAIN } = process.env;
+  if (domain === NEXT_PUBLIC_OWNER_DOMAIN) {
+    Router.push("/admin");
+  } else {
+    Router.push("/dashboard");
+  }
 };
 
 export const auth = (ctx: any) => {
