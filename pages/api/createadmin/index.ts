@@ -14,7 +14,6 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools, Accounts } = await dbCon();
       const created = await Schools.create({
-        owner: true,
         domain: "metrics.ng",
         name: "Metrics AI Ranking Engine",
         shortname: "METRICS",
