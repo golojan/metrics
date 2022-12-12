@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const method: keyof ResponseFunctions = req.method as keyof ResponseFunctions;
-  const catcher = (error: Error) => res.status(400).json( { status: false, error:error });
+  const catcher:any = (error: Error) => res.status(400).json( { status: false, error:error });
   const handleCase: ResponseFunctions = {
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools } = await dbCon();
@@ -17,11 +17,11 @@ export default async function handler(
         shortname: "METRICS",
       }).catch(catcher);
 
-      // if (created?._id) {
-      //   res.status(200).json({ status: true, schoolid: created?._id });
-      // } else {
-      //   res.status(400).json({ status: false, err: "Failed to create School" });
-      // }
+      if (created._id) {
+        res.status(200).json({ status: true, schoolid: created?._id });
+      } else {
+        res.status(400).json({ status: false, err: "Failed to create School" });
+      }
       res.status(200).json({ status: true });
     },
   };
