@@ -12,7 +12,7 @@ const schoolsScheme = new mongoose.Schema(
     owner: { type: Boolean, default: false },
     domain: { type: String, unique: true },
     name: { type: String },
-    shortname: { type: String },
+    shortname: { type: String, unique: true },
     state: {
       type: String,
       enum: Object.values(StateTypes),
@@ -42,7 +42,7 @@ const schoolsScheme = new mongoose.Schema(
     ],
     indicators: [
       {
-        name: { type: String, unique: true },
+        name: { type: String },
         title: String,
         category: String,
         enabled: {
