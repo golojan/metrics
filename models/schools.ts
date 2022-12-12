@@ -6,6 +6,7 @@ import { StateTypes, OwnerTypes } from "../interfaces/enums";
 
 const schoolsScheme = new mongoose.Schema(
   {
+    owner: { type: Boolean, default: false },
     logo: {
       type: String,
       default: "/assets/img/logo-icon.png",

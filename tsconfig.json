@@ -4,7 +4,7 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,16 +21,18 @@
     "plugins": [
       {
         "name": "next"
-      }
-    ]
+      },
+    ],
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "components/ArticleEditor.tsx", "pages/dashboard/faculties/index.tsx"  ],
+    ".next/types/**/*.ts",
+    "components/ArticleEditor.tsx",
+    "pages/dashboard/faculties/index.tsx",
+  ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
