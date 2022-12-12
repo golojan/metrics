@@ -6,7 +6,7 @@ import {
   faUserLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AppSidebar from "./AppSidebar";
+import AppSidebarAdmin from "./AppSidebarAdmin";
 import Link from "next/link";
 import Image from "next/image";
 import { authlogout } from "../utils/withAuthSync";
@@ -29,7 +29,7 @@ function AppHeader({ isroot }: AppHeaderProps) {
     <>
       {isroot ? (
         <>
-          <AppSidebar />
+          <AppSidebarAdmin />
           <div className="appHeader bg-primary text-light relative">
             <div className="left">
               <a
