@@ -14,30 +14,31 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools, Accounts } = await dbCon();
       const created = await Schools.create({
-        domain: "esut.metrics.ng",
-        name: "Enugu State University",
-        shortname: "ESUT",
+        owner: true,
+        domain: "metrics.ng",
+        name: "Metrics AI Ranking Engine",
+        shortname: "METRICS",
       }).catch(catcher);
-      if (created?._id) {
+      if (created) {
         // Encrypt Password//
         const salt = bcrypt.genSaltSync(10);
         var hashedPassword = bcrypt.hashSync("admin", salt);
         // Encrypt Password//
         const account = await Accounts.create({
-          schoolid: created?._id,
-          email: "agu.chux@yahoo.com",
-          firstname: "Agu",
-          lastname: "Chux",
-          mobile: "08068573376",
+          schoolid: created._id,
+          email: "admin@metrics.ng",
+          firstname: "Metrics",
+          lastname: "Admin",
+          mobile: "07068573376",
           enabled: true,
           password: hashedPassword,
         }).catch(catcher);
 
-        if (created?._id) {
+        if (account) {
           res.status(200).json({
             status: true,
-            accid: account?._id,
-            schoolid: created?._id,
+            accid: account._id,
+            schoolid: created._id,
           });
         } else {
           res
