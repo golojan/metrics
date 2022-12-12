@@ -6,6 +6,8 @@ import ShowChartButton from "./ShowChartButton";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import LooseBusy from "./LooseBusy";
+import Widget from "../widgets/Widget";
+import PieChart from "./charts/PieChart";
 
 const SchoolRanking = () => {
   const { busy } = useSelector((state: RootState) => state.settings);
@@ -581,6 +583,24 @@ const SchoolRanking = () => {
                   icon={faAreaChart}
                 />{" "}
                 {99.9}
+              </h1>
+            </div>
+          </div>
+          {/*  */}
+
+          {/*  */}
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-1">
+            <div className="stat-box">
+              <ShowChartButton />
+              <div className="title">
+                <strong className="text-black">Citations Per Capita</strong>
+              </div>
+              <h1 className="total mt-2">
+                <FontAwesomeIcon
+                  className="text-secondary"
+                  icon={faAreaChart}
+                />{" "}
+                {ranking.citations}
               </h1>
             </div>
           </div>

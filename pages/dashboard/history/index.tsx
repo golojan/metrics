@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import AdminLayout from "../../../components/AdminLayout";
+import useHistory from "../../../libs/hooks/useHistory";
 
 import {
   faDownLong,
@@ -18,10 +19,7 @@ import AppDrawer from "../../../serverlets/AppDrawer";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import LiveRankingTable from "../../../components/LiveRankingTable";
 
-import allschools from "../../../data/nuc-2021.json";
-import { getLiveStats } from "../../../utils/queries";
 import RankingHostoryTable from "../../../components/RankingHostoryTable";
 
 const RankingsHistory: NextPage = () => {

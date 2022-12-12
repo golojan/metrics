@@ -40,6 +40,21 @@ const schoolsScheme = new mongoose.Schema(
       },
       { timestamps: true },
     ],
+    indicators: [
+      {
+        name: { type: String, unique: true },
+        title: String,
+        category: String,
+        enabled: {
+          type: Boolean,
+          default: false,
+        },
+        showGraph: {
+          type: Boolean,
+          default: true,
+        },
+      },
+    ],
     enabled: {
       type: Boolean,
       default: false,

@@ -1,6 +1,20 @@
 import { ReactNode } from "react";
 import { Gender, LecturerLevel, LecturerType, StudentType } from "./enums";
 
+
+export interface IHistory {
+  name?: string;
+  lecturers?: LecturerInfo[];
+  students?: StudentInfo[];
+  googlePresence?: number;
+  citations?: number;
+  hindex?: number;
+  i10hindex?: number;
+  allschools?: [{}];
+  adminId?: string;
+}
+
+
 export type GSRanking = {
   scrap?: boolean;
   url?: string;
@@ -75,10 +89,10 @@ export type SchoolTypes = {
       name?: string;
       lecturers?: LecturerInfo[];
       students?: StudentInfo[];
-      googlePresence?: Number;
-      citations?: Number;
-      hindex?: Number;
-      i10hindex?: Number;
+      googlePresence?: number;
+      citations?: number;
+      hindex?: number;
+      i10hindex?: number;
       allschools: [{}];
       adminId: String;
     }
@@ -115,7 +129,7 @@ export type LecturerInfo = {
   _id?: string;
   avatar?: string;
   departmentId?: string;
-  staffNumber?: string;
+  staffnumber?: string;
   firstname?: string;
   middlename?: string;
   lastname?: string;
@@ -143,7 +157,7 @@ export type LecturerInfo = {
   googlePresence?: number;
   citations?: number;
   hindex?: number;
-  i10hindex: number;
+  i10hindex?: number;
   enabled?: boolean;
 };
 
@@ -214,7 +228,7 @@ export type StudentInfo = {
   _id?: string;
   avatar?: string;
   departmentId?: string;
-  regNumber?: string;
+  regnumber?: string;
   firstname?: string;
   middlename?: string;
   lastname?: string;
@@ -306,7 +320,7 @@ export type UserInfo = {
   state?: string;
   zip?: string;
   country?: string;
-  regfee?: Number;
+  regfee?: number;
   referrer?: string;
   admin?: string;
 };
@@ -333,7 +347,7 @@ export type AccountInfo = {
   state?: string;
   zip?: string;
   country?: string;
-  regfee?: Number;
+  regfee?: number;
   referrer?: string;
   enabled?: boolean;
 };

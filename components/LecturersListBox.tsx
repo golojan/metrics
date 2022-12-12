@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ShowChartButton from "../components/ShowChartButton";
 import Image from "next/image";
 
@@ -13,6 +13,8 @@ import { getDepartment, loadLecturers } from "../utils/queries";
 import { Gender } from "../interfaces/enums";
 import Link from "next/link";
 import cookie from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faList } from "@fortawesome/free-solid-svg-icons";
 
 const LecturersListBox = ({ lecturers }: ScholarsProps) => {
   //
@@ -111,15 +113,20 @@ const LecturersListBox = ({ lecturers }: ScholarsProps) => {
                 </strong>
               </div>
               <h4 className="h3 my-1">
-                <strong className="text-green-700">
+                <Link href={`/dashboard/lecturers/${lecturer._id}/profile`}>
+                  <strong className="text-green-700">
+                    {lecturer.lastname}
+                  </strong>
+                  , {lecturer.firstname} {lecturer.middlename}
+                </Link>
+                <small>
                   <Link
-                    href={""}
+                    href={"#"}
                     onClick={(e) => resetLecturerId(e, lecturer._id as string)}
                   >
-                    {lecturer.lastname}
+                    <FontAwesomeIcon icon={faList} />
                   </Link>
-                </strong>
-                , {lecturer.firstname} {lecturer.middlename}
+                </small>
               </h4>
               <div className="text-md mt-0">
                 <span>ID:</span>{" "}

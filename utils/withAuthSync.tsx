@@ -17,7 +17,11 @@ export const authLogin = ({ token, domain }: Token) => {
   const inMinutes = new Date(new Date().getTime() + expire_time * 60 * 1000);
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
-  Router.push("/dashboard");
+  if (domain === "metrics.ng") {
+    Router.push("/admin");
+  }else{
+    Router.push("/dashboard");
+  }
 };
 
 export const auth = (ctx: any) => {
