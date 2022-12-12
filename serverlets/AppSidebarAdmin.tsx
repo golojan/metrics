@@ -131,6 +131,17 @@ function AppSidebarAdmin() {
               <ul className="listview flush transparent no-line image-listview">
 
                 <li>
+                  <Link href={"/admin/schools"} legacyBehavior>
+                    <a className="item">
+                      <div className="icon-box bg-primary">
+                        <FontAwesomeIcon icon={faGear} />
+                      </div>
+                      <div className="in">Schools & Domains</div>
+                    </a>
+                  </Link>
+                </li>
+
+                 <li>
                   <Link href={"/admin/settings"} legacyBehavior>
                     <a className="item">
                       <div className="icon-box bg-primary">
@@ -140,6 +151,7 @@ function AppSidebarAdmin() {
                     </a>
                   </Link>
                 </li>
+
 
               </ul>
               {/* * others */}

@@ -7,7 +7,7 @@ import { faBriefcase, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
-import AppHeader from "../../serverlets/AppHeader";
+import AppHeaderAdmin from "../../serverlets/AppHeaderAdmin";
 import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
 
@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <>
       <OwnerLayout>
-        <AppHeader isroot={true} />
+        <AppHeaderAdmin isroot={true} />
         <div id="appCapsule">
           <div className="section wallet-card-section pt-1">
             <div className="wallet-card">
