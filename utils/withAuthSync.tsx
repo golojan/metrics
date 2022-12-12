@@ -15,9 +15,12 @@ import { div, perc } from "./math";
 export const authLogin = ({ token, domain }: Token) => {
   const expire_time: any = process.env.COOKIE_TIME_IN_MINS || 10;
   const inMinutes = new Date(new Date().getTime() + expire_time * 60 * 1000);
+
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
-  if (domain === process.env.OWNER_DOMAIN) {
+
+  const { OWNER_DOMAIN } = process.env;
+  if (domain === OWNER_DOMAIN) {
     Router.push("/admin");
   } else {
     Router.push("/dashboard");
