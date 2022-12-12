@@ -21,8 +21,6 @@ export const authLogin = ({ token, domain }: Token) => {
   cookie.set("domain", domain as string, { expires: inMinutes });
 
   const owner_domain = process.env.NEXT_PUBLIC_OWNER_DOMAIN;
-  alert(owner_domain);
-
   if (domain === owner_domain) {
     Router.push("/admin");
   } else {
