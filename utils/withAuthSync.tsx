@@ -20,8 +20,10 @@ export const authLogin = ({ token, domain }: Token) => {
   cookie.set("token", token as string, { expires: inMinutes });
   cookie.set("domain", domain as string, { expires: inMinutes });
 
-  const { NEXT_PUBLIC_OWNER_DOMAIN } = process.env;
-  if (domain === NEXT_PUBLIC_OWNER_DOMAIN) {
+  const owner_domain = process.env.NEXT_PUBLIC_OWNER_DOMAIN;
+  alert(owner_domain);
+
+  if (domain === owner_domain) {
     Router.push("/admin");
   } else {
     Router.push("/dashboard");
