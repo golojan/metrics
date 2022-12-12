@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { Gender, LecturerLevel, LecturerType, StudentType } from "./enums";
 
-
 export interface IHistory {
   name?: string;
   lecturers?: LecturerInfo[];
@@ -13,7 +12,6 @@ export interface IHistory {
   allschools?: [{}];
   adminId?: string;
 }
-
 
 export type GSRanking = {
   scrap?: boolean;
@@ -127,6 +125,7 @@ export type Logon = {
 
 export type LecturerInfo = {
   _id?: string;
+  staffNumber: number;
   avatar?: string;
   departmentId?: string;
   staffnumber?: string;
