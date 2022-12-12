@@ -1,4 +1,3 @@
-import { LecturerInfo } from "./../interfaces/index";
 import mongoose from "mongoose";
 
 mongoose.Promise = global.Promise;
@@ -6,11 +5,11 @@ import { StateTypes, OwnerTypes } from "../interfaces/enums";
 
 const schoolsScheme = new mongoose.Schema(
   {
-    owner: { type: Boolean, default: false },
     logo: {
       type: String,
       default: "/assets/img/logo-icon.png",
     },
+    owner: { type: Boolean, default: false },
     domain: { type: String, unique: true },
     name: { type: String },
     shortname: { type: String },
