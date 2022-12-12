@@ -227,7 +227,7 @@ export type StudentInfo = {
   _id?: string;
   avatar?: string;
   departmentId?: string;
-  regnumber?: string;
+  regNumber?: string;
   firstname?: string;
   middlename?: string;
   lastname?: string;
