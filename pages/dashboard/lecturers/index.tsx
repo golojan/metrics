@@ -50,7 +50,7 @@ const Lecturers: NextPage = () => {
         lecturer.firstname?.toLowerCase().startsWith(q.toLowerCase()) ||
         lecturer.lastname?.toLowerCase().startsWith(q.toLowerCase()) ||
         lecturer.middlename?.toLowerCase().startsWith(q.toLowerCase()) ||
-        lecturer.staffNumber?.toLowerCase().startsWith(q.toLowerCase())
+        lecturer.staffNumber?.toString().startsWith(q.toLowerCase())
       );
     });
     dispatch.lecturers.setList(newData);
