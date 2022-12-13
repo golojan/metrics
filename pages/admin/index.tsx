@@ -3,7 +3,7 @@ import React from "react";
 import AppDrawerAdmin from "../../serverlets/AppDrawerAdmin";
 import OwnerLayout from "../../components/OwnerLayout";
 
-import { faBriefcase, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faDashboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Link from "next/link";
@@ -11,7 +11,7 @@ import AppHeaderAdmin from "../../serverlets/AppHeaderAdmin";
 import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
 
-const Dashboard = () => {
+const Dashboard: NextPage = () => {
   return (
     <>
       <OwnerLayout>
@@ -22,22 +22,26 @@ const Dashboard = () => {
               <div className="balance">
                 <div className="left">
                   <span className="title">Total University Ranking</span>
-                  <h1 className="total">
-                    <FontAwesomeIcon
-                      className="text-danger"
-                      icon={faBriefcase}
-                    />{" "}
-                    {0}
-                  </h1>
+                  <h1 className="total">Welcome Sir</h1>
                 </div>
                 <div className="right flex">
-                  <Link href="/dashboard/todos" legacyBehavior>
+                  <Link href="#" legacyBehavior>
                     <a className="button">
                       <FontAwesomeIcon icon={faPlus} />
                     </a>
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="section pt-1">
+            <div className="row">
+              <div className="col-3">
+                <div className="wallet-card p-2">
+ww
+                </div>
+              </div>
+              <div className="col-9"></div>
             </div>
           </div>
           <Copyright />

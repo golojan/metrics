@@ -1,6 +1,14 @@
 import { ReactNode } from "react";
 import { Gender, LecturerLevel, LecturerType, StudentType } from "./enums";
 
+export type SchoolInfo = {
+  _id?: string;
+  owner?: string;
+  name?: string;
+  shortname?: string;
+  logo?: string;
+};
+
 export interface IHistory {
   name?: string;
   lecturers?: LecturerInfo[];
