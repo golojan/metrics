@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import AdminLayout from "../../../components/AdminLayout";
+import { compose } from "redux";
 
 import { faPlus, faSchoolCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,4 +49,4 @@ const Reports: NextPage = () => {
   );
 };
 
-export default withAuthSync(Reports);
+export default compose(withAuthSync)(Reports);

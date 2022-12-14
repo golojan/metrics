@@ -10,6 +10,7 @@ import Link from "next/link";
 import AppHeader from "../../../serverlets/AppHeader";
 import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
+import {withStatistics} from "../../../utils/withStatistics";
 import { compose } from "redux";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -225,4 +226,4 @@ const Lecturers: NextPage = () => {
   );
 };
 
-export default compose(withAuthSync)(Lecturers);
+export default compose(withAuthSync,withStatistics)(Lecturers);

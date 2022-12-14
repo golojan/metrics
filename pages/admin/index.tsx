@@ -37,9 +37,7 @@ const Dashboard: NextPage = () => {
           <div className="section pt-1">
             <div className="row">
               <div className="col-3">
-                <div className="wallet-card p-2">
-ww
-                </div>
+                <div className="wallet-card p-2">ww</div>
               </div>
               <div className="col-9"></div>
             </div>

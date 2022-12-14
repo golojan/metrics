@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
 import AdminLayout from "../../../components/AdminLayout";
+import { compose } from "redux";
+
 import useHistory from "../../../libs/hooks/useHistory";
 
 import {
@@ -77,4 +79,4 @@ const RankingsHistory: NextPage = () => {
   );
 };
 
-export default withAuthSync(RankingsHistory);
+export default compose(withAuthSync)(RankingsHistory);

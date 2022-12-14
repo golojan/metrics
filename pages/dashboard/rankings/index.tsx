@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
 import AdminLayout from "../../../components/AdminLayout";
+import { compose } from "redux";
 
 import {
   faDownLong,
@@ -206,4 +207,4 @@ const Rankings: NextPage = () => {
   );
 };
 
-export default withAuthSync(Rankings);
+export default compose(withAuthSync)(Rankings);

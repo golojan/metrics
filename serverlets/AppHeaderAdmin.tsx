@@ -26,11 +26,11 @@ function AppHeaderAdmin({ isroot }: AppHeaderProps) {
   );
   const { name, shortname } = school;
   return (
-        <>
-          <AppSidebarAdmin />
-          <div className="appHeader bg-primary text-light relative">
-            {isroot ?
-            <>
+    <>
+      <AppSidebarAdmin />
+      <div className="appHeader bg-primary text-light relative">
+        {isroot ? (
+          <>
             <div className="left">
               <a
                 href="#"
@@ -39,44 +39,44 @@ function AppHeaderAdmin({ isroot }: AppHeaderProps) {
               >
                 <FontAwesomeIcon icon={faListUl} size={"2x"} />
               </a>
-            </div></>:<><div className="left">
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="left">
               <Link href="#" legacyBehavior>
                 <a className="headerButton">
                   <FontAwesomeIcon icon={faArrowLeft} size={"2x"} />
                 </a>
               </Link>
             </div>
-            </>
-            }
-            <div className="pageTitle">
-              <h2 className="text-white mt-2">Metrics AI Admin</h2>
-            </div>
-            <div className="right">
-              <a href={"/admin"} className="headerButton">
-                <FontAwesomeIcon icon={faHome} />
-              </a>
-              <a href="#" className="headerButton">
-                <Image
-                  width={32}
-                  height={32}
-                  src="/avatars/avatar.png"
-                  className="imaged w32"
-                  alt=""
-                />
-              </a>
-              <a
-                href="#"
-                className="headerButton text-white"
-                onClick={authlogout}
-              >
-                <FontAwesomeIcon icon={faUserLock} />
-                <span className="badge badge-black bg-black p-1">
-                  {windows.size}
-                </span>
-              </a>
-            </div>
-          </div>
-        </>
+          </>
+        )}
+        <div className="pageTitle">
+          <h2 className="text-white mt-2">Metrics AI Admin</h2>
+        </div>
+        <div className="right">
+          <a href={"/admin"} className="headerButton">
+            <FontAwesomeIcon icon={faHome} />
+          </a>
+          <a href="#" className="headerButton">
+            <Image
+              width={32}
+              height={32}
+              src="/avatars/avatar.png"
+              className="imaged w32"
+              alt=""
+            />
+          </a>
+          <a href="#" className="headerButton text-white" onClick={authlogout}>
+            <FontAwesomeIcon icon={faUserLock} />
+            <span className="badge badge-black bg-black p-1">
+              {windows.size}
+            </span>
+          </a>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -5,17 +5,16 @@ import AdminLayout from "../../components/AdminLayout";
 
 import { faBriefcase, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { compose } from "redux";
 
 import Link from "next/link";
 import AppHeader from "../../serverlets/AppHeader";
 import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
-import AppAnalytics from "../../serverlets/AppAnalytics";
-import AppSummary from "../../serverlets/AppSummary";
-
 import SchoolRanking from "../../components/SchoolRanking";
+import { withStatistics } from "../../utils/withStatistics";
 
-const Dashboard = () => {
+const Dashboard: NextPage = () => {
   return (
     <>
       <AdminLayout>
@@ -42,50 +41,6 @@ const Dashboard = () => {
                   </Link>
                 </div>
               </div>
-
-              {/* <div className="wallet-footer">
-                <div className="item">
-                  <Link href="/dashboard/faculties" legacyBehavior>
-                    <a>
-                      <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faSchool} />
-                      </div>
-                      <strong>All Faculties</strong>
-                    </a>
-                  </Link>
-                </div>
-                <div className="item">
-                  <Link href="/dashboard/departments" legacyBehavior>
-                    <a>
-                      <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faSchoolCircleCheck} />
-                      </div>
-                      <strong>All Departments</strong>
-                    </a>
-                  </Link>
-                </div>
-                <div className="item">
-                  <Link href="/dashboard/lecturers" legacyBehavior>
-                    <a>
-                      <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faUsersGear} />
-                      </div>
-                      <strong>All Lecturers</strong>
-                    </a>
-                  </Link>
-                </div>
-
-                <div className="item">
-                  <Link href="/dashboard/students" legacyBehavior>
-                    <a>
-                      <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faUsersBetweenLines} />
-                      </div>
-                      <strong>All Students</strong>
-                    </a>
-                  </Link>
-                </div>
-              </div> */}
             </div>
           </div>
           <SchoolRanking />
@@ -97,4 +52,4 @@ const Dashboard = () => {
   );
 };
 
-export default withAuthSync(Dashboard);
+export default compose(withAuthSync,withStatistics)(Dashboard);

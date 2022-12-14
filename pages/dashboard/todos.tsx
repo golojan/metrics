@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { useEffect } from "react";
 import AppDrawer from "../../serverlets/AppDrawer";
+import { compose } from "redux";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -61,4 +62,4 @@ const ToDos: NextPage = () => {
   );
 };
 
-export default withAuthSync(ToDos);
+export default compose(withAuthSync)(ToDos);

@@ -1,4 +1,3 @@
-
 import { NextPage } from "next";
 import React from "react";
 import OwnerLayout from "../../../components/OwnerLayout";
@@ -7,7 +6,7 @@ import AppHeaderAdmin from "../../../serverlets/AppHeaderAdmin";
 import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 
-const Lecturers:NextPage = () => {
+const Lecturers: NextPage = () => {
   return (
     <>
       <OwnerLayout>

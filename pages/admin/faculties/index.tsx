@@ -6,7 +6,7 @@ import AppHeaderAdmin from "../../../serverlets/AppHeaderAdmin";
 import Copyright from "../../../serverlets/Copyright";
 import { withAuthSync } from "../../../utils/withAuthSync";
 
-const Faculties:NextPage = () => {
+const Faculties: NextPage = () => {
   return (
     <>
       <OwnerLayout>

@@ -1,6 +1,18 @@
 import { DepartmentsInfo, IStats } from "./../interfaces/index";
 import { div, perc, sub } from "./math";
 
+export const getAccountInfo = async (_token: string) => {
+  const response = await fetch(`/api/accounts/${_token}/info`);
+  const userinfo = await response.json();
+  return userinfo;
+};
+
+export const getSchoolInfo = async (domain: string) => {
+  const response = await fetch(`/api/schools/${domain}/info`);
+  const userinfo = await response.json();
+  return userinfo;
+};
+
 export const getDomain = (host: string) => {
   const _domain: any = host?.split(":", 1).pop();
   const domain = _domain.replace("www.", "");
@@ -26,10 +38,43 @@ export const getLiveStats = (arrData: any, statVal: any) => {
   }
 };
 
+export const loadSchoolsStats = async (domain: string) => {
+  const response = await fetch(`/api/schools/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
+};
+export const loadStudents = async (domain: string) => {
+  const response = await fetch(`/api/students/${domain}/list`);
+  const students = await response.json();
+  return students;
+};
+export const loadStudentsStats = async (domain: string) => {
+  const response = await fetch(`/api/students/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
+};
+
+export const loadLecturers = async (domain: string) => {
+  const response = await fetch(`/api/lecturers/${domain}/list`);
+  const lecturers = await response.json();
+  return lecturers;
+};
+
+export const loadLecturersStats = async (domain: string) => {
+  const response = await fetch(`/api/lecturers/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
+};
+
 export const loadFaculties = async (domain: string) => {
   const response = await fetch(`/api/faculties/${domain}/list`);
   const faculties = await response.json();
   return faculties;
+};
+export const loadFacultiesStats = async (domain: string) => {
+  const response = await fetch(`/api/faculties/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
 };
 
 export const loadDepartments = async (domain: string) => {
@@ -37,17 +82,10 @@ export const loadDepartments = async (domain: string) => {
   const departments = await response.json();
   return departments;
 };
-
-export const loadStudents = async (domain: string) => {
-  const response = await fetch(`/api/students/${domain}/list`);
-  const students = await response.json();
-  return students;
-};
-
-export const loadLecturers = async (domain: string) => {
-  const response = await fetch(`/api/lecturers/${domain}/list`);
-  const lecturers = await response.json();
-  return lecturers;
+export const loadDepartmentsStats = async (domain: string) => {
+  const response = await fetch(`/api/departments/${domain}/stats`);
+  const stats = await response.json();
+  return stats;
 };
 
 export const loadUsers: any = async () => {
