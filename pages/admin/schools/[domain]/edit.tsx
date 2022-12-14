@@ -18,7 +18,7 @@ const School: NextPage = () => {
   );
 
   const ischool = data ? data.data : {};
-  const [edit,setEdit] = useState<typeof school>({...ischool});
+  const [edit,setEdit] = useState<typeof ischool>({...ischool});
 
   const saveSchool = (e:any)=>{
     e.preventDefault();
