@@ -10,7 +10,7 @@ import useSWR from "swr";
 import Link from "next/link";
 
 const Schools: NextPage = () => {
-  const { data, error } = useSWR("/api/schools/list", fetcher);
+  const { data, error, isLoading } = useSWR("/api/schools/list", fetcher);
   return (
     <>
       <OwnerLayout>
@@ -34,23 +34,25 @@ const Schools: NextPage = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {data
-                        ? data.schools.map((school: any, index: number) => (
-                            <tr key={index}>
+                      {isLoading
+                        ?
+                        <h1>Loading...</h1>
+                        : data.schools.map((school: any, index: number) => (
+                          <tr key={index}>
                               <td scope="row">{school.shortname}</td>
                               <td>{school.name}</td>
                               <td>{school.domain}</td>
                               <td>
-                                <Link href={"#"} className="mx-2 text-success">
+                                <Link href={`/admin/schools/${school.domain}/edit`} className="mx-2 text-success">
                                   edit
                                 </Link>
-                                <Link href={"#"} className="mx-2 text-primary">
+                                <Link href={`/admin/schools/${school.domain}/view`} className="mx-2 text-primary">
                                   configure
                                 </Link>
                               </td>
                             </tr>
-                          ))
-                        : null}
+                        ))
+                      }
                     </tbody>
                   </table>
                 </div>
