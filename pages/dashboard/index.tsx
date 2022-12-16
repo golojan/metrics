@@ -13,8 +13,11 @@ import Copyright from "../../serverlets/Copyright";
 import { withAuthSync } from "../../utils/withAuthSync";
 import SchoolRanking from "../../components/SchoolRanking";
 import { withStatistics } from "../../utils/withStatistics";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const Dashboard: NextPage = () => {
+  const { total } = useSelector((state: RootState) => state.settings);
   return (
     <>
       <AdminLayout>
@@ -30,7 +33,7 @@ const Dashboard: NextPage = () => {
                       className="text-danger"
                       icon={faBriefcase}
                     />{" "}
-                    {0}
+                    {total}
                   </h1>
                 </div>
                 <div className="right flex">
@@ -52,4 +55,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default compose(withAuthSync,withStatistics)(Dashboard);
+export default compose(withAuthSync, withStatistics)(Dashboard);

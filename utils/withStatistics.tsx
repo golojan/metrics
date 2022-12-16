@@ -141,7 +141,12 @@ export const withStatistics = (WrappedComponent: any) => {
               hindex: totalHindex,
               i10hindex: totalI10hindex,
             });
-
+            const _total =
+              totalGooglePresence +
+              totalCitations +
+              totalHindex +
+              totalI10hindex;
+            dispatch.settings.setTotal(_total);
             dispatch.lecturers.setLecturers(lecturers.data);
             dispatch.lecturers.setLecturersCount(lecturers.data.length);
           })

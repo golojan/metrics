@@ -27,7 +27,7 @@ export const settings = createModel<RootModel>()({
     dynamicPages: "",
     uploaded: false,
     idelTime: 0,
-
+    total:0,
     ranking: {
       googlePresence: 0,
       citations: 0,
@@ -74,6 +74,9 @@ export const settings = createModel<RootModel>()({
     },
     setRank(state, payload: object) {
       return { ...state, ranking: payload };
+    },
+    setTotal(state, payload: number) {
+      return { ...state, total: payload };
     },
     setNewUser(state, payload: object) {
       return { ...state, newUser: payload };
