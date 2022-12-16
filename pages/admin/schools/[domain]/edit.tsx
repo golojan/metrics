@@ -12,17 +12,15 @@ import { useRouter } from "next/router";
 const School: NextPage = () => {
   const router = useRouter();
   const { domain } = router.query;
+
   const { data, error, isLoading } = useSWR(
     `/api/schools/${domain}/info`,
     fetcher
   );
-
   const [edit, setEdit] = useState<typeof data>({ ...data });
 
   useEffect(() => {
-    if (data) {
-      setEdit(data);
-    }
+    setEdit(data);
   }, [data]);
 
   const saveSchool = async (e: any) => {

@@ -14,9 +14,9 @@ export default async function handler(
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
       const { Schools, Accounts } = await dbCon();
       const created = await Schools.create({
-        domain: "metrics.ng",
-        name: "Metrics AI Ranking Engine",
-        shortname: "METRICS",
+        domain: "esut.metrics.ng",
+        name: "Enug State University, ESUT",
+        shortname: "ESUT",
       }).catch(catcher);
       if (created) {
         // Encrypt Password//
@@ -25,9 +25,9 @@ export default async function handler(
         // Encrypt Password//
         const account = await Accounts.create({
           schoolid: created._id,
-          email: "admin@metrics.ng",
-          firstname: "Metrics",
-          lastname: "Admin",
+          email: "agu.chux@yahoo.com",
+          firstname: "Agu",
+          lastname: "Chux",
           mobile: "07068573376",
           enabled: true,
           password: hashedPassword,

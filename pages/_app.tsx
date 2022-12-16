@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import App from "next/app";
 import type { AppProps } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-select/dist/css/bootstrap-select.min.css";
@@ -8,7 +7,7 @@ import "../styles/globals.scss";
 import { Provider } from "react-redux";
 import { store } from "../store";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     require("jquery/dist/jquery");
     require("popper.js/dist/popper");
@@ -20,6 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </Provider>
   );
-}
+};
 
 export default MyApp;
